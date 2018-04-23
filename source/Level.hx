@@ -20,7 +20,7 @@ import flixel.group.FlxGroup;
  */
 class Level extends TiledMap
 {
-	private inline static var PATH_TILESETS = "maps/";
+	private inline static var PATH_TILESETS = "assets/maps/tiles.png";
 	
 	public var backgroundGroup:FlxTypedGroup<FlxTilemapExt>;
 	public var foregroundGroup:FlxTypedGroup<FlxTilemapExt>;
@@ -66,12 +66,11 @@ class Level extends TiledMap
 				throw "The tileset is null";
 			
 			tilemap = new FlxTilemapExt();
-			throw tileset.firstGID;
 			tilemap.loadMapFromArray(
 				layer.tileArray,
 				layer.width,
 				layer.height,
-				tileset.imageSource,
+				PATH_TILESETS,
 				tileset.tileWidth,                      // each tileset can have a different tile width or height
 				tileset.tileHeight,
 				OFF,                                    // disable auto map

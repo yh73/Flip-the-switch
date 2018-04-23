@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="35">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
-  <image source="./tiles.png" width="320" height="768"/>
+  <image source="tiles.png" width="320" height="768"/>
  </tileset>
  <layer name="bg" width="25" height="19">
   <properties>
@@ -188,7 +188,7 @@
 </data>
  </layer>
  <objectgroup name="character">
-  <object id="32" name="princess" type="player" x="611.386" y="419.554" width="17.3267" height="24.7525"/>
+  <object id="32" name="princess" type="player" x="616.336" y="420.792" width="12.3762" height="18.5644"/>
  </objectgroup>
  <layer name="wall fg" width="25" height="19">
   <properties>
