@@ -10,9 +10,10 @@ import flixel.text.FlxText;
 
 class MenuState extends FlxState
 {
-	public var player:FlxSprite;
-	public var floor:FlxObject;
-	public var exit:FlxSprite;
+	// public var player:FlxSprite;
+	// public var floor:FlxObject;
+	// public var exit:FlxSprite;
+
 	private var _btnPlay:FlxButton;
 
 	private static var youDied:Bool = false;
@@ -29,7 +30,7 @@ class MenuState extends FlxState
 
 	private function clickPlay():Void
     {
-        FlxG.switchState(new PlayState());
+        FlxG.switchState(new PlayState(1));
     }
 
 	override public function update(elapsed:Float):Void 

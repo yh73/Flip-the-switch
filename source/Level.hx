@@ -24,6 +24,10 @@ class Level extends TiledMap
 	
 	public var backgroundGroup:FlxTypedGroup<FlxTilemapExt>;
 	public var foregroundGroup:FlxTypedGroup<FlxTilemapExt>;
+
+	public var switchonGroup:FlxTypedGroup<FlxTilemapExt>;
+	public var switchoffGroup:FlxTypedGroup<FlxTilemapExt>;
+	public var coverSwitchGroup:FlxTypedGroup<FlxTilemapExt>;
 	
 	public var collisionGroup:FlxTypedGroup<FlxObject>;
 	public var characterGroup:FlxTypedGroup<Character>;
@@ -37,11 +41,18 @@ class Level extends TiledMap
 		// background and foreground groups
 		backgroundGroup = new FlxTypedGroup<FlxTilemapExt>();
 		foregroundGroup = new FlxTypedGroup<FlxTilemapExt>();
+
+		// switch on/off groups
+		switchonGroup = new FlxTypedGroup<FlxTilemapExt>();
+		switchoffGroup = new FlxTypedGroup<FlxTilemapExt>();
+
+		// cover-switch groups
+		coverSwitchGroup = new FlxTypedGroup<FlxTilemapExt>();
 		
 		// events and collision groups
 		characterGroup = new FlxTypedGroup<Character>();
 		collisionGroup = new FlxTypedGroup<FlxObject>();
-		
+
 		// The bound of the map for the camera
 		bounds = FlxRect.get(0, 0, fullWidth, fullHeight);
 		
@@ -90,14 +101,20 @@ class Level extends TiledMap
 			
 			if (layer.properties.contains("fg"))
 				foregroundGroup.add(tilemap);
+			else if (layer.properties.contains("switchoff"))
+				switchoffGroup.add(tilemap);
+			else if (layer.properties.contains("switchon"))
+				switchonGroup.add(tilemap);
+			else if (layer.properties.contains("cover"))
+				coverSwitchGroup.add(tilemap);
 			else
 				backgroundGroup.add(tilemap);
 		}
 		
-		loadObjects();
+		loadObjects(state);
 	}
 	
-	public function loadObjects()
+	public function loadObjects(state:PlayState)
 	{
 		for (layer in layers)
 		{
@@ -107,12 +124,12 @@ class Level extends TiledMap
 			
 			for (obj in group.objects)
 			{
-				loadObject(obj, group);
+				loadObject(state, obj, group);
 			}
 		}
 	}
 	
-	private function loadObject(o:TiledObject, g:TiledObjectLayer)
+	private function loadObject(state:PlayState, o:TiledObject, g:TiledObjectLayer)
 	{
 		var x:Int = o.x;
 		var y:Int = o.y;
@@ -121,11 +138,12 @@ class Level extends TiledMap
 		{   
             
 			case "player":
-				var player:Character = new Character(o.name, x, y, "assets/"+o.name+".json");
+				var player = new Character(o.name, x, y, "assets/"+o.name+".json");
 				player.setBoundsMap(bounds);
 				player.controllable = true;
 				FlxG.camera.follow(player);
 				characterGroup.add(player);
+				state.player = player;
 				
             
 			case "collision":
@@ -135,6 +153,11 @@ class Level extends TiledMap
 				#end
 				coll.immovable = true;
 				collisionGroup.add(coll);
+
+			case "switch":
+				var sw = new FlxObject(x, y, o.width, o.height);
+				state.sw = sw;
+
 		}
 	}
 	
@@ -143,7 +166,7 @@ class Level extends TiledMap
 		updateCollisions();
 		updateEventsOrder();
 	}
-	
+
 	public function updateEventsOrder():Void
 	{
 		characterGroup.sort(FlxSort.byY);
