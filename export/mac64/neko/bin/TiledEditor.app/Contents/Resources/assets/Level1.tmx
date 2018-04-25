@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="36">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="43">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="tiles.png" width="320" height="768"/>
  </tileset>
@@ -241,6 +241,23 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup name="door">
+  <properties>
+   <property name="door" value="1"/>
+  </properties>
+  <object id="38" name="1" type="door" x="544.357" y="406.984" width="32.0965" height="71.8963"/>
+  <object id="40" name="2" type="door" x="161.767" y="354.346" width="61.6254" height="20.5418"/>
+ </objectgroup>
+ <objectgroup name="open">
+  <properties>
+   <property name="open" value="1"/>
+  </properties>
+  <object id="36" name="1" type="open" x="577.738" y="406.984" width="28.245" height="74.464"/>
+  <object id="37" name="2" type="open" x="160.483" y="377.455" width="62.9092" height="35.9481"/>
+ </objectgroup>
+ <objectgroup name="open switch">
+  <object id="41" type="opensw" x="608" y="96" width="32" height="32"/>
+ </objectgroup>
  <layer name="fg" width="25" height="19">
   <properties>
    <property name="fg" value="1"/>
@@ -296,7 +313,9 @@
 </data>
  </layer>
  <objectgroup name="character">
-  <object id="32" name="princess" type="player" x="652.284" y="492.688" width="12.3762" height="12.1451"/>
+  <object id="42" name="princess" type="player" x="680.447" y="494.287" width="11.5548" height="11.5548">
+   <ellipse/>
+  </object>
  </objectgroup>
  <layer name="wall fg" width="25" height="19">
   <properties>
@@ -362,7 +381,7 @@
   <object id="9" type="collision" x="96" y="96" width="64" height="18"/>
   <object id="10" type="collision" x="320" y="96" width="32" height="50"/>
   <object id="11" type="collision" x="384" y="96" width="64" height="18"/>
-  <object id="12" type="collision" x="675.948" y="96" width="28.0519" height="32"/>
+  <object id="12" type="collision" x="640" y="96" width="64" height="32"/>
   <object id="13" type="collision" x="576" y="128" width="128" height="192"/>
   <object id="14" type="collision" x="256" y="288" width="320" height="32"/>
   <object id="15" type="collision" x="352" y="256" width="32" height="32"/>
@@ -380,8 +399,5 @@
   <object id="29" type="collision" x="544" y="340" width="32" height="64"/>
   <object id="30" type="collision" x="128" y="480" width="96" height="25"/>
   <object id="31" type="collision" x="544" y="224" width="32" height="64"/>
- </objectgroup>
- <objectgroup name="switch">
-  <object id="35" type="switch" x="640" y="96" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -13,6 +13,7 @@ import flixel.FlxObject;
 import flixel.math.FlxRect;
 import flixel.util.FlxSort;
 import flixel.group.FlxGroup;
+import java.util.*;
 
 /**
  * ...
@@ -31,6 +32,9 @@ class Level extends TiledMap
 	
 	public var collisionGroup:FlxTypedGroup<FlxObject>;
 	public var characterGroup:FlxTypedGroup<Character>;
+	public var doorGroup:FlxTypedGroup<FlxObject>;
+
+	public var openMap:Map<FlxObject, FlxObject>;
 	
 	public var bounds:FlxRect;
 
@@ -52,6 +56,9 @@ class Level extends TiledMap
 		// events and collision groups
 		characterGroup = new FlxTypedGroup<Character>();
 		collisionGroup = new FlxTypedGroup<FlxObject>();
+		doorGroup = new FlxTypedGroup<FlxObject>();
+
+		openMap = new Map<FlxObject, FlxObject>();
 
 		// The bound of the map for the camera
 		bounds = FlxRect.get(0, 0, fullWidth, fullHeight);
@@ -116,16 +123,43 @@ class Level extends TiledMap
 	
 	public function loadObjects(state:PlayState)
 	{
+		var stringOpen:Map<String, FlxObject> = new Map<String, FlxObject>();
+		var stringDoor:Map<String, FlxObject> = new Map<String, FlxObject>();
 		for (layer in layers)
 		{
 			if (layer.type != TiledLayerType.OBJECT)
 				continue;
 			var group:TiledObjectLayer = cast layer;
-			
-			for (obj in group.objects)
-			{
-				loadObject(state, obj, group);
+
+			if (group.properties.contains("open")) {
+				for (o in group.objects) {
+					var x:Int = o.x;
+					var y:Int = o.y;
+					var open:FlxObject = new FlxObject(x, y, o.width, o.height);
+					open.immovable = true;
+					stringOpen.set(o.name, open);
+				}
+			} else if (group.properties.contains("door")) {
+				for (o in group.objects) {
+					var x:Int = o.x;
+					var y:Int = o.y;
+					var door:FlxObject = new FlxObject(x, y, o.width, o.height);
+					#if FLX_DEBUG
+					door.debugBoundingBoxColor = 0xFFFF00FF;
+					#end
+					door.immovable = true;
+					doorGroup.add(door);
+					stringDoor.set(o.name, door);
+				}
+			} else {
+				for (obj in group.objects)
+				{
+					loadObject(state, obj, group);
+				}
 			}
+		}
+		for (key in stringOpen.keys()) {
+			openMap.set(stringOpen[key], stringDoor[key]);
 		}
 	}
 	
@@ -145,7 +179,6 @@ class Level extends TiledMap
 				characterGroup.add(player);
 				state.player = player;
 				
-            
 			case "collision":
 				var coll:FlxObject = new FlxObject(x, y, o.width, o.height);
 				#if FLX_DEBUG
@@ -154,7 +187,7 @@ class Level extends TiledMap
 				coll.immovable = true;
 				collisionGroup.add(coll);
 
-			case "switch":
+			case "opensw":
 				var sw = new FlxObject(x, y, o.width, o.height);
 				state.sw = sw;
 
@@ -176,10 +209,18 @@ class Level extends TiledMap
 	{
 		FlxG.collide(characterGroup, collisionGroup);
 		FlxG.collide(characterGroup, characterGroup);
+		for (open in openMap.keys()) {
+			if (FlxG.overlap(characterGroup, open)) {
+				if (FlxG.keys.anyJustPressed([E])) {
+					openMap[open].kill();
+				}
+			}
+		}
+		FlxG.collide(characterGroup, doorGroup);
 	}
 	
-	private inline function isSpecialTile(tile:TiledTile, animations:Dynamic):Bool
-	{
-		return tile.isFlipHorizontally || tile.isFlipVertically || tile.rotate != FlxTileSpecial.ROTATE_0 || animations.exists(tile.tilesetID);
-	}
+	// private inline function isSpecialTile(tile:TiledTile, animations:Dynamic):Bool
+	// {
+	// return tile.isFlipHorizontally || tile.isFlipVertically || tile.rotate != FlxTileSpecial.ROTATE_0 || animations.exists(tile.tilesetID);
+	// }
 }
