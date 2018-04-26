@@ -16,10 +16,11 @@ class Backpack extends FlxTypedGroup<FlxSprite>
     public var equipSlotBorder:FlxSprite;
     public var equipSlot:FlxSprite;
     public var firstTimeEquip = true;
+    public var unEquipButton:FlxButtonPlus;
     var player:Character;
     var tileSize:Int; 
     var lastItemIdx:Int;
-    var button:FlxButtonPlus;
+    var equipButton:FlxButtonPlus;
     static var counter = 0;
 
 	override public function new(size:Int, number:Int, color:FlxColor, character:Character) 
@@ -33,17 +34,19 @@ class Backpack extends FlxTypedGroup<FlxSprite>
         border = new FlxSprite(0,0).makeGraphic(5 * size, size, color);
         border = FlxGridOverlay.overlay(border, size, size,  number * size, 
             size, true, color);
-        button = new FlxButtonPlus(0,0, equip,"Equip", 32, 16);
-        buttons.add(button);
-        buttons.add(new FlxButtonPlus(0,0, null,"Craft", 32, 16));
+        equipButton = new FlxButtonPlus(0,0, equip,"Equip", 48, 16);
+        unEquipButton = new FlxButtonPlus(0,0, unequip,"Unequip", 48, 16);
+        buttons.add(equipButton);
+        buttons.add(new FlxButtonPlus(0,0, null,"Craft", 48, 16));
         this.add(new FlxSprite(border.x, border.y).loadGraphic("assets/gold.png", 32, 32));
-        this.add(new FlxSprite(border.x, border.y).loadGraphic("assets/gold.png", 32, 32));
-        this.add(new FlxSprite(border.x, border.y).loadGraphic("assets/health.png", 32, 32));
+        this.add(new FlxSprite(border.x, border.y).loadGraphic("assets/key1.png", 32, 32));
+        this.add(new FlxSprite(border.x, border.y).loadGraphic("assets/key2.png", 32, 32));
         visible = false;
         buttons.kill();
+        unEquipButton.kill();
         border.visible = false;
         equipSlotBorder.visible = false;
-        equipSlot.visible = false;
+        equipSlot.kill();
 	}
 	
 
@@ -75,11 +78,19 @@ class Backpack extends FlxTypedGroup<FlxSprite>
                 buttons.kill();
             }
             i++;
-            
         }
-       
+
+        if (FlxG.mouse.overlaps(equipSlot, null) && equipSlotBorder.visible && !firstTimeEquip) {
+            unEquipButton.revive();
+            unEquipButton.x = equipSlot.x;
+            unEquipButton.y = equipSlot.y;
+        } else if (!FlxG.mouse.overlaps(equipSlot, null)) {
+            unEquipButton.kill();
+        }
+
         if (FlxG.keys.justPressed.B) {
             buttons.kill();
+            unEquipButton.kill();
             visible = !visible;
             if (!firstTimeEquip) {
                 equipSlot.visible = !equipSlot.visible;
@@ -93,20 +104,32 @@ class Backpack extends FlxTypedGroup<FlxSprite>
     {   
         var itemToEquip = new FlxSprite(0,0);
         for (item in this) {
-            if (item.x == button.x) {
+            if (item.x == equipButton.x) {
                 itemToEquip = item;
                 break;
             }
         }
         lastItemIdx = this.members.indexOf(itemToEquip);
+        equipSlot.revive();
         if (!firstTimeEquip) {
             this.insert(lastItemIdx, new FlxSprite(0,0).loadGraphicFromSprite(equipSlot));
             equipSlot.loadGraphicFromSprite(this.remove(itemToEquip));
         } else {
             equipSlot.loadGraphicFromSprite(this.remove(itemToEquip));
-            equipSlot.visible = true;
             firstTimeEquip = false;
         }
         buttons.kill();
+    }
+
+    private function unequip() 
+    {
+        this.add(new FlxSprite(0,0).loadGraphicFromSprite(equipSlot));
+        equipSlot.kill();
+        firstTimeEquip = true;
+    }
+
+    private function addItem(name:String) 
+    {
+        this.add(new Sprite(0,0).loadGraphic("assets/" + name, 32, 32));
     }
 }
