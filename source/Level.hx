@@ -28,19 +28,32 @@ class Level extends TiledMap
 
 	public var switchonGroup:FlxTypedGroup<FlxTilemapExt>;
 	public var switchoffGroup:FlxTypedGroup<FlxTilemapExt>;
-	public var coverSwitchGroup:FlxTypedGroup<FlxTilemapExt>;
-	
+
+	public var doorClosedGroup:FlxTypedGroup<FlxTilemapExt>;
+	public var doorOpenGroup:FlxTypedGroup<FlxTilemapExt>;
+	public var doorOpenFgGroup:FlxTypedGroup<FlxTilemapExt>;
+
 	public var collisionGroup:FlxTypedGroup<FlxObject>;
 	public var characterGroup:FlxTypedGroup<Character>;
 	public var doorGroup:FlxTypedGroup<FlxObject>;
 
 	public var openMap:Map<FlxObject, FlxObject>;
+
+	public var doorName:Map<FlxObject, String>;
+	public var doorNameToOpenGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
+	public var doorNameToOpenFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
+	public var doorNameToClosedGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
+	public var doorNameToClosedFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	
 	public var bounds:FlxRect;
+
+	public var _state:PlayState;
 
 	public function new(level:Dynamic, state:PlayState) 
 	{
 		super(level);
+
+		_state = state;
 		
 		// background and foreground groups
 		backgroundGroup = new FlxTypedGroup<FlxTilemapExt>();
@@ -50,15 +63,25 @@ class Level extends TiledMap
 		switchonGroup = new FlxTypedGroup<FlxTilemapExt>();
 		switchoffGroup = new FlxTypedGroup<FlxTilemapExt>();
 
-		// cover-switch groups
-		coverSwitchGroup = new FlxTypedGroup<FlxTilemapExt>();
+		// door open/close groups
+		// doorOpenGroup = new FlxTypedGroup<FlxTilemapExt>();
+		// doorClosedGroup = new FlxTypedGroup<FlxTilemapExt>();
 		
 		// events and collision groups
 		characterGroup = new FlxTypedGroup<Character>();
 		collisionGroup = new FlxTypedGroup<FlxObject>();
 		doorGroup = new FlxTypedGroup<FlxObject>();
 
+		// Mapping from open to door
 		openMap = new Map<FlxObject, FlxObject>();
+
+		// Mapping from door to name
+		doorName = new Map<FlxObject, String>();
+
+		// Mapping from door's name to door's Group
+		doorNameToOpenGroup = new Map<String, FlxTypedGroup<FlxTilemapExt>>();
+		doorNameToOpenFgGroup = new Map<String, FlxTypedGroup<FlxTilemapExt>>();
+		doorNameToClosedGroup = new Map<String, FlxTypedGroup<FlxTilemapExt>>();
 
 		// The bound of the map for the camera
 		bounds = FlxRect.get(0, 0, fullWidth, fullHeight);
@@ -112,10 +135,30 @@ class Level extends TiledMap
 				switchoffGroup.add(tilemap);
 			else if (layer.properties.contains("switchon"))
 				switchonGroup.add(tilemap);
-			else if (layer.properties.contains("cover"))
-				coverSwitchGroup.add(tilemap);
-			else
+			else if (layer.properties.contains("bg"))
 				backgroundGroup.add(tilemap);
+			else {
+				// door open/close
+				doorOpenGroup = new FlxTypedGroup<FlxTilemapExt>();
+				doorOpenFgGroup = new FlxTypedGroup<FlxTilemapExt>();
+				doorClosedGroup = new FlxTypedGroup<FlxTilemapExt>();
+				var i:Int;
+				for (i in 0...10) {
+					if (layer.properties.contains("doorOpen" + i)) {
+						doorOpenGroup.add(tilemap);
+						doorNameToOpenGroup.set(""+i, doorOpenGroup);
+					}
+					else if (layer.properties.contains("doorOpenFg" + i)) {
+						doorOpenFgGroup.add(tilemap);
+						doorNameToOpenFgGroup.set(""+i, doorOpenFgGroup);
+					}
+					else if (layer.properties.contains("doorClosed" + i)) {
+						doorClosedGroup.add(tilemap);
+						doorNameToClosedGroup.set(""+i, doorClosedGroup);
+					}
+
+				}
+			}
 		}
 		
 		loadObjects(state);
@@ -150,6 +193,7 @@ class Level extends TiledMap
 					door.immovable = true;
 					doorGroup.add(door);
 					stringDoor.set(o.name, door);
+					doorName.set(door, o.name);
 				}
 			} else {
 				for (obj in group.objects)
@@ -213,6 +257,15 @@ class Level extends TiledMap
 			if (FlxG.overlap(characterGroup, open)) {
 				if (FlxG.keys.anyJustPressed([E])) {
 					openMap[open].kill();
+
+					var curr:String = doorName[openMap[open]];
+					var doorOpenGroup = doorNameToOpenGroup[curr];
+					var doorClosedGroup = doorNameToClosedGroup[curr];
+					var doorOpenFgGroup = doorNameToOpenFgGroup[curr];
+
+					_state.remove(doorClosedGroup);
+					_state.add(doorOpenGroup);
+					_state.add(doorOpenFgGroup);
 				}
 			}
 		}

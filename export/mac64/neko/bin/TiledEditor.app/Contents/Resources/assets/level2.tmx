@@ -5,6 +5,7 @@
  </tileset>
  <layer name="bg" width="25" height="19">
   <properties>
+   <property name="bg" value="0"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="csv">
@@ -31,6 +32,7 @@
  </layer>
  <layer name="wall bg" width="25" height="19">
   <properties>
+   <property name="bg" value="0"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="csv">
@@ -57,6 +59,7 @@
  </layer>
  <layer name="floor object 1" width="25" height="19">
   <properties>
+   <property name="bg" value="0"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="csv">
@@ -83,6 +86,7 @@
  </layer>
  <layer name="floor object 2" width="25" height="19">
   <properties>
+   <property name="bg" value="0"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="csv">
@@ -109,6 +113,7 @@
  </layer>
  <layer name="door bg" width="25" height="19">
   <properties>
+   <property name="bg" value="1"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="csv">
@@ -243,6 +248,7 @@
  </layer>
  <layer name="key" width="25" height="19">
   <properties>
+   <property name="bg" value="0"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="csv">

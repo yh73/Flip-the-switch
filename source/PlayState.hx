@@ -16,7 +16,7 @@ class PlayState extends FlxState
 	var level:Level;
 	var _levelNumber:Int;
 	var _map:TiledMap;
-	var backpack:FlxTypedGroup<FlxSprite>;
+	var backpack:Backpack;
 
 	public function new(levelNumber:Int) {
 		super();
@@ -25,17 +25,30 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
-		FlxG.mouse.visible = false;
+		FlxG.mouse.visible = true;
 		
 		// Set a background color
 		FlxG.cameras.bgColor = 0xff131c1b;
 		level = new Level("assets/level" + _levelNumber +".tmx", this);
 		backpack = new Backpack(TILE_SIZE, 5, FlxColor.GRAY, player);
+		// add background
 		add(level.backgroundGroup);
+		// add switch (off)
 		add(level.switchoffGroup);
+		// add door (closed)
+		for (key in level.doorNameToClosedGroup.keys()) {
+			add(level.doorNameToClosedGroup[key]);
+		}
+		// add character
 		add(level.characterGroup);
+		// add foreground
 		add(level.foregroundGroup);
+		// add backpack
+		add(backpack.border);
+		add(backpack.buttons);
+		add(backpack.equipSlot);
 		add(backpack);
+		// add collision
 		add(level.collisionGroup);
 		
 		FlxG.camera.setScrollBoundsRect(level.bounds.x, level.bounds.y, level.bounds.width, level.bounds.height);
@@ -59,7 +72,7 @@ class PlayState extends FlxState
 	public function nextLevel(player:Character, sw:FlxObject):Void
 	{
 		player.kill();
-		add(level.coverSwitchGroup);
+		remove(level.switchoffGroup);
 		add(level.switchonGroup);
 		_levelNumber = _levelNumber + 1;
 		FlxG.switchState(new PlayState(_levelNumber));

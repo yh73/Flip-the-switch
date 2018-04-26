@@ -7,6 +7,8 @@
 -D openfl=3.6.1
 -cp /usr/local/lib/haxe/lib/flixel-addons/2,5,0
 -D flixel-addons=2.5.0
+-cp /usr/local/lib/haxe/lib/flixel-ui/2,2,0
+-D flixel-ui=2.2.0
 -cp source
 -cp /usr/local/lib/haxe/lib/lime/2,9,1/legacy
 -D HXCPP_QUIET
