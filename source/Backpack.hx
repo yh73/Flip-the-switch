@@ -3,10 +3,8 @@ package;
 import flixel.FlxG;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.util.FlxColor;
-import openfl.events.Event;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
-import flixel.addons.ui.FlxUIDropDownMenu;
 import flixel.addons.ui.FlxButtonPlus;
 
 class Backpack extends FlxTypedGroup<FlxSprite>
@@ -126,8 +124,8 @@ class Backpack extends FlxTypedGroup<FlxSprite>
         firstTimeEquip = true;
     }
 
-    public function addItem(name:String) 
+    public function addItem(item:FlxSprite) 
     {
-        this.add(new FlxSprite(0,0).loadGraphic(name + ".png", 32, 32));
+        this.add(item);
     }
 }

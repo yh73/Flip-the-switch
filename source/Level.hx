@@ -1,4 +1,3 @@
-
 import flixel.addons.editors.tiled.TiledLayer;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObject;
@@ -29,11 +28,13 @@ class Level extends TiledMap
 
 	public var collisionGroup:FlxTypedGroup<FlxObject>;
 	public var characterGroup:FlxTypedGroup<Character>;
+	public var itemGroup:FlxTypedGroup<FlxSprite>;
 
 	// open area to door collision
 	public var openMap:Map<FlxObject, FlxObject>;
-	public var itemMap:Map<FlxObject, FlxObject>;
-	public var chooseNameMap:Map<FlxObject, String>;
+	// open area to item
+	public var itemMap:Map<FlxObject, FlxSprite>;
+	// door to door name
 	public var doorName:Map<FlxObject, String>;
 	public var doorNameToOpenGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	public var doorNameToOpenFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
@@ -58,10 +59,7 @@ class Level extends TiledMap
 		// switch on/off groups
 		switchonGroup = new FlxTypedGroup<FlxTilemapExt>();
 		switchoffGroup = new FlxTypedGroup<FlxTilemapExt>();
-
-		// door open/close groups
-		// doorOpenGroup = new FlxTypedGroup<FlxTilemapExt>();
-		// doorClosedGroup = new FlxTypedGroup<FlxTilemapExt>();
+		itemGroup = new FlxTypedGroup<FlxSprite>();
 		
 		// events and collision groups
 		characterGroup = new FlxTypedGroup<Character>();
@@ -70,8 +68,7 @@ class Level extends TiledMap
 		// Mapping from area to door
 		openMap = new Map<FlxObject, FlxObject>();
 		// Mapping area to item
-		itemMap = new Map<FlxObject, FlxObject>();
-		chooseNameMap = new Map<FlxObject, String>();
+		itemMap = new Map<FlxObject, FlxSprite>();
 
 		// Mapping from door to name
 		doorName = new Map<FlxObject, String>();
@@ -87,8 +84,6 @@ class Level extends TiledMap
 		var tileset:TiledTileSet;
 		var tilemap:FlxTilemapExt;
 		
-		// Prepare the tile animations
-		//var animations = TileAnims.getAnimations(animFile);
 		
 		for (tiledLayer in layers)
 		{
@@ -116,16 +111,6 @@ class Level extends TiledMap
 				tileset.firstGID                        // IMPORTANT! set the starting tile id to the first tile id of the tileset
 			);
 			
-            /*
-			var specialTiles:Array<FlxTileSpecial> = new Array<FlxTileSpecial>();
-			var tile:TiledTile;
-			var animData;
-			var specialTile:FlxTileSpecial;
-			// set the special tiles (flipped, rotated and/or animated tiles)
-			tilemap.setSpecialTiles(specialTiles);
-			// set the alpha of the layer
-			tilemap.alpha = layer.opacity;
-			*/
 			
 			if (layer.properties.contains("fg"))
 				foregroundGroup.add(tilemap);
@@ -166,7 +151,7 @@ class Level extends TiledMap
 	{
 		var stringOpen:Map<String, FlxObject> = new Map<String, FlxObject>();
 		var stringDoor:Map<String, FlxObject> = new Map<String, FlxObject>();
-		var stringitem:Map<String, FlxObject> = new Map<String, FlxObject>();
+		var stringitem:Map<String, FlxSprite> = new Map<String, FlxSprite>();
 		var stringchoose:Map<String, FlxObject> = new Map<String, FlxObject>();
 		for (layer in layers)
 		{
@@ -199,10 +184,10 @@ class Level extends TiledMap
 				for (o in group.objects) {
 					var x:Int = o.x;
 					var y:Int = o.y;
-					var item:FlxObject = new FlxObject(x, y, o.width, o.height);
+					var item:FlxSprite = new FlxSprite(o.x, o.y).loadGraphic("assets/" + o.properties.get("name") + ".png");
 					item.immovable = true;
-					collisionGroup.add(item);
 					stringitem.set(o.name, item);
+					itemGroup.add(item);
 				}
 			} else if (group.properties.contains("itemchoose")) {
 				for (o in group.objects) {
@@ -211,7 +196,6 @@ class Level extends TiledMap
 					var area:FlxObject = new FlxObject(x, y, o.width, o.height);
 					area.immovable = true;
 					stringchoose.set(o.name, area);
-					chooseNameMap.set(area, o.properties.get("name"));
 				}
 			}else {
 				for (obj in group.objects)
@@ -290,7 +274,7 @@ class Level extends TiledMap
 		for (choose in itemMap.keys()) {
 			if (FlxG.overlap(characterGroup, choose)) {
 				if (FlxG.keys.anyJustPressed([E])) {
-					_state.backpack.addItem("assets/" + chooseNameMap.get(choose));
+					_state.backpack.addItem(new FlxSprite(0,0).loadGraphicFromSprite(itemMap[choose]));
 					itemMap[choose].kill();
 					choose.kill();
 				}
@@ -299,9 +283,4 @@ class Level extends TiledMap
 		FlxG.collide(characterGroup, collisionGroup);
 		FlxG.collide(characterGroup, characterGroup);
 	}
-	
-	// private inline function isSpecialTile(tile:TiledTile, animations:Dynamic):Bool
-	// {
-	// return tile.isFlipHorizontally || tile.isFlipVertically || tile.rotate != FlxTileSpecial.ROTATE_0 || animations.exists(tile.tilesetID);
-	// }
 }
