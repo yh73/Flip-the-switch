@@ -36,7 +36,6 @@ class Backpack extends FlxTypedGroup<FlxSprite>
         unEquipButton = new FlxButtonPlus(0,0, unequip,"Unequip", 48, 16);
         buttons.add(equipButton);
         buttons.add(new FlxButtonPlus(0,0, null,"Craft", 48, 16));
-        this.add(new FlxSprite(border.x, border.y).loadGraphic("assets/key1.png", 32, 32));
         visible = false;
         buttons.kill();
         unEquipButton.kill();

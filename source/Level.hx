@@ -28,14 +28,14 @@ class Level extends TiledMap
 
 	public var collisionGroup:FlxTypedGroup<FlxObject>;
 	public var characterGroup:FlxTypedGroup<Character>;
-	public var itemGroup:FlxTypedGroup<FlxSprite>;
+	public var itemGroup:FlxTypedGroup<Item>;
+	public var doorGroup:FlxTypedGroup<Door>;
 
 	// open area to door collision
-	public var openMap:Map<FlxObject, FlxObject>;
+	public var openMap:Map<FlxObject, Door>;
 	// open area to item
-	public var itemMap:Map<FlxObject, FlxSprite>;
-	// door to door name
-	public var doorName:Map<FlxObject, String>;
+	public var itemMap:Map<FlxObject, Item>;
+
 	public var doorNameToOpenGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	public var doorNameToOpenFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	public var doorNameToClosedGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
@@ -59,19 +59,17 @@ class Level extends TiledMap
 		// switch on/off groups
 		switchonGroup = new FlxTypedGroup<FlxTilemapExt>();
 		switchoffGroup = new FlxTypedGroup<FlxTilemapExt>();
-		itemGroup = new FlxTypedGroup<FlxSprite>();
+		itemGroup = new FlxTypedGroup<Item>();
+		doorGroup = new FlxTypedGroup<Door>();
 		
 		// events and collision groups
 		characterGroup = new FlxTypedGroup<Character>();
 		collisionGroup = new FlxTypedGroup<FlxObject>();
 
 		// Mapping from area to door
-		openMap = new Map<FlxObject, FlxObject>();
+		openMap = new Map<FlxObject, Door>();
 		// Mapping area to item
-		itemMap = new Map<FlxObject, FlxSprite>();
-
-		// Mapping from door to name
-		doorName = new Map<FlxObject, String>();
+		itemMap = new Map<FlxObject, Item>();
 
 		// Mapping from door's name to door's Group
 		doorNameToOpenGroup = new Map<String, FlxTypedGroup<FlxTilemapExt>>();
@@ -150,8 +148,8 @@ class Level extends TiledMap
 	public function loadObjects(state:PlayState)
 	{
 		var stringOpen:Map<String, FlxObject> = new Map<String, FlxObject>();
-		var stringDoor:Map<String, FlxObject> = new Map<String, FlxObject>();
-		var stringitem:Map<String, FlxSprite> = new Map<String, FlxSprite>();
+		var stringDoor:Map<String, Door> = new Map<String, Door>();
+		var stringitem:Map<String, Item> = new Map<String, Item>();
 		var stringchoose:Map<String, FlxObject> = new Map<String, FlxObject>();
 		for (layer in layers)
 		{
@@ -169,25 +167,15 @@ class Level extends TiledMap
 				}
 			} else if (group.properties.contains("door")) {
 				for (o in group.objects) {
-					var x:Int = o.x;
-					var y:Int = o.y;
-					var door:FlxObject = new FlxObject(x, y, o.width, o.height);
-					#if FLX_DEBUG
-					door.debugBoundingBoxColor = 0xFFFF00FF;
-					#end
-					door.immovable = true;
-					collisionGroup.add(door);
-					doorName.set(door, o.name);
+					var door:Door = new Door(o);
+					doorGroup.add(cast door);
 					stringDoor.set(o.name, door);
 				}
 			} else if (group.properties.contains("item")) {
 				for (o in group.objects) {
-					var x:Int = o.x;
-					var y:Int = o.y;
-					var item:FlxSprite = new FlxSprite(o.x, o.y).loadGraphic("assets/" + o.properties.get("name") + ".png");
-					item.immovable = true;
+					var item:Item = new Item(o);
 					stringitem.set(o.name, item);
-					itemGroup.add(item);
+					itemGroup.add(cast item);
 				}
 			} else if (group.properties.contains("itemchoose")) {
 				for (o in group.objects) {
@@ -258,8 +246,7 @@ class Level extends TiledMap
 		for (open in openMap.keys()) {
 			if (FlxG.overlap(characterGroup, open)) {
 				if (FlxG.keys.anyJustPressed([E])) {
-					openMap[open].kill();
-					var curr:String = doorName[openMap[open]];
+					var curr:String = openMap[open].name;
 					var doorOpenGroup = doorNameToOpenGroup[curr];
 					var doorClosedGroup = doorNameToClosedGroup[curr];
 					var doorOpenFgGroup = doorNameToOpenFgGroup[curr];
@@ -267,6 +254,7 @@ class Level extends TiledMap
 					_state.remove(doorClosedGroup);
 					_state.add(doorOpenGroup);
 					_state.add(doorOpenFgGroup);
+					openMap[open].kill();
 				}
 			}
 		}
@@ -281,6 +269,7 @@ class Level extends TiledMap
 			}
 		}
 		FlxG.collide(characterGroup, collisionGroup);
+		FlxG.collide(characterGroup, doorGroup);
 		FlxG.collide(characterGroup, characterGroup);
 	}
 }

@@ -40,6 +40,7 @@ class PlayState extends FlxState
 			add(level.doorNameToClosedGroup[key]);
 		}
 		// add character
+		
 		add(level.itemGroup);
 		add(level.characterGroup);
 		// add foreground
@@ -51,6 +52,7 @@ class PlayState extends FlxState
 		add(backpack);
 		// add collision
 		add(level.collisionGroup);
+		add(level.doorGroup);
 		
 		
 		FlxG.camera.setScrollBoundsRect(level.bounds.x, level.bounds.y, level.bounds.width, level.bounds.height);
