@@ -16,7 +16,7 @@ class PlayState extends FlxState
 	var level:Level;
 	var _levelNumber:Int;
 	var _map:TiledMap;
-	var backpack:Backpack;
+	public var backpack:Backpack;
 
 	public function new(levelNumber:Int) {
 		super();
