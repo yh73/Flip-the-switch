@@ -118,30 +118,20 @@ class Level extends TiledMap
 				switchonGroup.add(tilemap);
 			else if (layer.properties.contains("bg"))
 				backgroundGroup.add(tilemap);
-			else {
-				// door open/close
-				var i:Int;
-				for (i in 0...10) {
-					if (layer.properties.contains("doorOpen" + i)) {
-						var doorOpenGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
-						doorOpenGroup.add(tilemap);
-						doorNameToOpenGroup.set(""+i, doorOpenGroup);
-					}
-					else if (layer.properties.contains("doorOpenFg" + i)) {
-						var doorOpenFgGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
-						doorOpenFgGroup.add(tilemap);
-						doorNameToOpenFgGroup.set(""+i, doorOpenFgGroup);
-					}
-					else if (layer.properties.contains("doorClosed" + i)) {
-						var doorClosedGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
-						doorClosedGroup.add(tilemap);
-						doorNameToClosedGroup.set(""+i, doorClosedGroup);
-					}
-
-				}
+			else if (layer.properties.contains("doorOpen")) {
+				var doorOpenGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
+				doorOpenGroup.add(tilemap);
+				doorNameToOpenGroup.set(layer.properties.get("doorOpen"), doorOpenGroup);
+			} else if (layer.properties.contains("doorOpenFg")) {
+				var doorOpenFgGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
+				doorOpenFgGroup.add(tilemap);
+				doorNameToOpenFgGroup.set(layer.properties.get("doorOpenFg"), doorOpenFgGroup);
+			} else if (layer.properties.contains("doorClosed")) {
+				var doorClosedGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
+				doorClosedGroup.add(tilemap);
+				doorNameToClosedGroup.set(layer.properties.get("doorClosed"), doorClosedGroup);
 			}
 		}
-		
 		loadObjects(state);
 	}
 	
@@ -168,14 +158,14 @@ class Level extends TiledMap
 			} else if (group.properties.contains("door")) {
 				for (o in group.objects) {
 					var door:Door = new Door(o);
-					doorGroup.add(cast door);
+					doorGroup.add(door);
 					stringDoor.set(o.name, door);
 				}
 			} else if (group.properties.contains("item")) {
 				for (o in group.objects) {
-					var item:Item = new Item(o);
+					var item:Item = new Item(o.x, o.y, o.name, o.properties.get("from"));
 					stringitem.set(o.name, item);
-					itemGroup.add(cast item);
+					itemGroup.add(item);
 				}
 			} else if (group.properties.contains("itemchoose")) {
 				for (o in group.objects) {
@@ -245,16 +235,19 @@ class Level extends TiledMap
 	{
 		for (open in openMap.keys()) {
 			if (FlxG.overlap(characterGroup, open)) {
+				var door:Door = openMap[open];
+				var curr:String = door.name;
 				if (FlxG.keys.anyJustPressed([E])) {
-					var curr:String = openMap[open].name;
-					var doorOpenGroup = doorNameToOpenGroup[curr];
-					var doorClosedGroup = doorNameToClosedGroup[curr];
-					var doorOpenFgGroup = doorNameToOpenFgGroup[curr];
+					if (door.need == "" || door.need == _state.backpack.equipSlot.name) {
+						var doorOpenGroup = doorNameToOpenGroup[curr];
+						var doorClosedGroup = doorNameToClosedGroup[curr];
+						var doorOpenFgGroup = doorNameToOpenFgGroup[curr];
 
-					_state.remove(doorClosedGroup);
-					_state.add(doorOpenGroup);
-					_state.add(doorOpenFgGroup);
-					openMap[open].kill();
+						_state.remove(doorClosedGroup);
+						_state.add(doorOpenGroup);
+						_state.add(doorOpenFgGroup);
+						openMap[open].kill();
+					}
 				}
 			}
 		}
@@ -262,8 +255,9 @@ class Level extends TiledMap
 		for (choose in itemMap.keys()) {
 			if (FlxG.overlap(characterGroup, choose)) {
 				if (FlxG.keys.anyJustPressed([E])) {
-					_state.backpack.addItem(new FlxSprite(0,0).loadGraphicFromSprite(itemMap[choose]));
-					itemMap[choose].kill();
+					var item:Item = itemMap[choose];
+					_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath));
+					item.kill();
 					choose.kill();
 				}
 			}

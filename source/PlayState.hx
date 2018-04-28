@@ -48,7 +48,9 @@ class PlayState extends FlxState
 		// add backpack
 		add(backpack.border);
 		add(backpack.buttons);
+		add(backpack.equipSlotBorder);
 		add(backpack.equipSlot);
+		add(backpack.unEquipButton);
 		add(backpack);
 		// add collision
 		add(level.collisionGroup);
@@ -82,5 +84,4 @@ class PlayState extends FlxState
 		FlxG.switchState(new PlayState(_levelNumber));
 		
 	}
-	
 }

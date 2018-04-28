@@ -7,12 +7,12 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.addons.ui.FlxButtonPlus;
 
-class Backpack extends FlxTypedGroup<FlxSprite>
+class Backpack extends FlxTypedGroup<Item>
 {   
     public var border:FlxSprite;
     public var buttons:FlxTypedGroup<FlxButtonPlus>;
     public var equipSlotBorder:FlxSprite;
-    public var equipSlot:FlxSprite;
+    public var equipSlot:Item;
     public var firstTimeEquip = true;
     public var unEquipButton:FlxButtonPlus;
     var player:Character;
@@ -28,7 +28,7 @@ class Backpack extends FlxTypedGroup<FlxSprite>
         tileSize = size;
         buttons = new FlxTypedGroup<FlxButtonPlus>();
         equipSlotBorder = new FlxSprite(0,0).makeGraphic(size, size, color);
-        equipSlot = new FlxSprite(0,0,null);
+        equipSlot = new Item(0.0, 0.0, "", "");
         border = new FlxSprite(0,0).makeGraphic(5 * size, size, color);
         border = FlxGridOverlay.overlay(border, size, size,  number * size, 
             size, true, color);
@@ -97,7 +97,7 @@ class Backpack extends FlxTypedGroup<FlxSprite>
 
     private function equip() 
     {   
-        var itemToEquip = new FlxSprite(0,0);
+        var itemToEquip = new Item(0.0, 0.0, "", "");
         for (item in this) {
             if (item.x == equipButton.x) {
                 itemToEquip = item;
@@ -107,10 +107,10 @@ class Backpack extends FlxTypedGroup<FlxSprite>
         lastItemIdx = this.members.indexOf(itemToEquip);
         equipSlot.revive();
         if (!firstTimeEquip) {
-            this.insert(lastItemIdx, new FlxSprite(0,0).loadGraphicFromSprite(equipSlot));
-            equipSlot.loadGraphicFromSprite(this.remove(itemToEquip));
+            this.insert(lastItemIdx, new Item(equipSlot.x, equipSlot.y, equipSlot.name, equipSlot.mypath));
+            equipSlot.loadGraphicFromItem(this.remove(itemToEquip));
         } else {
-            equipSlot.loadGraphicFromSprite(this.remove(itemToEquip));
+            equipSlot.loadGraphicFromItem(this.remove(itemToEquip));
             firstTimeEquip = false;
         }
         buttons.kill();
@@ -118,12 +118,12 @@ class Backpack extends FlxTypedGroup<FlxSprite>
 
     private function unequip() 
     {
-        this.add(new FlxSprite(0,0).loadGraphicFromSprite(equipSlot));
+        this.add(new Item(equipSlot.x, equipSlot.y, equipSlot.name, equipSlot.mypath));
         equipSlot.kill();
         firstTimeEquip = true;
     }
 
-    public function addItem(item:FlxSprite) 
+    public function addItem(item:Item) 
     {
         this.add(item);
     }
