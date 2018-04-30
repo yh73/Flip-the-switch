@@ -49,7 +49,7 @@ class PowerBar extends FlxSprite{
 
     public function generateResult():Float {
         this.kill();
-        return 2 * (1 - (indicator.y - this.y) / (4 * size));
+        return (1 - (indicator.y - this.y) / (4 * size));
     }
 
     override public function kill() {
