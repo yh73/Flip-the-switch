@@ -129,30 +129,20 @@ class Level extends TiledMap
 				switchonGroup.add(tilemap);
 			else if (layer.properties.contains("bg"))
 				backgroundGroup.add(tilemap);
-			else {
-				// door open/close
-				var i:Int;
-				for (i in 0...10) {
-					if (layer.properties.contains("doorOpen" + i)) {
-						var doorOpenGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
-						doorOpenGroup.add(tilemap);
-						doorNameToOpenGroup.set(""+i, doorOpenGroup);
-					}
-					else if (layer.properties.contains("doorOpenFg" + i)) {
-						var doorOpenFgGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
-						doorOpenFgGroup.add(tilemap);
-						doorNameToOpenFgGroup.set(""+i, doorOpenFgGroup);
-					}
-					else if (layer.properties.contains("doorClosed" + i)) {
-						var doorClosedGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
-						doorClosedGroup.add(tilemap);
-						doorNameToClosedGroup.set(""+i, doorClosedGroup);
-					}
-
-				}
+			else if (layer.properties.contains("doorOpen")) {
+				var doorOpenGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
+				doorOpenGroup.add(tilemap);
+				doorNameToOpenGroup.set(layer.properties.get("doorOpen"), doorOpenGroup);
+			} else if (layer.properties.contains("doorOpenFg")) {
+				var doorOpenFgGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
+				doorOpenFgGroup.add(tilemap);
+				doorNameToOpenFgGroup.set(layer.properties.get("doorOpenFg"), doorOpenFgGroup);
+			} else if (layer.properties.contains("doorClosed")) {
+				var doorClosedGroup:FlxTypedGroup<FlxTilemapExt> = new FlxTypedGroup<FlxTilemapExt>();
+				doorClosedGroup.add(tilemap);
+				doorNameToClosedGroup.set(layer.properties.get("doorClosed"), doorClosedGroup);
 			}
 		}
-		
 		loadObjects(state);
 	}
 	
@@ -179,14 +169,14 @@ class Level extends TiledMap
 			} else if (group.properties.contains("door")) {
 				for (o in group.objects) {
 					var door:Door = new Door(o);
-					doorGroup.add(cast door);
+					doorGroup.add(door);
 					stringDoor.set(o.name, door);
 				}
 			} else if (group.properties.contains("item")) {
 				for (o in group.objects) {
-					var item:Item = new Item(o);
+					var item:Item = new Item(o.x, o.y, o.name, o.properties.get("from"));
 					stringitem.set(o.name, item);
-					itemGroup.add(cast item);
+					itemGroup.add(item);
 				}
 			} else if (group.properties.contains("itemchoose")) {
 				for (o in group.objects) {
