@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2018.04.18" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="50">
+<map version="1.0" tiledversion="2018.04.18" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="66">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="tiles.png" width="320" height="768"/>
  </tileset>
@@ -111,33 +111,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="door bg" width="25" height="19">
-  <properties>
-   <property name="bg" value="1"/>
-   <property name="tileset" value="tiles"/>
-  </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,11,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
  <layer name="switchoff" width="25" height="19">
   <properties>
    <property name="switchoff" value="2"/>
@@ -165,6 +138,43 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <layer name="door close 1" width="25" height="19">
+  <properties>
+   <property name="doorClosed" value="1"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,11,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="door">
+  <properties>
+   <property name="door" value="1"/>
+  </properties>
+  <object id="50" name="1" type="door" x="384.5" y="139" width="31.5" height="52">
+   <properties>
+    <property name="need" value="key1"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer name="cover bg" width="25" height="19">
   <properties>
    <property name="cover" value="3"/>
@@ -279,9 +289,15 @@
   </properties>
   <object id="45" name="key1" gid="119" x="641.5" y="353" width="32" height="32">
    <properties>
-    <property name="name" value="key1"/>
+    <property name="from" value="key1"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup name="door openarea">
+  <properties>
+   <property name="opendoor" value="1"/>
+  </properties>
+  <object id="51" name="1" x="372" y="191" width="59.5" height="34"/>
  </objectgroup>
  <objectgroup name="itemchoose">
   <properties>
@@ -356,25 +372,44 @@
   <object id="3" type="collision" x="0" y="52.9418" width="128" height="552.392"/>
   <object id="4" type="collision" x="672" y="52.0132" width="128" height="554.39"/>
   <object id="5" type="collision" x="609.33" y="52.9418" width="62.9308" height="42.9528"/>
-  <object id="7" type="collision" x="641.295" y="96.8934" width="30.9659" height="210"/>
   <object id="9" type="collision" x="129.857" y="96" width="32" height="18"/>
   <object id="10" type="collision" x="352" y="320" width="96" height="82"/>
   <object id="11" type="collision" x="288" y="352" width="32" height="50"/>
   <object id="12" type="collision" x="128" y="512" width="96" height="18"/>
-  <object id="15" type="collision" x="512" y="160" width="128" height="114"/>
-  <object id="16" type="collision" x="608" y="274" width="32" height="32"/>
   <object id="17" type="collision" x="416" y="160" width="96" height="32"/>
-  <object id="18" type="collision" x="128" y="160" width="160" height="114"/>
   <object id="19" type="collision" x="288" y="160" width="32" height="82"/>
   <object id="20" type="collision" x="320" y="160" width="64" height="32"/>
   <object id="21" type="collision" x="128" y="326.992" width="28" height="24.9989"/>
-  <object id="23" type="collision" x="128" y="352" width="160" height="160"/>
   <object id="24" type="collision" x="288" y="480" width="64" height="32"/>
-  <object id="25" type="collision" x="512" y="352" width="160" height="160"/>
   <object id="26" type="collision" x="448" y="480" width="64" height="32"/>
   <object id="27" type="collision" x="480" y="418" width="32" height="64"/>
   <object id="28" type="collision" x="640" y="512" width="32" height="64"/>
   <object id="29" type="collision" x="608" y="544" width="32" height="32"/>
   <object id="32" type="collision" x="225.515" y="54.768" width="30.6057" height="41.8814"/>
+  <object id="52" type="collision" x="513" y="449" width="159.5" height="62"/>
+  <object id="53" type="collision" x="128.5" y="448" width="159.5" height="63.5"/>
+  <object id="54" type="collision" x="129" y="153.5" width="159.5" height="41"/>
+  <object id="57" type="collision" x="609" y="288" width="32" height="19.5"/>
+  <object id="60" type="collision" x="641" y="151.5">
+   <polyline points="0,0 -128,5 -128,46 -64.5,44 -65,41.5 -64.5,64.5 -0.5,67.5"/>
+  </object>
+  <object id="61" type="collision" x="642" y="97.5" width="28" height="121"/>
+ </objectgroup>
+ <objectgroup name="dead">
+  <properties>
+   <property name="dead" value="1"/>
+  </properties>
+  <object id="62" type="dead" x="512.5" y="378.5">
+   <polygon points="0,0 0.5,37 30.5,37 30.5,67.5 65.5,68 65.5,38 95.5,37.5 96.5,68 127,68 128.5,36 158,36 157.5,-1.5 128,-0.5 127,-29.5 96,-30 95,-1.5 64,-1.5 64,-26 32,-24.5 31.5,0.5"/>
+  </object>
+  <object id="63" type="dead" x="512" y="193">
+   <polygon points="0,0 -1,94.5 160.5,96.5 157.5,25 64.5,22.5 61.5,-1"/>
+  </object>
+  <object id="64" type="dead" x="128" y="193">
+   <polygon points="0,0 -1,93.5 159.5,94 159,2"/>
+  </object>
+  <object id="65" type="dead" x="128" y="352">
+   <polygon points="0,0 158.5,1 160.5,94 -0.5,95.5"/>
+  </object>
  </objectgroup>
 </map>
