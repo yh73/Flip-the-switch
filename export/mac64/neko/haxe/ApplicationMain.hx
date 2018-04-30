@@ -635,7 +635,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "225",
+			build: "250",
 			company: "HaxeFlixel",
 			file: "TiledEditor",
 			fps: 60,

@@ -33,6 +33,10 @@ class Level extends TiledMap
 	public var itemGroup:FlxTypedGroup<Item>;
 	public var doorGroup:FlxTypedGroup<Door>;
 
+	public var waterGroup:FlxTypedGroup<FlxObject>;
+	public var waterFront:FlxObject;
+	public var waterBack:FlxObject;
+
 	// open area to door collision
 	public var openMap:Map<FlxObject, Door>;
 	// open area to item
@@ -62,8 +66,17 @@ class Level extends TiledMap
 		// switch on/off groups
 		switchonGroup = new FlxTypedGroup<FlxTilemapExt>();
 		switchoffGroup = new FlxTypedGroup<FlxTilemapExt>();
+
+		// item group
 		itemGroup = new FlxTypedGroup<Item>();
+
+		// door group
 		doorGroup = new FlxTypedGroup<Door>();
+
+		// water group
+		waterGroup = new FlxTypedGroup<FlxObject>();
+		waterFront = new FlxObject();
+		waterBack = new FlxObject();
 		
 		// events and collision groups
 		characterGroup = new FlxTypedGroup<Character>();
@@ -228,13 +241,36 @@ class Level extends TiledMap
 			case "opensw":
 				var sw = new FlxObject(x, y, o.width, o.height);
 				state.sw = sw;
+
+			case "water":
+				var water = new FlxObject(x, y, o.width, o.height);
+				waterGroup.add(water);
+
+			case "waterfront":
+				waterFront = new FlxObject(x, y, o.width, o.height);
+
+			case "waterback":
+				waterBack = new FlxObject(x, y, o.width, o.height);
 		}
 	}
 	
 	public function update(elapsed:Float):Void
 	{
+		moveBlock();
 		updateCollisions();
 		updateEventsOrder();
+	}
+
+	public function moveBlock():Void
+	{
+		if (FlxG.keys.anyJustPressed([M])) {
+			if (FlxG.overlap(_state.block, waterBack)) {
+				_state.block.velocity.y = 60;
+			}
+			else if (FlxG.overlap(_state.block, waterFront)) {
+				_state.block.velocity.y = -60;
+			}
+		}
 	}
 
 	public function updateEventsOrder():Void

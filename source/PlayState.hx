@@ -19,6 +19,8 @@ class PlayState extends FlxState
 	public var backpack:Backpack;
 	public var powerBar:PowerBar;
 	public var lasso:Lasso;
+	public var slingshot:Slingshot;
+	public var block:FlxSprite;
 
 	public function new(levelNumber:Int) {
 		super();
@@ -36,6 +38,7 @@ class PlayState extends FlxState
 		powerBar = new PowerBar(32, player);
 		powerBar.kill();
 		lasso = new Lasso(32, player, powerBar);
+		slingshot = new Slingshot(player, powerBar);
 		// add background
 		add(level.backgroundGroup);
 		// add switch (off)
@@ -45,7 +48,6 @@ class PlayState extends FlxState
 			add(level.doorNameToClosedGroup[key]);
 		}
 		// add character
-		
 		add(level.itemGroup);
 		add(lasso);
 		add(level.characterGroup);
@@ -58,17 +60,32 @@ class PlayState extends FlxState
 		add(backpack.equipSlot);
 		add(backpack.unEquipButton);
 		add(backpack);
-		add(backpack.buttons);
 		add(level.popUp);
 		add(level.itemPopUp);
 		// add collision
 		add(level.collisionGroup);
 		add(level.doorGroup);
+		add(level.waterFront);
+		add(level.waterBack);
+		add(level.waterGroup);
+
+		// add floating block
+		block = new FlxSprite(224, 192);
+		block.makeGraphic(32,32, FlxColor.GRAY);
+		if (_levelNumber == 4) 
+			block.exists = true;
+		else 
+			block.exists = false;
+		add(block);
+
 		// add powerBar UI
 		add(powerBar);
 		add(powerBar.indicator);
 		FlxG.camera.setScrollBoundsRect(level.bounds.x, level.bounds.y, level.bounds.width, level.bounds.height);
 		FlxG.worldBounds.copyFrom(level.bounds);
+		// add slingshot
+		add(slingshot);
+		add(slingshot.playerBullets);
 		
 		super.create();
 	}
@@ -76,13 +93,14 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		level.update(elapsed);
+		updateSlingshot();
+		updateBlock();
 		super.update(elapsed);
 		if (FlxG.overlap(player, sw)) {
 			if (FlxG.keys.anyJustPressed([E])) {
 				nextLevel(player, sw);
 			}
 		}
-		// FlxG.overlap(player, sw, nextLevel);
 	}	
 
 	public function nextLevel(player:Character, sw:FlxObject):Void
@@ -93,5 +111,43 @@ class PlayState extends FlxState
 		_levelNumber = _levelNumber + 1;
 		FlxG.switchState(new PlayState(_levelNumber));
 		
+	}
+
+	private function updateSlingshot():Void
+	{
+		FlxG.overlap(slingshot.playerBullets, level.collisionGroup, stuffHitStuff);
+		FlxG.overlap(slingshot.playerBullets, level.doorGroup, stuffHitStuff);
+	}
+
+	private function updateBlock():Void
+	{
+		if (FlxG.overlap(player, block)) {
+			if (block.velocity.y > 0) {
+				player.y++;
+			}
+			else if (block.velocity.y < 0) {
+				player.y--;
+			}
+		}
+		else if (FlxG.overlap(player, level.waterGroup)) {
+			player.x = 700;
+			player.y = 512;
+		}
+		if (block.velocity.y > 0) {
+			FlxG.overlap(block, level.waterFront, stopSprite);
+		}
+		else if (block.velocity.y < 0) {
+			FlxG.overlap(block, level.waterBack, stopSprite);
+		}
+	}
+
+	private function stopSprite(Object1:FlxSprite, Object2:FlxObject):Void
+	{
+		Object1.velocity.y = 0;
+	}
+
+	private function stuffHitStuff(Object1:FlxObject, Object2:FlxObject):Void
+	{
+		Object1.kill();
 	}
 }
