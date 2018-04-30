@@ -32,6 +32,8 @@ class Lasso extends FlxSprite{
 		}
         if (lifeSpan > 0) {
             length += 5;
+            player.moves = false;
+            player.controllable = false;
             if (player.facing == FlxObject.LEFT) {
                 this.x -= 5;
                 end.x = end.x;
@@ -54,6 +56,8 @@ class Lasso extends FlxSprite{
             lifeSpan -= elapsed;
         } else {
             length = 0;
+            player.moves = true;
+            player.controllable = true;
             this.x = player.x + size / 2;
             this.y = player.y + size / 2;
             makeGraphic(length, 3, COLOR);
