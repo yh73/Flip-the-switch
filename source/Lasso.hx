@@ -7,9 +7,10 @@ import flixel.addons.ui.FlxUILine;
 class Lasso extends FlxSprite{
     var player:Character;
     var size:Int;
-    var lifeSpan:Float;
+    public var lifeSpan:Float;
 	var powerBar:PowerBar;
     var length:Int;
+    public var end:FlxObject;
     static var COLOR = FlxColor.YELLOW;
     override public function new(size:Int, charater:Character, powerBar:PowerBar) {
         player = charater;
@@ -17,6 +18,7 @@ class Lasso extends FlxSprite{
         this.powerBar = powerBar;
         this.length = 0;
         super(Std.int(player.x + 10), Std.int(player.y + size / 2));
+        this.end = new FlxObject(this.x, this.y, 10, 10);
         //,HORIZONTAL, 0, 2, FlxColor.WHITE);
         //createFilledBar(FlxColor.TRANSPARENT, FlxColor.WHITE);
         //diff = 0;
@@ -32,13 +34,21 @@ class Lasso extends FlxSprite{
             length += 5;
             if (player.facing == FlxObject.LEFT) {
                 this.x -= 5;
+                end.x = end.x;
+                end.y = this.y;
                 makeGraphic(length, 3, COLOR);
             } else if (player.facing == FlxObject.UP) {
                 this.y -= 5;
+                end.y = this.y;
+                end.x = this.x;
                 makeGraphic(3, length, COLOR);
             } else if (player.facing == FlxObject.DOWN) {
+                end.y = this.y + length;
+                end.x = this.x;
                 makeGraphic(3, length, COLOR);
             } else {
+                end.x = this.x + length;
+                end.y = this.y;
                 makeGraphic(length, 3, COLOR);
             }
             lifeSpan -= elapsed;
@@ -67,5 +77,4 @@ class Lasso extends FlxSprite{
         indicator.y = this.y + diff;
         */
     }
-
 }
