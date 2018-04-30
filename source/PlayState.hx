@@ -17,6 +17,8 @@ class PlayState extends FlxState
 	var _levelNumber:Int;
 	var _map:TiledMap;
 	public var backpack:Backpack;
+	public var powerBar:PowerBar;
+	public var lasso:Lasso;
 
 	public function new(levelNumber:Int) {
 		super();
@@ -31,6 +33,9 @@ class PlayState extends FlxState
 		FlxG.cameras.bgColor = 0xff131c1b;
 		level = new Level("assets/level" + _levelNumber +".tmx", this);
 		backpack = new Backpack(TILE_SIZE, 5, FlxColor.GRAY, player);
+		powerBar = new PowerBar(32, player);
+		powerBar.kill();
+		lasso = new Lasso(32, player, powerBar);
 		// add background
 		add(level.backgroundGroup);
 		// add switch (off)
@@ -42,19 +47,25 @@ class PlayState extends FlxState
 		// add character
 		
 		add(level.itemGroup);
+		add(lasso);
 		add(level.characterGroup);
 		// add foreground
 		add(level.foregroundGroup);
 		// add backpack
 		add(backpack.border);
-		add(backpack.buttons);
+		add(backpack.equipSlotBorder);
 		add(backpack.equipSlot);
+		add(backpack.unEquipButton);
 		add(backpack);
+		add(backpack.buttons);
+		add(level.popUp);
+		add(level.itemPopUp);
 		// add collision
 		add(level.collisionGroup);
 		add(level.doorGroup);
-		
-		
+		// add powerBar UI
+		add(powerBar);
+		add(powerBar.indicator);
 		FlxG.camera.setScrollBoundsRect(level.bounds.x, level.bounds.y, level.bounds.width, level.bounds.height);
 		FlxG.worldBounds.copyFrom(level.bounds);
 		

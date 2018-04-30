@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.util.FlxColor;
+import flixel.util.FlxGradient;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.addons.ui.FlxButtonPlus;
@@ -15,6 +16,7 @@ class Backpack extends FlxTypedGroup<FlxSprite>
     public var equipSlot:FlxSprite;
     public var firstTimeEquip = true;
     public var unEquipButton:FlxButtonPlus;
+    public var powerBar:PowerBar;
     var player:Character;
     var tileSize:Int; 
     var lastItemIdx:Int;
@@ -127,4 +129,5 @@ class Backpack extends FlxTypedGroup<FlxSprite>
     {
         this.add(item);
     }
+
 }

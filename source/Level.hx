@@ -11,6 +11,8 @@ import flixel.math.FlxRect;
 import flixel.util.FlxSort;
 import flixel.group.FlxGroup;
 import flixel.FlxSprite;
+import flixel.text.FlxText;
+import flixel.util.FlxTimer;
 
 /**
  * ...
@@ -41,7 +43,8 @@ class Level extends TiledMap
 	public var doorNameToClosedGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	public var doorNameToClosedFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	
-	
+	public var popUp:FlxText;
+	public var itemPopUp:FlxText;
 	public var bounds:FlxRect;
 
 	public var _state:PlayState;
@@ -79,6 +82,14 @@ class Level extends TiledMap
 		// The bound of the map for the camera
 		bounds = FlxRect.get(0, 0, fullWidth, fullHeight);
 		
+		// Popup ui initialization
+		popUp = new FlxText(0,0, 7*32, "E", 12);
+		itemPopUp = new FlxText(0,0, 7*32, "E", 12);
+		popUp.alignment = FlxTextAlign.CENTER;
+		itemPopUp.alignment = FlxTextAlign.CENTER;
+		popUp.kill();
+		itemPopUp.kill();
+		//popUp.kill();
 		var tileset:TiledTileSet;
 		var tilemap:FlxTilemapExt;
 		
@@ -243,33 +254,51 @@ class Level extends TiledMap
 	
 	public function updateCollisions():Void
 	{
+		popUp.x = _state.player.x - 3*32;
+		popUp.y = _state.player.y - 42;
+		itemPopUp.x = _state.player.x - 3*32;
+		itemPopUp.y = _state.player.y - 42;
 		for (open in openMap.keys()) {
 			if (FlxG.overlap(characterGroup, open)) {
+				popUp.revive();
 				if (FlxG.keys.anyJustPressed([E])) {
 					var curr:String = openMap[open].name;
 					var doorOpenGroup = doorNameToOpenGroup[curr];
 					var doorClosedGroup = doorNameToClosedGroup[curr];
 					var doorOpenFgGroup = doorNameToOpenFgGroup[curr];
-
 					_state.remove(doorClosedGroup);
 					_state.add(doorOpenGroup);
 					_state.add(doorOpenFgGroup);
 					openMap[open].kill();
-				}
+				} 
+			} else {
+				popUp.kill();
 			}
 		}
 
 		for (choose in itemMap.keys()) {
 			if (FlxG.overlap(characterGroup, choose)) {
+				popUp.revive();
 				if (FlxG.keys.anyJustPressed([E])) {
 					_state.backpack.addItem(new FlxSprite(0,0).loadGraphicFromSprite(itemMap[choose]));
+					itemPopUp.text = "You got a key";
+					itemPopUp.revive();
+					var timer = new FlxTimer();
+					timer.start(1, onTimer, 1);
 					itemMap[choose].kill();
 					choose.kill();
-				}
+				} 
+			}else {
+				popUp.kill();
 			}
 		}
+
 		FlxG.collide(characterGroup, collisionGroup);
 		FlxG.collide(characterGroup, doorGroup);
 		FlxG.collide(characterGroup, characterGroup);
+	}
+
+	private function onTimer(Timer:FlxTimer):Void {
+		itemPopUp.kill();
 	}
 }
