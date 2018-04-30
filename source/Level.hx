@@ -270,7 +270,9 @@ class Level extends TiledMap
 			if (FlxG.overlap(characterGroup, choose)) {
 				popUp.revive();
 				if (FlxG.keys.anyJustPressed([E])) {
-					_state.backpack.addItem(new FlxSprite(0,0).loadGraphicFromSprite(itemMap[choose]));
+					var item:Item = itemMap[choose];
+					_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath));
+					item.kill();
 					itemPopUp.text = "You got a key";
 					itemPopUp.revive();
 					var timer = new FlxTimer();
