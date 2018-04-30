@@ -303,24 +303,28 @@ class Level extends TiledMap
 		}
 
 		for (choose in itemMap.keys()) {
-			if (FlxG.overlap(characterGroup, choose)) {
+			if ((FlxG.overlap(characterGroup, choose) && FlxG.keys.justPressed.E)
+			|| (FlxG.overlap(_state.lasso.end, choose) && _state.lasso.lifeSpan <= 0)) {
+				var item:Item = itemMap[choose];
+				_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath));
+				item.kill();
+				itemPopUp.text = "You got a key";
+				itemPopUp.revive();
+				var timer = new FlxTimer();
+				timer.start(1, onTimer, 1);
+				itemMap[choose].kill();
+				choose.kill();
+			}else if (FlxG.overlap(characterGroup, choose)){
 				popUp.revive();
-				if (FlxG.keys.anyJustPressed([E])) {
-					var item:Item = itemMap[choose];
-					_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath));
-					item.kill();
-					itemPopUp.text = "You got a key";
-					itemPopUp.revive();
-					var timer = new FlxTimer();
-					timer.start(1, onTimer, 1);
-					itemMap[choose].kill();
-					choose.kill();
-				} 
-			}else {
+			} else {
 				popUp.kill();
 			}
 		}
 
+		if (FlxG.overlap(_state.lasso, collisionGroup) || FlxG.overlap(_state.lasso, doorGroup))
+		{
+			_state.lasso.lifeSpan = 0;
+		}
 		FlxG.collide(characterGroup, collisionGroup);
 		FlxG.collide(characterGroup, doorGroup);
 		FlxG.collide(characterGroup, characterGroup);
