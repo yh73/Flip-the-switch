@@ -33,6 +33,7 @@ class Level extends TiledMap
 	public var itemGroup:FlxTypedGroup<Item>;
 	public var doorGroup:FlxTypedGroup<Door>;
 	public var buttonGroup:FlxTypedGroup<FlxObject>;
+	public var blockGroup:FlxTypedGroup<Block>;
 
 	public var waterGroup:FlxTypedGroup<FlxObject>;
 	public var waterFront:FlxObject;
@@ -76,6 +77,9 @@ class Level extends TiledMap
 
 		// button group
 		buttonGroup = new FlxTypedGroup<FlxObject>();
+
+		// block group
+		blockGroup = new FlxTypedGroup<Block>();
 
 		// water group
 		waterGroup = new FlxTypedGroup<FlxObject>();
@@ -246,6 +250,10 @@ class Level extends TiledMap
 				var sw = new FlxObject(x, y, o.width, o.height);
 				state.sw = sw;
 
+			case "block":
+				var curr = new Block(x, y, this, _state);
+				blockGroup.add(curr);
+
 			case "button":
 				var button = new FlxObject(x, y, o.width, o.height);
 				buttonGroup.add(button);
@@ -265,7 +273,6 @@ class Level extends TiledMap
 	public function update(elapsed:Float):Void
 	{
 		updateSlingshot();
-		updateBlock();
 		updateCollisions();
 		updateEventsOrder();
 	}
@@ -273,51 +280,12 @@ class Level extends TiledMap
 	private function updateSlingshot():Void
 	{
 		FlxG.overlap(_state.slingshot.playerBullets, collisionGroup, stuffHitStuff);
-		FlxG.overlap(_state.slingshot.playerBullets, doorGroup, stuffHitStuff);
-		if (FlxG.overlap(_state.slingshot.playerBullets, buttonGroup)) {
-			moveBlock();
-		}
-	}
-
-	private function updateBlock():Void
-	{
-		if (FlxG.overlap(_state.player, _state.block)) {
-			if (_state.block.velocity.y > 0) {
-				_state.player.y++;
-			}
-			else if (_state.block.velocity.y < 0) {
-				_state.player.y--;
-			}
-		}
-		else if (FlxG.overlap(_state.player, waterGroup)) {
-			FlxG.switchState(new PlayState(_state._levelNumber));
-		}
-		if (_state.block.velocity.y > 0) {
-			FlxG.overlap(_state.block, waterFront, stopSprite);
-		}
-		else if (_state.block.velocity.y < 0) {
-			FlxG.overlap(_state.block, waterBack, stopSprite);
-		}
-	}
-
-	private function stopSprite(Object1:FlxSprite, Object2:FlxObject):Void
-	{
-		Object1.velocity.y = 0;
+		FlxG.overlap(_state.slingshot.playerBullets, doorGroup, stuffHitStuff);	
 	}
 
 	private function stuffHitStuff(Object1:FlxObject, Object2:FlxObject):Void
 	{
 		Object1.kill();
-	}
-
-	public function moveBlock():Void
-	{
-		if (FlxG.overlap(_state.block, waterBack)) {
-			_state.block.velocity.y = 60;
-		}
-		else if (FlxG.overlap(_state.block, waterFront)) {
-			_state.block.velocity.y = -60;
-		}
 	}
 
 	public function updateEventsOrder():Void

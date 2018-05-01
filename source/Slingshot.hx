@@ -17,7 +17,7 @@ class Slingshot extends FlxSprite {
     var bulletLife:Map<FlxSprite, Float>;
 
     override public function new(charater:Character, pb:PowerBar) {
-        super();
+        super(-100, -100);
         player = charater;
         powerBar = pb;
         percent = 0;
@@ -33,7 +33,7 @@ class Slingshot extends FlxSprite {
 		for (i in 0...numPlayerBullets)
 		{
 			// Instantiate a new sprite offscreen
-			sprite = new FlxSprite( -100, -100);
+			sprite = new FlxSprite(-100, -100);
 			// Create a 3x3 white box
 			sprite.makeGraphic(3, 3);
 			sprite.exists = false;

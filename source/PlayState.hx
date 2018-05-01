@@ -20,7 +20,6 @@ class PlayState extends FlxState
 	public var powerBar:PowerBar;
 	public var lasso:Lasso;
 	public var slingshot:Slingshot;
-	public var block:FlxSprite;
 
 	public function new(levelNumber:Int) {
 		super();
@@ -37,20 +36,17 @@ class PlayState extends FlxState
 		backpack = new Backpack(TILE_SIZE, 5, FlxColor.GRAY, player);
 		powerBar = new PowerBar(32, player);
 		powerBar.kill();
-		lasso = new Lasso(32, player, powerBar);
+		lasso = new Lasso(32, player, powerBar, backpack);
 		slingshot = new Slingshot(player, powerBar);
 		// add background
 		add(level.backgroundGroup);
 
 		// add floating block
-		block = new FlxSprite(224, 192);
-		block.makeGraphic(32,32, FlxColor.GRAY);
-		if (_levelNumber == 3) 
-			block.exists = true;
-		else 
-			block.exists = false;
-		add(block);
-
+		add(level.blockGroup);
+		for (i in 0...level.blockGroup.length) {
+			add(level.blockGroup.members[i].block);
+		}
+ 
 		// add button
 		add(level.buttonGroup);
 		// add switch (off)
