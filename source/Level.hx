@@ -250,9 +250,10 @@ class Level extends TiledMap
 		itemPopUp.y = _state.player.y - 42;
 		for (open in openMap.keys()) {
 			if (FlxG.overlap(characterGroup, open)) {
+				var door:Door = openMap[open];
+				var curr:String = door.name;
 				popUp.revive();
-				if (FlxG.keys.anyJustPressed([E])) {
-					var curr:String = openMap[open].name;
+				if ((door.need == "" || door.need == _state.backpack.equipSlot.name) && FlxG.keys.justPressed.E) {
 					var doorOpenGroup = doorNameToOpenGroup[curr];
 					var doorClosedGroup = doorNameToClosedGroup[curr];
 					var doorOpenFgGroup = doorNameToOpenFgGroup[curr];
@@ -260,7 +261,9 @@ class Level extends TiledMap
 					_state.add(doorOpenGroup);
 					_state.add(doorOpenFgGroup);
 					openMap[open].kill();
+					open.kill();
 				} 
+				break;
 			} else {
 				popUp.kill();
 			}
@@ -278,6 +281,7 @@ class Level extends TiledMap
 				timer.start(1, onTimer, 1);
 				itemMap[choose].kill();
 				choose.kill();
+				break;
 			}else if (FlxG.overlap(characterGroup, choose)){
 				popUp.revive();
 			} else {

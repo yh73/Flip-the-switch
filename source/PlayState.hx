@@ -35,7 +35,7 @@ class PlayState extends FlxState
 		backpack = new Backpack(TILE_SIZE, 5, FlxColor.GRAY, player);
 		powerBar = new PowerBar(32, player);
 		powerBar.kill();
-		lasso = new Lasso(32, player, powerBar);
+		lasso = new Lasso(32, player, powerBar, backpack);
 		// add background
 		add(level.backgroundGroup);
 		// add switch (off)
