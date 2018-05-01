@@ -14,7 +14,7 @@ class PlayState extends FlxState
 	public var sw:FlxObject;
 	public static var TILE_SIZE = 32;
 	var level:Level;
-	var _levelNumber:Int;
+	public var _levelNumber:Int;
 	var _map:TiledMap;
 	public var backpack:Backpack;
 	public var powerBar:PowerBar;
@@ -33,7 +33,7 @@ class PlayState extends FlxState
 		
 		// Set a background color
 		FlxG.cameras.bgColor = 0xff131c1b;
-		level = new Level("assets/level" + _levelNumber +".tmx", this);
+		level = new Level("assets/level" + _levelNumber + ".tmx", this);
 		backpack = new Backpack(TILE_SIZE, 5, FlxColor.GRAY, player);
 		powerBar = new PowerBar(32, player);
 		powerBar.kill();
@@ -41,6 +41,18 @@ class PlayState extends FlxState
 		slingshot = new Slingshot(player, powerBar);
 		// add background
 		add(level.backgroundGroup);
+
+		// add floating block
+		block = new FlxSprite(224, 192);
+		block.makeGraphic(32,32, FlxColor.GRAY);
+		if (_levelNumber == 3) 
+			block.exists = true;
+		else 
+			block.exists = false;
+		add(block);
+
+		// add button
+		add(level.buttonGroup);
 		// add switch (off)
 		add(level.switchoffGroup);
 		// add door (closed)
@@ -69,15 +81,6 @@ class PlayState extends FlxState
 		add(level.waterBack);
 		add(level.waterGroup);
 
-		// add floating block
-		block = new FlxSprite(224, 192);
-		block.makeGraphic(32,32, FlxColor.GRAY);
-		if (_levelNumber == 4) 
-			block.exists = true;
-		else 
-			block.exists = false;
-		add(block);
-
 		// add powerBar UI
 		add(powerBar);
 		add(powerBar.indicator);
@@ -93,8 +96,6 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		level.update(elapsed);
-		updateSlingshot();
-		updateBlock();
 		super.update(elapsed);
 		if (FlxG.overlap(player, sw)) {
 			if (FlxG.keys.anyJustPressed([E])) {
@@ -113,41 +114,4 @@ class PlayState extends FlxState
 		
 	}
 
-	private function updateSlingshot():Void
-	{
-		FlxG.overlap(slingshot.playerBullets, level.collisionGroup, stuffHitStuff);
-		FlxG.overlap(slingshot.playerBullets, level.doorGroup, stuffHitStuff);
-	}
-
-	private function updateBlock():Void
-	{
-		if (FlxG.overlap(player, block)) {
-			if (block.velocity.y > 0) {
-				player.y++;
-			}
-			else if (block.velocity.y < 0) {
-				player.y--;
-			}
-		}
-		else if (FlxG.overlap(player, level.waterGroup)) {
-			player.x = 700;
-			player.y = 512;
-		}
-		if (block.velocity.y > 0) {
-			FlxG.overlap(block, level.waterFront, stopSprite);
-		}
-		else if (block.velocity.y < 0) {
-			FlxG.overlap(block, level.waterBack, stopSprite);
-		}
-	}
-
-	private function stopSprite(Object1:FlxSprite, Object2:FlxObject):Void
-	{
-		Object1.velocity.y = 0;
-	}
-
-	private function stuffHitStuff(Object1:FlxObject, Object2:FlxObject):Void
-	{
-		Object1.kill();
-	}
 }

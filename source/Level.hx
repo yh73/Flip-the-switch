@@ -32,6 +32,7 @@ class Level extends TiledMap
 	public var characterGroup:FlxTypedGroup<Character>;
 	public var itemGroup:FlxTypedGroup<Item>;
 	public var doorGroup:FlxTypedGroup<Door>;
+	public var buttonGroup:FlxTypedGroup<FlxObject>;
 
 	public var waterGroup:FlxTypedGroup<FlxObject>;
 	public var waterFront:FlxObject;
@@ -72,6 +73,9 @@ class Level extends TiledMap
 
 		// door group
 		doorGroup = new FlxTypedGroup<Door>();
+
+		// button group
+		buttonGroup = new FlxTypedGroup<FlxObject>();
 
 		// water group
 		waterGroup = new FlxTypedGroup<FlxObject>();
@@ -242,6 +246,10 @@ class Level extends TiledMap
 				var sw = new FlxObject(x, y, o.width, o.height);
 				state.sw = sw;
 
+			case "button":
+				var button = new FlxObject(x, y, o.width, o.height);
+				buttonGroup.add(button);
+
 			case "water":
 				var water = new FlxObject(x, y, o.width, o.height);
 				waterGroup.add(water);
@@ -256,20 +264,59 @@ class Level extends TiledMap
 	
 	public function update(elapsed:Float):Void
 	{
-		moveBlock();
+		updateSlingshot();
+		updateBlock();
 		updateCollisions();
 		updateEventsOrder();
 	}
 
+	private function updateSlingshot():Void
+	{
+		FlxG.overlap(_state.slingshot.playerBullets, collisionGroup, stuffHitStuff);
+		FlxG.overlap(_state.slingshot.playerBullets, doorGroup, stuffHitStuff);
+		if (FlxG.overlap(_state.slingshot.playerBullets, buttonGroup)) {
+			moveBlock();
+		}
+	}
+
+	private function updateBlock():Void
+	{
+		if (FlxG.overlap(_state.player, _state.block)) {
+			if (_state.block.velocity.y > 0) {
+				_state.player.y++;
+			}
+			else if (_state.block.velocity.y < 0) {
+				_state.player.y--;
+			}
+		}
+		else if (FlxG.overlap(_state.player, waterGroup)) {
+			FlxG.switchState(new PlayState(_state._levelNumber));
+		}
+		if (_state.block.velocity.y > 0) {
+			FlxG.overlap(_state.block, waterFront, stopSprite);
+		}
+		else if (_state.block.velocity.y < 0) {
+			FlxG.overlap(_state.block, waterBack, stopSprite);
+		}
+	}
+
+	private function stopSprite(Object1:FlxSprite, Object2:FlxObject):Void
+	{
+		Object1.velocity.y = 0;
+	}
+
+	private function stuffHitStuff(Object1:FlxObject, Object2:FlxObject):Void
+	{
+		Object1.kill();
+	}
+
 	public function moveBlock():Void
 	{
-		if (FlxG.keys.anyJustPressed([M])) {
-			if (FlxG.overlap(_state.block, waterBack)) {
-				_state.block.velocity.y = 60;
-			}
-			else if (FlxG.overlap(_state.block, waterFront)) {
-				_state.block.velocity.y = -60;
-			}
+		if (FlxG.overlap(_state.block, waterBack)) {
+			_state.block.velocity.y = 60;
+		}
+		else if (FlxG.overlap(_state.block, waterFront)) {
+			_state.block.velocity.y = -60;
 		}
 	}
 
@@ -286,8 +333,9 @@ class Level extends TiledMap
 		itemPopUp.y = _state.player.y - 42;
 		for (open in openMap.keys()) {
 			if (FlxG.overlap(characterGroup, open)) {
+				var door:Door = openMap[open];
 				popUp.revive();
-				if (FlxG.keys.anyJustPressed([E])) {
+				if (FlxG.keys.anyJustPressed([E]) && (door.need == "" || _state.backpack.equipSlot.name == door.need)) {
 					var curr:String = openMap[open].name;
 					var doorOpenGroup = doorNameToOpenGroup[curr];
 					var doorClosedGroup = doorNameToClosedGroup[curr];
@@ -296,7 +344,9 @@ class Level extends TiledMap
 					_state.add(doorOpenGroup);
 					_state.add(doorOpenFgGroup);
 					openMap[open].kill();
-				} 
+					open.kill();
+				}	
+				break; 
 			} else {
 				popUp.kill();
 			}
@@ -316,6 +366,7 @@ class Level extends TiledMap
 				choose.kill();
 			}else if (FlxG.overlap(characterGroup, choose)){
 				popUp.revive();
+				break;
 			} else {
 				popUp.kill();
 			}
