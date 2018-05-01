@@ -30,7 +30,7 @@ class MenuState extends FlxState
 
 	private function clickPlay():Void
     {
-        FlxG.switchState(new PlayState(1));
+        FlxG.switchState(new PlayState(2));
     }
 
 	override public function update(elapsed:Float):Void 

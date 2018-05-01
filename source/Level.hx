@@ -326,15 +326,16 @@ class Level extends TiledMap
 	}
 	
 	public function updateCollisions():Void
-	{
+	{	
 		popUp.x = _state.player.x - 3*32;
 		popUp.y = _state.player.y - 42;
 		itemPopUp.x = _state.player.x - 3*32;
 		itemPopUp.y = _state.player.y - 42;
+		var overlapped = false;
 		for (open in openMap.keys()) {
 			if (FlxG.overlap(characterGroup, open)) {
 				var door:Door = openMap[open];
-				popUp.revive();
+				overlapped = true;
 				if (FlxG.keys.anyJustPressed([E]) && (door.need == "" || _state.backpack.equipSlot.name == door.need)) {
 					var curr:String = openMap[open].name;
 					var doorOpenGroup = doorNameToOpenGroup[curr];
@@ -345,10 +346,10 @@ class Level extends TiledMap
 					_state.add(doorOpenFgGroup);
 					openMap[open].kill();
 					open.kill();
-				}	
-				break; 
-			} else {
-				popUp.kill();
+					break; 
+				} else if (FlxG.keys.anyJustPressed([E])) {
+					displayMsg("The door is locked.");
+				}
 			}
 		}
 
@@ -358,19 +359,19 @@ class Level extends TiledMap
 				var item:Item = itemMap[choose];
 				_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath));
 				item.kill();
-				itemPopUp.text = "You got a key";
-				itemPopUp.revive();
-				var timer = new FlxTimer();
-				timer.start(1, onTimer, 1);
+				displayMsg("You got a key");
 				itemMap[choose].kill();
 				choose.kill();
 				break;
-			}else if (FlxG.overlap(characterGroup, choose)){
-				popUp.revive();
-				break;
-			} else {
-				popUp.kill();
+			} else if (FlxG.overlap(characterGroup, choose)){
+				overlapped = true;
 			}
+		}
+
+		if (overlapped && !itemPopUp.alive) {
+			popUp.revive();
+		} else {
+			popUp.kill();
 		}
 
 		if (FlxG.overlap(_state.lasso, collisionGroup) || FlxG.overlap(_state.lasso, doorGroup))
@@ -384,5 +385,14 @@ class Level extends TiledMap
 
 	private function onTimer(Timer:FlxTimer):Void {
 		itemPopUp.kill();
+	}
+
+	private function displayMsg(content:String) 
+	{	
+		popUp.kill();
+		itemPopUp.text = content;
+		itemPopUp.revive();
+		var timer = new FlxTimer();
+		timer.start(1, onTimer, 1);
 	}
 }

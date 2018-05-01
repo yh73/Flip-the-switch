@@ -15,9 +15,9 @@ class Slingshot extends FlxSprite {
     var percent:Float;
     public var playerBullets:FlxTypedGroup<FlxSprite>;
     var bulletLife:Map<FlxSprite, Float>;
-
-    override public function new(charater:Character, pb:PowerBar) {
-        super();
+    var backpack:Backpack;
+    override public function new(charater:Character, pb:PowerBar, backpack:Backpack) {
+        super(-100, -100);
         player = charater;
         powerBar = pb;
         percent = 0;
@@ -28,7 +28,7 @@ class Slingshot extends FlxSprite {
 		// Initializing the array is very important and easy to forget!
 		playerBullets = new FlxTypedGroup(numPlayerBullets);
 		var sprite:FlxSprite;
-		
+		this.backpack = backpack;
 		// Create 100 bullets for the player to recycle
 		for (i in 0...numPlayerBullets)
 		{
@@ -44,10 +44,10 @@ class Slingshot extends FlxSprite {
 
     override public function update(elapsed:Float):Void 
     {
-        if (FlxG.keys.anyJustPressed([P]) && !powerBar.alive && percent == 0) {
+        if (FlxG.keys.justPressed.SPACE && !powerBar.alive && percent == 0 && backpack.hasSlingshot) {
             powerBar.revive();
         }
-        else if (FlxG.keys.anyJustPressed([P]) && powerBar.alive) {
+        else if (FlxG.keys.justPressed.SPACE && powerBar.alive && backpack.hasSlingshot) {
             lifeSpan = powerBar.generateResult();
             // Space bar was pressed! FIRE A BULLET
 			var bullet:FlxSprite = playerBullets.recycle();

@@ -29,7 +29,7 @@ class Lasso extends FlxSprite{
     override public function update(elapsed:Float):Void {
 		if (FlxG.keys.justPressed.SPACE && !powerBar.alive && length == 0 && backpack.hasLasso) {
 			powerBar.revive();
-		} else if (FlxG.keys.justPressed.SPACE && powerBar.alive) {
+		} else if (FlxG.keys.justPressed.SPACE && powerBar.alive && backpack.hasLasso) {
 			lifeSpan = powerBar.generateResult();
 		}
         if (lifeSpan > 0) {
