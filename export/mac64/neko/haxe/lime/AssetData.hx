@@ -16,12 +16,20 @@ class AssetData {
 		
 		if (!initialized) {
 			
+			path.set ("assets/maps/untitled.tmx", "assets/maps/untitled.tmx");
+			type.set ("assets/maps/untitled.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/maps/tiles.png", "assets/maps/tiles.png");
 			type.set ("assets/maps/tiles.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/health.png", "assets/health.png");
 			type.set ("assets/health.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/key1.png", "assets/key1.png");
+			type.set ("assets/key1.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/untitled.tmx", "assets/untitled.tmx");
+			type.set ("assets/untitled.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/level2.tmx", "assets/level2.tmx");
 			type.set ("assets/level2.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/block.png", "assets/block.png");
+			type.set ("assets/block.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/level3.tmx", "assets/level3.tmx");
 			type.set ("assets/level3.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/level1.tmx", "assets/level1.tmx");

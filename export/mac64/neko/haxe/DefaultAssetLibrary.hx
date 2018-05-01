@@ -66,6 +66,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -105,6 +109,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -744,6 +752,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -783,12 +795,20 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
+		path.set ("assets/maps/untitled.tmx", "assets/maps/untitled.tmx");
+		type.set ("assets/maps/untitled.tmx", AssetType.TEXT);
 		path.set ("assets/maps/tiles.png", "assets/maps/tiles.png");
 		type.set ("assets/maps/tiles.png", AssetType.IMAGE);
 		path.set ("assets/health.png", "assets/health.png");
 		type.set ("assets/health.png", AssetType.IMAGE);
+		path.set ("assets/key1.png", "assets/key1.png");
+		type.set ("assets/key1.png", AssetType.IMAGE);
+		path.set ("assets/untitled.tmx", "assets/untitled.tmx");
+		type.set ("assets/untitled.tmx", AssetType.TEXT);
 		path.set ("assets/level2.tmx", "assets/level2.tmx");
 		type.set ("assets/level2.tmx", AssetType.TEXT);
+		path.set ("assets/block.png", "assets/block.png");
+		type.set ("assets/block.png", AssetType.IMAGE);
 		path.set ("assets/level3.tmx", "assets/level3.tmx");
 		type.set ("assets/level3.tmx", AssetType.TEXT);
 		path.set ("assets/level1.tmx", "assets/level1.tmx");
@@ -876,15 +896,27 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
+		id = "assets/maps/untitled.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
 		id = "assets/maps/tiles.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/health.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "assets/key1.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/untitled.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
 		id = "assets/level2.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
+		id = "assets/block.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/level3.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
@@ -1061,6 +1093,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1903,6 +1939,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1942,6 +1982,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
+
 
 
 
