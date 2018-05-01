@@ -140,7 +140,11 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
+<<<<<<< HEAD
 	ApplicationMain.config = { build : "541", company : "HaxeFlixel", file : "TiledEditor", fps : 60, name : "TiledEditor", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 480, parameters : "{}", resizable : false, stencilBuffer : true, title : "TiledEditor", vsync : true, width : 640, x : null, y : null}]};
+=======
+	ApplicationMain.config = { build : "294", company : "HaxeFlixel", file : "TiledEditor", fps : 60, name : "TiledEditor", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 480, parameters : "{}", resizable : false, stencilBuffer : true, title : "TiledEditor", vsync : true, width : 640, x : null, y : null}]};
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -2797,9 +2801,18 @@ var Backpack = function(size,number,color,character) {
 	this.equipButton = new flixel_addons_ui_FlxButtonPlus(0,0,$bind(this,this.equip),"Equip",48,16);
 	this.unEquipButton = new flixel_addons_ui_FlxButtonPlus(0,0,$bind(this,this.unequip),"Unequip",48,16);
 	this.buttons.add(this.equipButton);
+<<<<<<< HEAD
 	this.set_visible(this.hasLasso = this.hasSlingshot = this.equipSlotBorder.set_visible(this.border.set_visible(false)));
 	this.buttons.kill();
 	this.unEquipButton.kill();
+=======
+	this.buttons.add(new flixel_addons_ui_FlxButtonPlus(0,0,null,"Craft",48,16));
+	this.set_visible(false);
+	this.buttons.kill();
+	this.unEquipButton.kill();
+	this.border.set_visible(false);
+	this.equipSlotBorder.set_visible(false);
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 	this.equipSlot.kill();
 };
 $hxClasses["Backpack"] = Backpack;
@@ -2813,8 +2826,11 @@ Backpack.prototype = $extend(flixel_group_FlxTypedGroup.prototype,{
 	,firstTimeEquip: null
 	,unEquipButton: null
 	,powerBar: null
+<<<<<<< HEAD
 	,hasLasso: null
 	,hasSlingshot: null
+=======
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 	,player: null
 	,tileSize: null
 	,lastItemIdx: null
@@ -2896,12 +2912,15 @@ Backpack.prototype = $extend(flixel_group_FlxTypedGroup.prototype,{
 	}
 	,addItem: function(item) {
 		this.add(item);
+<<<<<<< HEAD
 		if(item.name == "lasso") {
 			this.hasLasso = true;
 		}
 		if(item.name == "slingshot") {
 			this.hasSlingshot = true;
 		}
+=======
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 	}
 	,__class__: Backpack
 });
@@ -6297,6 +6316,7 @@ var DefaultAssetLibrary = function() {
 	}
 	id = "flixel/flixel-ui/img/button_arrow_up.png";
 	var _this58 = this.path;
+<<<<<<< HEAD
 	if(__map_reserved[id] != null) {
 		_this58.setReserved(id,id);
 	} else {
@@ -6307,6 +6327,18 @@ var DefaultAssetLibrary = function() {
 	if(__map_reserved[id] != null) {
 		_this59.setReserved(id,value31);
 	} else {
+=======
+	if(__map_reserved[id] != null) {
+		_this58.setReserved(id,id);
+	} else {
+		_this58.h[id] = id;
+	}
+	var _this59 = this.type;
+	var value31 = "IMAGE";
+	if(__map_reserved[id] != null) {
+		_this59.setReserved(id,value31);
+	} else {
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 		_this59.h[id] = value31;
 	}
 	id = "flixel/flixel-ui/img/minus_mark.png";
@@ -7003,12 +7035,19 @@ Lambda.array = function(it) {
 	}
 	return a;
 };
+<<<<<<< HEAD
 var Lasso = function(size,charater,powerBar,backpack) {
+=======
+var Lasso = function(size,charater,powerBar) {
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 	this.player = charater;
 	this.size = size;
 	this.powerBar = powerBar;
 	this.length = 0;
+<<<<<<< HEAD
 	this.backpack = backpack;
+=======
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 	flixel_FlxSprite.call(this,this.player.x + 10 | 0,this.player.y + size / 2 | 0);
 	this.end = new flixel_FlxObject(this.x,this.y,10,10);
 };
@@ -7022,6 +7061,7 @@ Lasso.prototype = $extend(flixel_FlxSprite.prototype,{
 	,powerBar: null
 	,length: null
 	,end: null
+<<<<<<< HEAD
 	,backpack: null
 	,update: function(elapsed) {
 		var tmp;
@@ -7035,17 +7075,30 @@ Lasso.prototype = $extend(flixel_FlxSprite.prototype,{
 		}
 		if(tmp2) {
 			tmp1 = this.length == 0;
+=======
+	,update: function(elapsed) {
+		var tmp;
+		var tmp1;
+		var _this = flixel_FlxG.keys.justPressed;
+		if(_this.keyManager.checkStatus(32,_this.status)) {
+			tmp1 = !this.powerBar.alive;
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 		} else {
 			tmp1 = false;
 		}
 		if(tmp1) {
+<<<<<<< HEAD
 			tmp = this.backpack.hasLasso;
+=======
+			tmp = this.length == 0;
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 		} else {
 			tmp = false;
 		}
 		if(tmp) {
 			this.powerBar.revive();
 		} else {
+<<<<<<< HEAD
 			var tmp3;
 			var _this1 = flixel_FlxG.keys.justPressed;
 			if(_this1.keyManager.checkStatus(32,_this1.status)) {
@@ -7054,6 +7107,16 @@ Lasso.prototype = $extend(flixel_FlxSprite.prototype,{
 				tmp3 = false;
 			}
 			if(tmp3) {
+=======
+			var tmp2;
+			var _this1 = flixel_FlxG.keys.justPressed;
+			if(_this1.keyManager.checkStatus(32,_this1.status)) {
+				tmp2 = this.powerBar.alive;
+			} else {
+				tmp2 = false;
+			}
+			if(tmp2) {
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 				this.lifeSpan = this.powerBar.generateResult();
 			}
 		}
@@ -7281,6 +7344,13 @@ var Level = function(level,state) {
 	this.switchoffGroup = new flixel_group_FlxTypedGroup();
 	this.itemGroup = new flixel_group_FlxTypedGroup();
 	this.doorGroup = new flixel_group_FlxTypedGroup();
+<<<<<<< HEAD
+=======
+	this.buttonGroup = new flixel_group_FlxTypedGroup();
+	this.waterGroup = new flixel_group_FlxTypedGroup();
+	this.waterFront = new flixel_FlxObject();
+	this.waterBack = new flixel_FlxObject();
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 	this.characterGroup = new flixel_group_FlxTypedGroup();
 	this.collisionGroup = new flixel_group_FlxTypedGroup();
 	this.openMap = new haxe_ds_ObjectMap();
@@ -7382,6 +7452,13 @@ Level.prototype = $extend(flixel_addons_editors_tiled_TiledMap.prototype,{
 	,characterGroup: null
 	,itemGroup: null
 	,doorGroup: null
+<<<<<<< HEAD
+=======
+	,buttonGroup: null
+	,waterGroup: null
+	,waterFront: null
+	,waterBack: null
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 	,openMap: null
 	,itemMap: null
 	,doorNameToOpenGroup: null
@@ -7496,6 +7573,10 @@ Level.prototype = $extend(flixel_addons_editors_tiled_TiledMap.prototype,{
 		var y = o.y;
 		var _g = o.type.toLowerCase();
 		switch(_g) {
+		case "button":
+			var button = new flixel_FlxObject(x,y,o.width,o.height);
+			this.buttonGroup.add(button);
+			break;
 		case "collision":
 			var coll = new flixel_FlxObject(x,y,o.width,o.height);
 			coll.debugBoundingBoxColor = -65281;
@@ -7513,12 +7594,70 @@ Level.prototype = $extend(flixel_addons_editors_tiled_TiledMap.prototype,{
 			flixel_FlxG.camera.follow(player);
 			this.characterGroup.add(player);
 			state.player = player;
+<<<<<<< HEAD
+=======
+			break;
+		case "water":
+			var water = new flixel_FlxObject(x,y,o.width,o.height);
+			this.waterGroup.add(water);
+			break;
+		case "waterback":
+			this.waterBack = new flixel_FlxObject(x,y,o.width,o.height);
+			break;
+		case "waterfront":
+			this.waterFront = new flixel_FlxObject(x,y,o.width,o.height);
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 			break;
 		}
 	}
 	,update: function(elapsed) {
+		this.updateSlingshot();
+		this.updateBlock();
 		this.updateCollisions();
 		this.updateEventsOrder();
+	}
+	,updateSlingshot: function() {
+		flixel_FlxG.overlap(this._state.slingshot.playerBullets,this.collisionGroup,$bind(this,this.stuffHitStuff));
+		flixel_FlxG.overlap(this._state.slingshot.playerBullets,this.doorGroup,$bind(this,this.stuffHitStuff));
+		if(flixel_FlxG.overlap(this._state.slingshot.playerBullets,this.buttonGroup)) {
+			this.moveBlock();
+		}
+	}
+	,updateBlock: function() {
+		if(flixel_FlxG.overlap(this._state.player,this._state.block)) {
+			if(this._state.block.velocity.y > 0) {
+				var _g = this._state.player;
+				var _g1 = _g.y;
+				_g.set_y(_g1 + 1);
+			} else if(this._state.block.velocity.y < 0) {
+				var _g2 = this._state.player;
+				var _g11 = _g2.y;
+				_g2.set_y(_g11 - 1);
+			}
+		} else if(flixel_FlxG.overlap(this._state.player,this.waterGroup)) {
+			var nextState = new PlayState(this._state._levelNumber);
+			if(flixel_FlxG.game._state.switchTo(nextState)) {
+				flixel_FlxG.game._requestedState = nextState;
+			}
+		}
+		if(this._state.block.velocity.y > 0) {
+			flixel_FlxG.overlap(this._state.block,this.waterFront,$bind(this,this.stopSprite));
+		} else if(this._state.block.velocity.y < 0) {
+			flixel_FlxG.overlap(this._state.block,this.waterBack,$bind(this,this.stopSprite));
+		}
+	}
+	,stopSprite: function(Object1,Object2) {
+		Object1.velocity.set_y(0);
+	}
+	,stuffHitStuff: function(Object1,Object2) {
+		Object1.kill();
+	}
+	,moveBlock: function() {
+		if(flixel_FlxG.overlap(this._state.block,this.waterBack)) {
+			this._state.block.velocity.set_y(60);
+		} else if(flixel_FlxG.overlap(this._state.block,this.waterFront)) {
+			this._state.block.velocity.set_y(-60);
+		}
 	}
 	,updateEventsOrder: function() {
 		this.characterGroup.members.sort(function(a2,a3) {
@@ -7535,6 +7674,7 @@ Level.prototype = $extend(flixel_addons_editors_tiled_TiledMap.prototype,{
 			var open1 = open.next();
 			if(flixel_FlxG.overlap(this.characterGroup,open1)) {
 				var door = this.openMap.h[open1.__id__];
+<<<<<<< HEAD
 				var curr = door.name;
 				this.popUp.revive();
 				var tmp;
@@ -7551,12 +7691,27 @@ Level.prototype = $extend(flixel_addons_editors_tiled_TiledMap.prototype,{
 					var doorClosedGroup = __map_reserved[curr] != null ? _this2.getReserved(curr) : _this2.h[curr];
 					var _this3 = this.doorNameToOpenFgGroup;
 					var doorOpenFgGroup = __map_reserved[curr] != null ? _this3.getReserved(curr) : _this3.h[curr];
+=======
+				this.popUp.revive();
+				if(flixel_FlxG.keys.checkKeyArrayState([69],2) && (door.need == "" || this._state.backpack.equipSlot.name == door.need)) {
+					var curr = this.openMap.h[open1.__id__].name;
+					var _this = this.doorNameToOpenGroup;
+					var doorOpenGroup = __map_reserved[curr] != null ? _this.getReserved(curr) : _this.h[curr];
+					var _this1 = this.doorNameToClosedGroup;
+					var doorClosedGroup = __map_reserved[curr] != null ? _this1.getReserved(curr) : _this1.h[curr];
+					var _this2 = this.doorNameToOpenFgGroup;
+					var doorOpenFgGroup = __map_reserved[curr] != null ? _this2.getReserved(curr) : _this2.h[curr];
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 					this._state.remove(doorClosedGroup);
 					this._state.add(doorOpenGroup);
 					this._state.add(doorOpenFgGroup);
 					this.openMap.h[open1.__id__].kill();
 					open1.kill();
 				}
+<<<<<<< HEAD
+=======
+				break;
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 			} else {
 				this.popUp.kill();
 			}
@@ -7564,6 +7719,7 @@ Level.prototype = $extend(flixel_addons_editors_tiled_TiledMap.prototype,{
 		var choose = this.itemMap.keys();
 		while(choose.hasNext()) {
 			var choose1 = choose.next();
+<<<<<<< HEAD
 			var tmp1;
 			var tmp2;
 			if(flixel_FlxG.overlap(this.characterGroup,choose1)) {
@@ -7582,6 +7738,26 @@ Level.prototype = $extend(flixel_addons_editors_tiled_TiledMap.prototype,{
 				tmp1 = true;
 			}
 			if(tmp1) {
+=======
+			var tmp;
+			var tmp1;
+			if(flixel_FlxG.overlap(this.characterGroup,choose1)) {
+				var _this3 = flixel_FlxG.keys.justPressed;
+				tmp1 = _this3.keyManager.checkStatus(69,_this3.status);
+			} else {
+				tmp1 = false;
+			}
+			if(!tmp1) {
+				if(flixel_FlxG.overlap(this._state.lasso.end,choose1)) {
+					tmp = this._state.lasso.lifeSpan <= 0;
+				} else {
+					tmp = false;
+				}
+			} else {
+				tmp = true;
+			}
+			if(tmp) {
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 				var item = this.itemMap.h[choose1.__id__];
 				this._state.backpack.addItem(new Item(item.x,item.y,item.name,item.mypath));
 				item.kill();
@@ -7593,6 +7769,10 @@ Level.prototype = $extend(flixel_addons_editors_tiled_TiledMap.prototype,{
 				choose1.kill();
 			} else if(flixel_FlxG.overlap(this.characterGroup,choose1)) {
 				this.popUp.revive();
+<<<<<<< HEAD
+=======
+				break;
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 			} else {
 				this.popUp.kill();
 			}
@@ -7784,7 +7964,11 @@ MenuState.prototype = $extend(flixel_FlxState.prototype,{
 		flixel_FlxState.prototype.create.call(this);
 	}
 	,clickPlay: function() {
+<<<<<<< HEAD
 		var nextState = new PlayState(1);
+=======
+		var nextState = new PlayState(3);
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 		if(flixel_FlxG.game._state.switchTo(nextState)) {
 			flixel_FlxG.game._requestedState = nextState;
 		}
@@ -7879,6 +8063,11 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	,backpack: null
 	,powerBar: null
 	,lasso: null
+<<<<<<< HEAD
+=======
+	,slingshot: null
+	,block: null
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 	,create: function() {
 		flixel_FlxG.mouse.set_visible(true);
 		flixel_FlxG.cameras.set_bgColor(-15524837);
@@ -7886,8 +8075,23 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.backpack = new Backpack(PlayState.TILE_SIZE,5,-8355712,this.player);
 		this.powerBar = new PowerBar(32,this.player);
 		this.powerBar.kill();
+<<<<<<< HEAD
 		this.lasso = new Lasso(32,this.player,this.powerBar,this.backpack);
 		this.add(this.level.backgroundGroup);
+=======
+		this.lasso = new Lasso(32,this.player,this.powerBar);
+		this.slingshot = new Slingshot(this.player,this.powerBar);
+		this.add(this.level.backgroundGroup);
+		this.block = new flixel_FlxSprite(224,192);
+		this.block.makeGraphic(32,32,-8355712);
+		if(this._levelNumber == 3) {
+			this.block.set_exists(true);
+		} else {
+			this.block.set_exists(false);
+		}
+		this.add(this.block);
+		this.add(this.level.buttonGroup);
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 		this.add(this.level.switchoffGroup);
 		var key = this.level.doorNameToClosedGroup.keys();
 		while(key.hasNext()) {
@@ -7905,11 +8109,20 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.add(this.backpack.equipSlot);
 		this.add(this.backpack.unEquipButton);
 		this.add(this.backpack);
+<<<<<<< HEAD
 		this.add(this.backpack.buttons);
+=======
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 		this.add(this.level.popUp);
 		this.add(this.level.itemPopUp);
 		this.add(this.level.collisionGroup);
 		this.add(this.level.doorGroup);
+<<<<<<< HEAD
+=======
+		this.add(this.level.waterFront);
+		this.add(this.level.waterBack);
+		this.add(this.level.waterGroup);
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 		this.add(this.powerBar);
 		this.add(this.powerBar.indicator);
 		flixel_FlxG.camera.setScrollBoundsRect(this.level.bounds.x,this.level.bounds.y,this.level.bounds.width,this.level.bounds.height);
@@ -7926,6 +8139,11 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 				flixel_math_FlxRect._pool.putUnsafe(Rect);
 			}
 		}
+<<<<<<< HEAD
+=======
+		this.add(this.slingshot);
+		this.add(this.slingshot.playerBullets);
+>>>>>>> 97aafbf572df61da97cb5c684ca1f921f701b53b
 		flixel_FlxState.prototype.create.call(this);
 	}
 	,update: function(elapsed) {
@@ -8141,6 +8359,73 @@ Reflect.makeVarArgs = function(f) {
 		return f(a);
 	};
 };
+var Slingshot = function(charater,pb) {
+	flixel_FlxSprite.call(this);
+	this.player = charater;
+	this.powerBar = pb;
+	this.percent = 0;
+	this.powerBar.kill();
+	this.bulletLife = new haxe_ds_ObjectMap();
+	var numPlayerBullets = 100;
+	this.playerBullets = new flixel_group_FlxTypedGroup(numPlayerBullets);
+	var sprite;
+	var _g1 = 0;
+	var _g = numPlayerBullets;
+	while(_g1 < _g) {
+		var i = _g1++;
+		sprite = new flixel_FlxSprite(-100,-100);
+		sprite.makeGraphic(3,3);
+		sprite.set_exists(false);
+		this.playerBullets.add(sprite);
+	}
+};
+$hxClasses["Slingshot"] = Slingshot;
+Slingshot.__name__ = ["Slingshot"];
+Slingshot.__super__ = flixel_FlxSprite;
+Slingshot.prototype = $extend(flixel_FlxSprite.prototype,{
+	player: null
+	,powerBar: null
+	,lifeSpan: null
+	,percent: null
+	,playerBullets: null
+	,bulletLife: null
+	,update: function(elapsed) {
+		if(flixel_FlxG.keys.checkKeyArrayState([80],2) && !this.powerBar.alive && this.percent == 0) {
+			this.powerBar.revive();
+		} else if(flixel_FlxG.keys.checkKeyArrayState([80],2) && this.powerBar.alive) {
+			this.lifeSpan = this.powerBar.generateResult();
+			var bullet = this.playerBullets.recycle();
+			bullet.reset(this.player.x + 16 - bullet.get_width() / 2,this.player.y);
+			if(this.player.facing == 16) {
+				bullet.velocity.set_x(400);
+			} else if(this.player.facing == 1) {
+				bullet.velocity.set_x(-400);
+			} else if(this.player.facing == 256) {
+				bullet.velocity.set_y(-400);
+			} else if(this.player.facing == 4096) {
+				bullet.velocity.set_y(400);
+			}
+			if(this.lifeSpan <= 0) {
+				this.lifeSpan = 0.1;
+			}
+			var v = this.lifeSpan;
+			this.bulletLife.set(bullet,v);
+		}
+		var bullet1 = this.bulletLife.keys();
+		while(bullet1.hasNext()) {
+			var bullet2 = bullet1.next();
+			var time = this.bulletLife.h[bullet2.__id__];
+			if(time > 0) {
+				time -= elapsed;
+				if(time <= 0) {
+					bullet2.kill();
+				}
+				this.bulletLife.set(bullet2,time);
+			}
+		}
+	}
+	,__class__: Slingshot
+});
 var Std = function() { };
 $hxClasses["Std"] = Std;
 Std.__name__ = ["Std"];
