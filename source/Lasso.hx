@@ -11,12 +11,14 @@ class Lasso extends FlxSprite{
 	var powerBar:PowerBar;
     var length:Int;
     public var end:FlxObject;
+    public var backpack:Backpack;
     static var COLOR = FlxColor.YELLOW;
-    override public function new(size:Int, charater:Character, powerBar:PowerBar) {
+    override public function new(size:Int, charater:Character, powerBar:PowerBar, backpack:Backpack) {
         player = charater;
         this.size = size;
         this.powerBar = powerBar;
         this.length = 0;
+        this.backpack = backpack;
         super(Std.int(player.x + 10), Std.int(player.y + size / 2));
         this.end = new FlxObject(this.x, this.y, 10, 10);
         //,HORIZONTAL, 0, 2, FlxColor.WHITE);
@@ -25,7 +27,7 @@ class Lasso extends FlxSprite{
     }
 
     override public function update(elapsed:Float):Void {
-		if (FlxG.keys.justPressed.SPACE && !powerBar.alive && length == 0) {
+		if (FlxG.keys.justPressed.SPACE && !powerBar.alive && length == 0 && backpack.hasLasso) {
 			powerBar.revive();
 		} else if (FlxG.keys.justPressed.SPACE && powerBar.alive) {
 			lifeSpan = powerBar.generateResult();

@@ -17,6 +17,8 @@ class Backpack extends FlxTypedGroup<Item>
     public var firstTimeEquip = true;
     public var unEquipButton:FlxButtonPlus;
     public var powerBar:PowerBar;
+    public var hasLasso:Bool;
+    public var hasSlingshot:Bool;
     var player:Character;
     var tileSize:Int; 
     var lastItemIdx:Int;
@@ -37,12 +39,10 @@ class Backpack extends FlxTypedGroup<Item>
         equipButton = new FlxButtonPlus(0,0, equip,"Equip", 48, 16);
         unEquipButton = new FlxButtonPlus(0,0, unequip,"Unequip", 48, 16);
         buttons.add(equipButton);
-        buttons.add(new FlxButtonPlus(0,0, null,"Craft", 48, 16));
-        visible = false;
+        //buttons.add(new FlxButtonPlus(0,0, null,"Craft", 48, 16));
+        visible = hasLasso = hasSlingshot = equipSlotBorder.visible =  border.visible = false;
         buttons.kill();
         unEquipButton.kill();
-        border.visible = false;
-        equipSlotBorder.visible = false;
         equipSlot.kill();
 	}
 	
@@ -128,6 +128,8 @@ class Backpack extends FlxTypedGroup<Item>
     public function addItem(item:Item) 
     {
         this.add(item);
+        if (item.name == "lasso") hasLasso = true;
+        if (item.name == "slingshot") hasSlingshot = true;
     }
 
 }
