@@ -111,7 +111,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="open switch" visible="0">
+ <objectgroup name="open switch">
   <object id="27" type="opensw" x="47.451" y="502.494" width="64.4847" height="37.7175"/>
  </objectgroup>
  <objectgroup name="collision">
@@ -124,7 +124,7 @@
   <object id="26" type="collision" x="65.7014" y="478.16" width="29.2006" height="53.5345"/>
   <object id="37" type="collision" x="514.639" y="475.4" width="27.1657" height="27.1657"/>
  </objectgroup>
- <objectgroup name="button">
+ <objectgroup name="button" visible="0">
   <properties>
    <property name="button" value="1"/>
   </properties>
@@ -176,7 +176,7 @@
  <objectgroup name="waterright">
   <object id="20" type="waterright" x="672.964" y="128.969" width="4.86677" height="351.624"/>
  </objectgroup>
- <objectgroup name="waterleft" visible="0">
+ <objectgroup name="waterleft">
   <object id="19" type="waterleft" x="127.753" y="130.186" width="3.65008" height="351.624"/>
  </objectgroup>
  <objectgroup name="block" visible="0">
