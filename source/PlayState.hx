@@ -37,7 +37,7 @@ class PlayState extends FlxState
 		powerBar = new PowerBar(32, player);
 		powerBar.kill();
 		lasso = new Lasso(32, player, powerBar, backpack);
-		slingshot = new Slingshot(player, powerBar);
+		slingshot = new Slingshot(player, powerBar, backpack);
 		// add background
 		add(level.backgroundGroup);
 
@@ -73,8 +73,11 @@ class PlayState extends FlxState
 		// add collision
 		add(level.collisionGroup);
 		add(level.doorGroup);
+		// add water
 		add(level.waterFront);
 		add(level.waterBack);
+		add(level.waterLeft);
+		add(level.waterRight);
 		add(level.waterGroup);
 
 		// add powerBar UI

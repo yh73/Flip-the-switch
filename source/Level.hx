@@ -38,11 +38,15 @@ class Level extends TiledMap
 	public var waterGroup:FlxTypedGroup<FlxObject>;
 	public var waterFront:FlxObject;
 	public var waterBack:FlxObject;
+	public var waterLeft:FlxObject;
+	public var waterRight:FlxObject;
 
 	// open area to door collision
 	public var openMap:Map<FlxObject, Door>;
 	// open area to item
 	public var itemMap:Map<FlxObject, Item>;
+	// button to block
+	public var buttonBlock:Map<FlxObject, Block>;
 
 	public var doorNameToOpenGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	public var doorNameToOpenFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
@@ -85,6 +89,8 @@ class Level extends TiledMap
 		waterGroup = new FlxTypedGroup<FlxObject>();
 		waterFront = new FlxObject();
 		waterBack = new FlxObject();
+		waterLeft = new FlxObject();
+		waterRight = new FlxObject();
 		
 		// events and collision groups
 		characterGroup = new FlxTypedGroup<Character>();
@@ -94,6 +100,8 @@ class Level extends TiledMap
 		openMap = new Map<FlxObject, Door>();
 		// Mapping area to item
 		itemMap = new Map<FlxObject, Item>();
+		// Mapping from button to block
+		buttonBlock = new Map<FlxObject, Block>();
 
 		// Mapping from door's name to door's Group
 		doorNameToOpenGroup = new Map<String, FlxTypedGroup<FlxTilemapExt>>();
@@ -173,6 +181,8 @@ class Level extends TiledMap
 		var stringDoor:Map<String, Door> = new Map<String, Door>();
 		var stringitem:Map<String, Item> = new Map<String, Item>();
 		var stringchoose:Map<String, FlxObject> = new Map<String, FlxObject>();
+		var stringButton:Map<String, FlxObject> = new Map<String, FlxObject>();
+		var stringBlock:Map<String, Block> = new Map<String, Block>();
 		for (layer in layers)
 		{
 			if (layer.type != TiledLayerType.OBJECT)
@@ -207,7 +217,23 @@ class Level extends TiledMap
 					area.immovable = true;
 					stringchoose.set(o.name, area);
 				}
-			}else {
+			} else if (group.properties.contains("button")) {
+				for (o in group.objects) {
+					var x:Int = o.x;
+					var y:Int = o.y;
+					var area:FlxObject = new FlxObject(x, y, o.width, o.height);
+					area.immovable = true;
+					stringButton.set(o.name, area);
+				}
+			} else if (group.properties.contains("block")) {
+				for (o in group.objects) {
+					var x:Int = o.x;
+					var y:Int = o.y;
+					var curr = new Block(x, y, this, _state);
+					blockGroup.add(curr);
+					stringBlock.set(o.name, curr);
+				}
+			} else {
 				for (obj in group.objects)
 				{
 					loadObject(state, obj, group);
@@ -219,6 +245,9 @@ class Level extends TiledMap
 		}
 		for (key in stringitem.keys()) {
 			itemMap.set(stringchoose[key], stringitem[key]);
+		}
+		for (key in stringButton.keys()) {
+			buttonBlock.set(stringButton[key], stringBlock[key.charAt(0)]);
 		}
 	}
 	
@@ -250,14 +279,6 @@ class Level extends TiledMap
 				var sw = new FlxObject(x, y, o.width, o.height);
 				state.sw = sw;
 
-			case "block":
-				var curr = new Block(x, y, this, _state);
-				blockGroup.add(curr);
-
-			case "button":
-				var button = new FlxObject(x, y, o.width, o.height);
-				buttonGroup.add(button);
-
 			case "water":
 				var water = new FlxObject(x, y, o.width, o.height);
 				waterGroup.add(water);
@@ -267,12 +288,19 @@ class Level extends TiledMap
 
 			case "waterback":
 				waterBack = new FlxObject(x, y, o.width, o.height);
+
+			case "waterleft":
+				waterLeft = new FlxObject(x, y, o.width, o.height);
+
+			case "waterright":
+				waterRight = new FlxObject(x, y, o.width, o.height);
 		}
 	}
 	
 	public function update(elapsed:Float):Void
 	{
 		updateSlingshot();
+		updateTouchingWater();
 		updateCollisions();
 		updateEventsOrder();
 	}
@@ -288,21 +316,41 @@ class Level extends TiledMap
 		Object1.kill();
 	}
 
+	private function updateTouchingWater():Void
+	{
+		var touch:Bool = false;
+		if (FlxG.overlap(_state.player, waterGroup)) {
+			touch = true;
+		}
+		if (touch) {
+			for (i in 0...blockGroup.length) {
+				var block = blockGroup.members[i].block;
+				if (FlxG.overlap(_state.player, block)) {
+					touch = false;
+					break;
+				}
+			}
+			if (touch)
+				FlxG.switchState(new PlayState(_state._levelNumber));
+		}
+	}
+
 	public function updateEventsOrder():Void
 	{
 		characterGroup.sort(FlxSort.byY);
 	}
 	
 	public function updateCollisions():Void
-	{
+	{	
 		popUp.x = _state.player.x - 3*32;
 		popUp.y = _state.player.y - 42;
 		itemPopUp.x = _state.player.x - 3*32;
 		itemPopUp.y = _state.player.y - 42;
+		var overlapped = false;
 		for (open in openMap.keys()) {
 			if (FlxG.overlap(characterGroup, open)) {
 				var door:Door = openMap[open];
-				popUp.revive();
+				overlapped = true;
 				if (FlxG.keys.anyJustPressed([E]) && (door.need == "" || _state.backpack.equipSlot.name == door.need)) {
 					var curr:String = openMap[open].name;
 					var doorOpenGroup = doorNameToOpenGroup[curr];
@@ -313,10 +361,10 @@ class Level extends TiledMap
 					_state.add(doorOpenFgGroup);
 					openMap[open].kill();
 					open.kill();
-				}	
-				break; 
-			} else {
-				popUp.kill();
+					break; 
+				} else if (FlxG.keys.anyJustPressed([E])) {
+					displayMsg("The door is locked.");
+				}
 			}
 		}
 
@@ -326,18 +374,19 @@ class Level extends TiledMap
 				var item:Item = itemMap[choose];
 				_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath));
 				item.kill();
-				itemPopUp.text = "You got a key";
-				itemPopUp.revive();
-				var timer = new FlxTimer();
-				timer.start(1, onTimer, 1);
+				displayMsg("You got a key");
 				itemMap[choose].kill();
 				choose.kill();
-			}else if (FlxG.overlap(characterGroup, choose)){
-				popUp.revive();
 				break;
-			} else {
-				popUp.kill();
+			} else if (FlxG.overlap(characterGroup, choose)){
+				overlapped = true;
 			}
+		}
+
+		if (overlapped && !itemPopUp.alive) {
+			popUp.revive();
+		} else {
+			popUp.kill();
 		}
 
 		if (FlxG.overlap(_state.lasso, collisionGroup) || FlxG.overlap(_state.lasso, doorGroup))
@@ -351,5 +400,14 @@ class Level extends TiledMap
 
 	private function onTimer(Timer:FlxTimer):Void {
 		itemPopUp.kill();
+	}
+
+	private function displayMsg(content:String) 
+	{	
+		popUp.kill();
+		itemPopUp.text = content;
+		itemPopUp.revive();
+		var timer = new FlxTimer();
+		timer.start(1, onTimer, 1);
 	}
 }

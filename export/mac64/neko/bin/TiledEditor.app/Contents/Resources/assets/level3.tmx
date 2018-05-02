@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="70">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="72">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="../../Tiles/tiles.png" width="320" height="768"/>
  </tileset>
@@ -297,10 +297,10 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,177,0,0,0,0,0,0,
 0,0,0,0,0,177,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,203,203,203,203,0,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,0
+0,203,203,203,203,0,203,203,203,203,203,203,203,203,203,203,203,203,0,203,203,203,203,203,0
 </data>
  </layer>
- <objectgroup name="water" visible="0">
+ <objectgroup name="water">
   <object id="43" type="water" x="1.30242" y="218.004" width="493.618" height="184.444"/>
   <object id="44" type="water" x="496.223" y="217.505" width="126.335" height="33.863"/>
   <object id="45" type="water" x="500.13" y="253.972" width="44.2824" height="20.8388"/>
@@ -314,20 +314,30 @@
   <object id="53" type="water" x="721.542" y="210.992" width="75.5405" height="134.15"/>
  </objectgroup>
  <objectgroup name="button">
-  <object id="63" type="button" x="224" y="518.959" width="51.4124" height="53.0607"/>
-  <object id="66" type="button" x="220.118" y="58.2373" width="43.6475" height="40.1191"/>
+  <properties>
+   <property name="button" value="1"/>
+  </properties>
+  <object id="63" name="1.2" type="button" x="224" y="518.959" width="51.4124" height="53.0607">
+   <properties>
+    <property name="button" value="1"/>
+   </properties>
+  </object>
+  <object id="66" name="1.1" type="button" x="220.118" y="58.2373" width="43.6475" height="40.1191"/>
  </objectgroup>
  <objectgroup name="block">
-  <object id="69" name="block" type="block" x="224" y="192" width="32" height="32"/>
+  <properties>
+   <property name="block" value="1"/>
+  </properties>
+  <object id="69" name="1" type="block" x="224" y="192" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="open door">
+ <objectgroup name="open door" visible="0">
   <properties>
    <property name="opendoor" value="1"/>
   </properties>
   <object id="6" name="1" type="open" x="601.311" y="466.401" width="30.8364" height="75.8062"/>
   <object id="55" name="2" x="191.536" y="520.254" width="27.1774" height="51.7665"/>
  </objectgroup>
- <objectgroup name="item">
+ <objectgroup name="item" visible="0">
   <properties>
    <property name="item" value="0"/>
   </properties>
@@ -336,14 +346,20 @@
     <property name="from" value="key1"/>
    </properties>
   </object>
+  <object id="70" name="slingshot" x="687.201" y="432.251" width="29.7658" height="24.5891">
+   <properties>
+    <property name="from" value="slingshot"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="item choose" visible="0">
+ <objectgroup name="item choose">
   <properties>
    <property name="itemchoose" value="0"/>
   </properties>
   <object id="59" name="key1" x="547.431" y="68.5907" width="41.4132" height="37.5307"/>
+  <object id="71" name="slingshot" x="674.259" y="414.132" width="58.2373" height="58.2373"/>
  </objectgroup>
- <objectgroup name="door">
+ <objectgroup name="door" visible="0">
   <properties>
    <property name="door" value="1"/>
   </properties>
@@ -355,8 +371,7 @@
   </object>
  </objectgroup>
  <objectgroup name="open switch" visible="0">
-  <object id="4" type="opensw" x="33.4061" y="477.965" width="64.2426" height="33.4061"/>
-  <object id="5" type="opensw" x="64.2426" y="449.698" width="33.4061" height="61.6729"/>
+  <object id="4" type="opensw" x="33.4061" y="446.905" width="64.2426" height="64.466"/>
  </objectgroup>
  <objectgroup name="character" visible="0">
   <object id="1" name="princess" type="player" x="702.809" y="503.133" width="19.1644" height="17.248">
@@ -402,7 +417,7 @@
  <objectgroup name="waterfront" visible="0">
   <object id="2" type="waterfront" x="191.4" y="416.59" width="192.162" height="5.74933"/>
  </objectgroup>
- <objectgroup name="waterback">
+ <objectgroup name="waterback" visible="0">
   <object id="3" type="waterback" x="142.446" y="199.477" width="174.848" height="1.91644"/>
  </objectgroup>
 </map>

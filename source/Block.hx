@@ -24,11 +24,14 @@ class Block extends FlxSprite {
 
     override public function update(elapsed:Float):Void 
     {
-        updateBlock();
-        if (FlxG.overlap(state.slingshot.playerBullets, level.buttonGroup)
-			|| (FlxG.overlap(state.player, level.buttonGroup) && FlxG.keys.anyJustPressed([E]))) {
-			moveBlock();
-		}
+		updateBlock();
+        for (key in level.buttonBlock.keys()) {
+            var button = key;
+            if (FlxG.overlap(state.slingshot.playerBullets, button)
+			    || (FlxG.overlap(state.player, button) && FlxG.keys.anyJustPressed([E]))) {
+			    moveBlock(level.buttonBlock[button].block);
+		    }
+        }
     }
 
     public function updateBlock():Void
@@ -40,31 +43,51 @@ class Block extends FlxSprite {
 			else if (block.velocity.y < 0) {
 				state.player.y--;
 			}
-		}
-		else if (FlxG.overlap(state.player, level.waterGroup)) {
-			FlxG.switchState(new PlayState(state._levelNumber));
+			else if (block.velocity.x > 0) {
+				state.player.x++;
+			}
+			else if (block.velocity.x < 0) {
+				state.player.x--;
+			}
+
 		}
 		if (block.velocity.y > 0) {
-			FlxG.overlap(block, level.waterFront, stopSprite);
+			FlxG.overlap(block, level.waterFront, stopBlockY);
 		}
 		else if (block.velocity.y < 0) {
-			FlxG.overlap(block, level.waterBack, stopSprite);
+			FlxG.overlap(block, level.waterBack, stopBlockY);
+		}
+		else if (block.velocity.x > 0) {
+			FlxG.overlap(block, level.waterRight, stopBlockX);
+		}
+		else if (block.velocity.x < 0) {
+			FlxG.overlap(block, level.waterLeft, stopBlockX);
 		}
 	}
 
-	private function stopSprite(Object1:FlxSprite, Object2:FlxObject):Void
+	private function stopBlockY(Object1:FlxSprite, Object2:FlxObject):Void
 	{
 		Object1.velocity.y = 0;
 	}
 
-
-	public function moveBlock():Void
+	private function stopBlockX(Object1:FlxSprite, Object2:FlxObject):Void
 	{
-		if (FlxG.overlap(block, level.waterBack)) {
-			block.velocity.y = 60;
+		Object1.velocity.x = 0;
+	}
+
+	public function moveBlock(currBlock:FlxSprite):Void
+	{
+		if (FlxG.overlap(currBlock, level.waterBack)) {
+			currBlock.velocity.y = 60;
 		}
-		else if (FlxG.overlap(block, level.waterFront)) {
-			block.velocity.y = -60;
+		else if (FlxG.overlap(currBlock, level.waterFront)) {
+			currBlock.velocity.y = -60;
+		}
+		else if (FlxG.overlap(currBlock, level.waterLeft)) {
+			currBlock.velocity.x = 60;
+		}
+		else if (FlxG.overlap(currBlock, level.waterRight)) {
+			currBlock.velocity.x = -60;
 		}
 	}
 

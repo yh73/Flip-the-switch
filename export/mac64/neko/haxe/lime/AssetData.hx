@@ -36,8 +36,12 @@ class AssetData {
 			type.set ("assets/level1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/princess.png", "assets/princess.png");
 			type.set ("assets/princess.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/level0.tmx", "assets/level0.tmx");
+			type.set ("assets/level0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/tiles.png", "assets/tiles.png");
 			type.set ("assets/tiles.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/slingshot.png", "assets/slingshot.png");
+			type.set ("assets/slingshot.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/princess.json", "assets/princess.json");
 			type.set ("assets/princess.json", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("flixel/sounds/beep.ogg", "flixel/sounds/beep.ogg");

@@ -44,6 +44,8 @@ class Backpack extends FlxTypedGroup<Item>
         buttons.kill();
         unEquipButton.kill();
         equipSlot.kill();
+        hasLasso = false;
+        hasSlingshot = false;
 	}
 	
 
@@ -108,6 +110,13 @@ class Backpack extends FlxTypedGroup<Item>
         }
         lastItemIdx = this.members.indexOf(itemToEquip);
         equipSlot.revive();
+
+        if (itemToEquip.name == "lasso"){
+            hasLasso = true;
+        } else if (itemToEquip.name == "slingshot") {
+            hasSlingshot = true;
+        }
+
         if (!firstTimeEquip) {
             this.insert(lastItemIdx, new Item(equipSlot.x, equipSlot.y, equipSlot.name, equipSlot.mypath));
             equipSlot.loadGraphicFromItem(this.remove(itemToEquip));
@@ -120,6 +129,11 @@ class Backpack extends FlxTypedGroup<Item>
 
     private function unequip() 
     {
+        if (equipSlot.name == "lasso"){
+            hasLasso = false;
+        } else if (equipSlot.name == "slingshot") {
+            hasSlingshot = false;
+        }
         this.add(new Item(equipSlot.x, equipSlot.y, equipSlot.name, equipSlot.mypath));
         equipSlot.kill();
         firstTimeEquip = true;
@@ -128,8 +142,6 @@ class Backpack extends FlxTypedGroup<Item>
     public function addItem(item:Item) 
     {
         this.add(item);
-        if (item.name == "lasso") hasLasso = true;
-        if (item.name == "slingshot") hasSlingshot = true;
     }
 
 }
