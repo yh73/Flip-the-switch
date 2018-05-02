@@ -32,7 +32,7 @@ class Backpack extends FlxTypedGroup<Item>
         tileSize = size;
         buttons = new FlxTypedGroup<FlxButtonPlus>();
         equipSlotBorder = new FlxSprite(0,0).makeGraphic(size, size, color);
-        equipSlot = new Item(0.0, 0.0, "", "");
+        equipSlot = new Item(0.0, 0.0, "", "", "");
         border = new FlxSprite(0,0).makeGraphic(5 * size, size, color);
         border = FlxGridOverlay.overlay(border, size, size,  number * size, 
             size, true, color);
@@ -101,7 +101,7 @@ class Backpack extends FlxTypedGroup<Item>
 
     private function equip() 
     {   
-        var itemToEquip = new Item(0.0, 0.0, "", "");
+        var itemToEquip = new Item(0.0, 0.0, "", "", "");
         for (item in this) {
             if (item.x == equipButton.x) {
                 itemToEquip = item;
@@ -118,7 +118,7 @@ class Backpack extends FlxTypedGroup<Item>
         }
 
         if (!firstTimeEquip) {
-            this.insert(lastItemIdx, new Item(equipSlot.x, equipSlot.y, equipSlot.name, equipSlot.mypath));
+            this.insert(lastItemIdx, new Item(equipSlot.x, equipSlot.y, equipSlot.name, equipSlot.mypath, equipSlot.type));
             equipSlot.loadGraphicFromItem(this.remove(itemToEquip));
         } else {
             equipSlot.loadGraphicFromItem(this.remove(itemToEquip));
@@ -134,7 +134,7 @@ class Backpack extends FlxTypedGroup<Item>
         } else if (equipSlot.name == "slingshot") {
             hasSlingshot = false;
         }
-        this.add(new Item(equipSlot.x, equipSlot.y, equipSlot.name, equipSlot.mypath));
+        this.add(new Item(equipSlot.x, equipSlot.y, equipSlot.name, equipSlot.mypath, equipSlot.type));
         equipSlot.kill();
         firstTimeEquip = true;
     }

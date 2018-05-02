@@ -96,11 +96,7 @@ class PlayState extends FlxState
 	{
 		level.update(elapsed);
 		super.update(elapsed);
-		if (FlxG.overlap(player, sw)) {
-			if (FlxG.keys.anyJustPressed([E])) {
-				nextLevel(player, sw);
-			}
-		}
+		
 	}	
 
 	public function nextLevel(player:Character, sw:FlxObject):Void

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="53">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="55">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
+  <image source="tiles.png" width="320" height="768"/>
+ </tileset>
+ <tileset firstgid="241" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="tiles.png" width="320" height="768"/>
  </tileset>
  <layer name="bg" width="25" height="19">

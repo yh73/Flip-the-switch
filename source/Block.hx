@@ -31,6 +31,9 @@ class Block extends FlxSprite {
 			    || (FlxG.overlap(state.player, button) && FlxG.keys.anyJustPressed([E]))) {
 			    moveBlock(level.buttonBlock[button].block);
 		    }
+			if (FlxG.overlap(state.player, button)) {
+				level.popUp.revive();
+			}
         }
     }
 

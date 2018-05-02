@@ -205,7 +205,7 @@ class Level extends TiledMap
 				}
 			} else if (group.properties.contains("item")) {
 				for (o in group.objects) {
-					var item:Item = new Item(o.x, o.y, o.name, o.properties.get("from"));
+					var item:Item = new Item(o.x, o.y, o.name, o.properties.get("from"), o.type);
 					stringitem.set(o.name, item);
 					itemGroup.add(item);
 				}
@@ -372,14 +372,20 @@ class Level extends TiledMap
 			if ((FlxG.overlap(characterGroup, choose) && FlxG.keys.justPressed.E)
 			|| (FlxG.overlap(_state.lasso.end, choose) && _state.lasso.lifeSpan <= 0)) {
 				var item:Item = itemMap[choose];
-				_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath));
+				_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath, item.type));
 				item.kill();
-				displayMsg("You got a key");
+				displayMsg("You got a " + item.type);
 				itemMap[choose].kill();
 				choose.kill();
 				break;
 			} else if (FlxG.overlap(characterGroup, choose)){
 				overlapped = true;
+			}
+		}
+		if (FlxG.overlap(_state.player, _state.sw)) {
+			overlapped = true;
+			if (FlxG.keys.anyJustPressed([E])) {
+				_state.nextLevel(_state.player, _state.sw);
 			}
 		}
 
