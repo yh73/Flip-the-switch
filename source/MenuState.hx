@@ -22,8 +22,10 @@ class MenuState extends FlxState
 	override public function create():Void 
 	{   
         _btnPlay = new FlxButton(0, 0, "Play", clickPlay);
-		//intro = new FlxText()
+		intro = new FlxText(200,260, "E to interact, B to open backpack, Space to shoot");
         add(_btnPlay);
+		intro.alignment = FlxTextAlign.CENTER;
+		add(intro);
         _btnPlay.screenCenter();
 
 		super.create();

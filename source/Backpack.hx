@@ -117,6 +117,8 @@ class Backpack extends FlxTypedGroup<Item>
         } else if (itemToEquip.name == "slingshot") {
             hasSlingshot = true;
             hasLasso = false;
+        } else {
+            hasLasso = hasSlingshot = false;
         }
 
         if (!firstTimeEquip) {
