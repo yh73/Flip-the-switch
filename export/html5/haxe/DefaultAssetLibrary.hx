@@ -61,6 +61,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -100,20 +110,40 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
+		className.set ("assets/maps/untitled.tmx", __ASSET__assets_maps_untitled_tmx);
+		type.set ("assets/maps/untitled.tmx", AssetType.TEXT);
 		className.set ("assets/maps/tiles.png", __ASSET__assets_maps_tiles_png);
 		type.set ("assets/maps/tiles.png", AssetType.IMAGE);
 		className.set ("assets/health.png", __ASSET__assets_health_png);
 		type.set ("assets/health.png", AssetType.IMAGE);
+		className.set ("assets/key1.png", __ASSET__assets_key1_png);
+		type.set ("assets/key1.png", AssetType.IMAGE);
+		className.set ("assets/untitled.tmx", __ASSET__assets_untitled_tmx);
+		type.set ("assets/untitled.tmx", AssetType.TEXT);
+		className.set ("assets/lasso.png", __ASSET__assets_lasso_png);
+		type.set ("assets/lasso.png", AssetType.IMAGE);
 		className.set ("assets/level2.tmx", __ASSET__assets_level2_tmx);
 		type.set ("assets/level2.tmx", AssetType.TEXT);
+		className.set ("assets/block.png", __ASSET__assets_block_png);
+		type.set ("assets/block.png", AssetType.IMAGE);
 		className.set ("assets/level3.tmx", __ASSET__assets_level3_tmx);
 		type.set ("assets/level3.tmx", AssetType.TEXT);
 		className.set ("assets/level1.tmx", __ASSET__assets_level1_tmx);
 		type.set ("assets/level1.tmx", AssetType.TEXT);
 		className.set ("assets/princess.png", __ASSET__assets_princess_png);
 		type.set ("assets/princess.png", AssetType.IMAGE);
+		className.set ("assets/level4.tmx", __ASSET__assets_level4_tmx);
+		type.set ("assets/level4.tmx", AssetType.TEXT);
+		className.set ("assets/level5.tmx", __ASSET__assets_level5_tmx);
+		type.set ("assets/level5.tmx", AssetType.TEXT);
+		className.set ("assets/level6.tmx", __ASSET__assets_level6_tmx);
+		type.set ("assets/level6.tmx", AssetType.TEXT);
 		className.set ("assets/tiles.png", __ASSET__assets_tiles_png);
 		type.set ("assets/tiles.png", AssetType.IMAGE);
+		className.set ("assets/slingshot.png", __ASSET__assets_slingshot_png);
+		type.set ("assets/slingshot.png", AssetType.IMAGE);
+		className.set ("assets/button.png", __ASSET__assets_button_png);
+		type.set ("assets/button.png", AssetType.IMAGE);
 		className.set ("assets/princess.json", __ASSET__assets_princess_json);
 		type.set ("assets/princess.json", AssetType.TEXT);
 		className.set ("flixel/sounds/beep.ogg", __ASSET__flixel_sounds_beep_ogg);
@@ -193,6 +223,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
+		id = "assets/maps/untitled.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
 		id = "assets/maps/tiles.png";
 		path.set (id, id);
 		
@@ -201,10 +235,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "assets/key1.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/untitled.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/lasso.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "assets/level2.tmx";
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
+		id = "assets/block.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "assets/level3.tmx";
 		path.set (id, id);
 		
@@ -217,7 +267,27 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "assets/level4.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/level5.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/level6.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
 		id = "assets/tiles.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/slingshot.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/button.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -387,14 +457,29 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		var useManifest = false;
 		
+		className.set ("assets/maps/untitled.tmx", __ASSET__assets_maps_untitled_tmx);
+		type.set ("assets/maps/untitled.tmx", AssetType.TEXT);
+		
 		className.set ("assets/maps/tiles.png", __ASSET__assets_maps_tiles_png);
 		type.set ("assets/maps/tiles.png", AssetType.IMAGE);
 		
 		className.set ("assets/health.png", __ASSET__assets_health_png);
 		type.set ("assets/health.png", AssetType.IMAGE);
 		
+		className.set ("assets/key1.png", __ASSET__assets_key1_png);
+		type.set ("assets/key1.png", AssetType.IMAGE);
+		
+		className.set ("assets/untitled.tmx", __ASSET__assets_untitled_tmx);
+		type.set ("assets/untitled.tmx", AssetType.TEXT);
+		
+		className.set ("assets/lasso.png", __ASSET__assets_lasso_png);
+		type.set ("assets/lasso.png", AssetType.IMAGE);
+		
 		className.set ("assets/level2.tmx", __ASSET__assets_level2_tmx);
 		type.set ("assets/level2.tmx", AssetType.TEXT);
+		
+		className.set ("assets/block.png", __ASSET__assets_block_png);
+		type.set ("assets/block.png", AssetType.IMAGE);
 		
 		className.set ("assets/level3.tmx", __ASSET__assets_level3_tmx);
 		type.set ("assets/level3.tmx", AssetType.TEXT);
@@ -405,8 +490,23 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/princess.png", __ASSET__assets_princess_png);
 		type.set ("assets/princess.png", AssetType.IMAGE);
 		
+		className.set ("assets/level4.tmx", __ASSET__assets_level4_tmx);
+		type.set ("assets/level4.tmx", AssetType.TEXT);
+		
+		className.set ("assets/level5.tmx", __ASSET__assets_level5_tmx);
+		type.set ("assets/level5.tmx", AssetType.TEXT);
+		
+		className.set ("assets/level6.tmx", __ASSET__assets_level6_tmx);
+		type.set ("assets/level6.tmx", AssetType.TEXT);
+		
 		className.set ("assets/tiles.png", __ASSET__assets_tiles_png);
 		type.set ("assets/tiles.png", AssetType.IMAGE);
+		
+		className.set ("assets/slingshot.png", __ASSET__assets_slingshot_png);
+		type.set ("assets/slingshot.png", AssetType.IMAGE);
+		
+		className.set ("assets/button.png", __ASSET__assets_button_png);
+		type.set ("assets/button.png", AssetType.IMAGE);
 		
 		className.set ("assets/princess.json", __ASSET__assets_princess_json);
 		type.set ("assets/princess.json", AssetType.TEXT);
@@ -1163,13 +1263,23 @@ class DefaultAssetLibrary extends AssetLibrary {
 #if !display
 #if flash
 
+@:keep @:bind #if display private #end class __ASSET__assets_maps_untitled_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_maps_tiles_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_health_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_key1_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_untitled_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_lasso_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_level2_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_block_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_level3_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_level1_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_princess_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_level4_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_level5_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_level6_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_tiles_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_slingshot_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_princess_json extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
@@ -1210,6 +1320,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1264,13 +1384,23 @@ class DefaultAssetLibrary extends AssetLibrary {
 #if (windows || mac || linux || cpp)
 
 
+@:file("assets/maps/untitled.tmx") #if display private #end class __ASSET__assets_maps_untitled_tmx extends lime.utils.Bytes {}
 @:image("assets/maps/tiles.png") #if display private #end class __ASSET__assets_maps_tiles_png extends lime.graphics.Image {}
 @:image("assets/health.png") #if display private #end class __ASSET__assets_health_png extends lime.graphics.Image {}
+@:image("assets/key1.png") #if display private #end class __ASSET__assets_key1_png extends lime.graphics.Image {}
+@:file("assets/untitled.tmx") #if display private #end class __ASSET__assets_untitled_tmx extends lime.utils.Bytes {}
+@:image("assets/lasso.png") #if display private #end class __ASSET__assets_lasso_png extends lime.graphics.Image {}
 @:file("assets/level2.tmx") #if display private #end class __ASSET__assets_level2_tmx extends lime.utils.Bytes {}
+@:image("assets/block.png") #if display private #end class __ASSET__assets_block_png extends lime.graphics.Image {}
 @:file("assets/level3.tmx") #if display private #end class __ASSET__assets_level3_tmx extends lime.utils.Bytes {}
 @:file("assets/level1.tmx") #if display private #end class __ASSET__assets_level1_tmx extends lime.utils.Bytes {}
 @:image("assets/princess.png") #if display private #end class __ASSET__assets_princess_png extends lime.graphics.Image {}
+@:file("assets/level4.tmx") #if display private #end class __ASSET__assets_level4_tmx extends lime.utils.Bytes {}
+@:file("assets/level5.tmx") #if display private #end class __ASSET__assets_level5_tmx extends lime.utils.Bytes {}
+@:file("assets/level6.tmx") #if display private #end class __ASSET__assets_level6_tmx extends lime.utils.Bytes {}
 @:image("assets/tiles.png") #if display private #end class __ASSET__assets_tiles_png extends lime.graphics.Image {}
+@:image("assets/slingshot.png") #if display private #end class __ASSET__assets_slingshot_png extends lime.graphics.Image {}
+@:image("assets/button.png") #if display private #end class __ASSET__assets_button_png extends lime.graphics.Image {}
 @:file("assets/princess.json") #if display private #end class __ASSET__assets_princess_json extends lime.utils.Bytes {}
 @:file("/usr/local/lib/haxe/lib/flixel/4,3,0/assets/sounds/beep.ogg") #if display private #end class __ASSET__flixel_sounds_beep_ogg extends lime.utils.Bytes {}
 @:file("/usr/local/lib/haxe/lib/flixel/4,3,0/assets/sounds/flixel.ogg") #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends lime.utils.Bytes {}
