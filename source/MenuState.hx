@@ -15,12 +15,14 @@ class MenuState extends FlxState
 	// public var exit:FlxSprite;
 
 	private var _btnPlay:FlxButton;
+	private var intro:FlxText;
 
 	private static var youDied:Bool = false;
 	
 	override public function create():Void 
 	{   
         _btnPlay = new FlxButton(0, 0, "Play", clickPlay);
+		//intro = new FlxText()
         add(_btnPlay);
         _btnPlay.screenCenter();
 
@@ -30,7 +32,7 @@ class MenuState extends FlxState
 
 	private function clickPlay():Void
     {
-        FlxG.switchState(new PlayState(2));
+        FlxG.switchState(new PlayState(4));
     }
 
 	override public function update(elapsed:Float):Void 
