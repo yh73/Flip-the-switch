@@ -46,9 +46,13 @@ class PlayState extends FlxState
 		for (i in 0...level.blockGroup.length) {
 			add(level.blockGroup.members[i].block);
 		}
- 
 		// add button
 		add(level.buttonGroup);
+		for (i in 0...level.buttonGroup.length) {
+			var button = level.buttonGroup.members[i];
+			button.loadGraphic("assets/button.png");
+			add(button);
+		}
 		// add switch (off)
 		add(level.switchoffGroup);
 		// add door (closed)
@@ -96,11 +100,7 @@ class PlayState extends FlxState
 	{
 		level.update(elapsed);
 		super.update(elapsed);
-		if (FlxG.overlap(player, sw)) {
-			if (FlxG.keys.anyJustPressed([E])) {
-				nextLevel(player, sw);
-			}
-		}
+		
 	}	
 
 	public function nextLevel(player:Character, sw:FlxObject):Void

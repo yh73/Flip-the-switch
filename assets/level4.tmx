@@ -124,7 +124,7 @@
   <object id="26" type="collision" x="131.439" y="441.891" width="29.2006" height="33.1333"/>
   <object id="37" type="collision" x="450.035" y="567.206" width="27.1657" height="40.7665"/>
  </objectgroup>
- <objectgroup name="button" visible="0">
+ <objectgroup name="button">
   <properties>
    <property name="button" value="1"/>
   </properties>
@@ -132,7 +132,7 @@
   <object id="11" name="1.1" x="246.872" y="20.2908" width="54.1089" height="43.9635"/>
   <object id="12" name="1.2" x="245.739" y="465.041" width="54.1089" height="43.9635"/>
   <object id="13" name="2.2" x="437.209" y="560.253" width="41.2713" height="43.9635"/>
-  <object id="22" name="3.1" x="65.1562" y="242.586" width="38.3985" height="43.5005"/>
+  <object id="22" name="3.1" x="52.6913" y="242.586" width="50.8634" height="43.5005"/>
   <object id="24" name="3.2" x="662.97" y="243.255" width="38.8408" height="47.451"/>
  </objectgroup>
  <objectgroup name="player" visible="0">
@@ -140,7 +140,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="water">
+ <objectgroup name="water" visible="0">
   <object id="1" type="water" x="177.269" y="154.334" width="381.597" height="213.993"/>
   <object id="28" type="water" x="590.1" y="9.05524" width="200.724" height="135.829"/>
   <object id="29" type="water" x="17.5731" y="9.16222" width="218.311" height="136.479"/>

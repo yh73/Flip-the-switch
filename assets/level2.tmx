@@ -233,7 +233,7 @@
   <properties>
    <property name="item" value="q"/>
   </properties>
-  <object id="45" name="key1" gid="119" x="641.5" y="353" width="32" height="32">
+  <object id="45" name="key1" type="key" gid="119" x="641.5" y="353" width="32" height="32">
    <properties>
     <property name="from" value="key1"/>
    </properties>

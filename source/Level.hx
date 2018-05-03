@@ -32,7 +32,7 @@ class Level extends TiledMap
 	public var characterGroup:FlxTypedGroup<Character>;
 	public var itemGroup:FlxTypedGroup<Item>;
 	public var doorGroup:FlxTypedGroup<Door>;
-	public var buttonGroup:FlxTypedGroup<FlxObject>;
+	public var buttonGroup:FlxTypedGroup<FlxSprite>;
 	public var blockGroup:FlxTypedGroup<Block>;
 
 	public var waterGroup:FlxTypedGroup<FlxObject>;
@@ -80,7 +80,7 @@ class Level extends TiledMap
 		doorGroup = new FlxTypedGroup<Door>();
 
 		// button group
-		buttonGroup = new FlxTypedGroup<FlxObject>();
+		buttonGroup = new FlxTypedGroup<FlxSprite>();
 
 		// block group
 		blockGroup = new FlxTypedGroup<Block>();
@@ -205,7 +205,7 @@ class Level extends TiledMap
 				}
 			} else if (group.properties.contains("item")) {
 				for (o in group.objects) {
-					var item:Item = new Item(o.x, o.y, o.name, o.properties.get("from"));
+					var item:Item = new Item(o.x, o.y, o.name, o.properties.get("from"), o.type);
 					stringitem.set(o.name, item);
 					itemGroup.add(item);
 				}
@@ -221,8 +221,10 @@ class Level extends TiledMap
 				for (o in group.objects) {
 					var x:Int = o.x;
 					var y:Int = o.y;
+					var button = new FlxSprite(x+16, y+16);
 					var area:FlxObject = new FlxObject(x, y, o.width, o.height);
 					area.immovable = true;
+					buttonGroup.add(button);
 					stringButton.set(o.name, area);
 				}
 			} else if (group.properties.contains("block")) {
@@ -372,14 +374,20 @@ class Level extends TiledMap
 			if ((FlxG.overlap(characterGroup, choose) && FlxG.keys.justPressed.E)
 			|| (FlxG.overlap(_state.lasso.end, choose) && _state.lasso.lifeSpan <= 0)) {
 				var item:Item = itemMap[choose];
-				_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath));
+				_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath, item.type));
 				item.kill();
-				displayMsg("You got a key");
+				displayMsg("You got a " + item.type);
 				itemMap[choose].kill();
 				choose.kill();
 				break;
 			} else if (FlxG.overlap(characterGroup, choose)){
 				overlapped = true;
+			}
+		}
+		if (FlxG.overlap(_state.player, _state.sw)) {
+			overlapped = true;
+			if (FlxG.keys.anyJustPressed([E])) {
+				_state.nextLevel(_state.player, _state.sw);
 			}
 		}
 

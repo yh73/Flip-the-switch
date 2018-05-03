@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="72">
- <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="0" columns="10">
   <image source="../../Tiles/tiles.png" width="320" height="768"/>
  </tileset>
  <layer name="bg" width="25" height="19">
@@ -341,12 +341,12 @@
   <properties>
    <property name="item" value="0"/>
   </properties>
-  <object id="56" name="key1" gid="119" x="544.373" y="60.944" width="32" height="32">
+  <object id="56" name="key1" type="key" gid="119" x="544.373" y="60.944" width="32" height="32">
    <properties>
     <property name="from" value="key1"/>
    </properties>
   </object>
-  <object id="70" name="slingshot" x="687.201" y="432.251" width="29.7658" height="24.5891">
+  <object id="70" name="slingshot" type="slingshot" x="687.201" y="432.251" width="29.7658" height="24.5891">
    <properties>
     <property name="from" value="slingshot"/>
    </properties>
