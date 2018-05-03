@@ -164,12 +164,12 @@
     <property name="from" value="slingshot"/>
    </properties>
   </object>
-  <object id="45" name="slingshot" x="65.0183" y="159.073" width="48.9635" height="45.8544"/>
  </objectgroup>
  <objectgroup name="itemchoose">
   <properties>
    <property name="itemchoose" value="0"/>
   </properties>
+  <object id="45" name="slingshot" x="65.0183" y="159.073" width="48.9635" height="45.8544"/>
  </objectgroup>
  <objectgroup name="waterfront" visible="0">
   <object id="42" type="waterfront" x="190.411" y="449.827" width="387.623" height="2.2668"/>
