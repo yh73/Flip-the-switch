@@ -93,6 +93,7 @@
  <layer name="wallObject" width="25" height="19">
   <properties>
    <property name="bg" value="1"/>
+   <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,42,0,114,0,0,0,0,0,0,114,0,34,0,0,0,114,0,0,0,0,0,
@@ -117,6 +118,10 @@
 </data>
  </layer>
  <layer name="floorObject" width="25" height="19">
+  <properties>
+   <property name="bg" value="1"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
