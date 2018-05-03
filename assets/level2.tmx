@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="67">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="73">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="tiles.png" width="320" height="768"/>
  </tileset>
@@ -233,7 +233,7 @@
   <properties>
    <property name="item" value="q"/>
   </properties>
-  <object id="45" name="key1" type="key" gid="119" x="641.5" y="353" width="32" height="32">
+  <object id="45" name="key1" type="key" gid="119" x="641.5" y="353" width="29.6347" height="32">
    <properties>
     <property name="from" value="key1"/>
    </properties>
@@ -322,7 +322,7 @@
   <object id="10" type="collision" x="352" y="320" width="96" height="82"/>
   <object id="11" type="collision" x="288" y="352" width="32" height="50"/>
   <object id="12" type="collision" x="128" y="512" width="96" height="18"/>
-  <object id="17" type="collision" x="416" y="160" width="96" height="32"/>
+  <object id="17" type="collision" x="416" y="160" width="223.92" height="32"/>
   <object id="19" type="collision" x="288" y="160" width="32" height="82"/>
   <object id="20" type="collision" x="320" y="160" width="64" height="32"/>
   <object id="21" type="collision" x="128" y="326.992" width="28" height="24.9989"/>
@@ -333,29 +333,17 @@
   <object id="29" type="collision" x="608" y="544" width="32" height="32"/>
   <object id="32" type="collision" x="225.515" y="54.768" width="30.6057" height="41.8814"/>
   <object id="52" type="collision" x="513" y="449" width="159.5" height="62"/>
-  <object id="53" type="collision" x="128.5" y="448" width="159.5" height="63.5"/>
+  <object id="53" type="collision" x="128.5" y="451.973" width="159.5" height="59.5273"/>
   <object id="54" type="collision" x="129" y="153.5" width="159.5" height="41"/>
   <object id="57" type="collision" x="609" y="288" width="32" height="19.5"/>
-  <object id="60" type="collision" x="641" y="151.5">
-   <polyline points="0,0 -128,5 -128,46 -64.5,44 -65,41.5 -64.5,64.5 -0.5,67.5"/>
-  </object>
   <object id="61" type="collision" x="642" y="97.5" width="28" height="121"/>
  </objectgroup>
- <objectgroup name="dead">
-  <properties>
-   <property name="water" value="1"/>
-  </properties>
-  <object id="62" type="water" x="512.5" y="385.805">
-   <polygon points="0,0 0.5,33.0253 30.5,33.0253 30.5,60.2488 65.5,60.6951 65.5,33.9178 95.5,33.4715 96.5,60.6951 127,60.6951 128.5,32.1327 158,32.1327 157.5,-1.33886 128,-0.446287 127,-26.3309 96,-26.7772 95,-1.33886 64,-1.33886 64,-23.2069 32,-21.8681 31.5,0.446287"/>
-  </object>
-  <object id="63" type="water" x="527.694" y="192.892">
-   <polygon points="0,0 -0.902219,84.2962 144.806,86.0803 142.1,22.3006 58.1932,20.0705 55.4865,-0.892024"/>
-  </object>
-  <object id="64" type="water" x="127.951" y="198.264">
-   <polygon points="0,0 -0.950805,75.1745 151.653,75.5765 151.178,1.60801"/>
-  </object>
-  <object id="65" type="water" x="127.959" y="369.108">
-   <polygon points="0,0 145.545,0.820864 147.381,77.1612 -0.459132,78.3925"/>
-  </object>
+ <objectgroup name="water">
+  <object id="67" type="water" x="131.098" y="199.428" width="151.756" height="83.426"/>
+  <object id="68" type="water" x="516.844" y="196.647" width="151.756" height="83.426"/>
+  <object id="69" type="water" x="129.112" y="366.677" width="151.756" height="83.426"/>
+  <object id="70" type="water" x="518.433" y="386.541" width="151.756" height="27.0141"/>
+  <object id="71" type="water" x="545.05" y="362.307" width="30.1923" height="21.4524"/>
+  <object id="72" type="water" x="608.613" y="362.705" width="30.1923" height="21.4524"/>
  </objectgroup>
 </map>
