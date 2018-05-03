@@ -199,8 +199,8 @@
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,79,0,0,0,0,0,0,0,0,0,0,0,0,0,0,91,0,0,
-0,0,3,0,0,0,0,89,0,0,0,0,0,116,0,0,0,0,0,0,0,116,101,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,91,0,0,
+0,0,3,0,0,0,0,0,0,0,0,0,0,116,0,0,0,0,0,0,0,116,101,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -214,8 +214,8 @@
 0,0,0,0,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,
 0,0,0,0,110,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,116,0,0,0,0,0,79,0,0,0,0,0,0,0,0,0,0,0,0,0,0,91,116,0,
-0,0,0,0,0,0,0,89,0,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,0,
+0,116,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,91,116,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
@@ -317,12 +317,12 @@
   <properties>
    <property name="button" value="1"/>
   </properties>
-  <object id="63" name="1.2" type="button" x="224" y="518.959" width="51.4124" height="53.0607">
+  <object id="63" name="1.2" type="button" x="205.518" y="447.876" width="67.0507" height="63.0124">
    <properties>
     <property name="button" value="1"/>
    </properties>
   </object>
-  <object id="66" name="1.1" type="button" x="220.118" y="58.2373" width="43.6475" height="40.1191"/>
+  <object id="66" name="1.1" type="button" x="207.323" y="48.2856" width="57.8642" height="54.3358"/>
  </objectgroup>
  <objectgroup name="block">
   <properties>
@@ -330,7 +330,7 @@
   </properties>
   <object id="69" name="1" type="block" x="224" y="192" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="open door" visible="0">
+ <objectgroup name="open door">
   <properties>
    <property name="opendoor" value="1"/>
   </properties>
@@ -378,7 +378,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="collision" visible="0">
+ <objectgroup name="collision">
   <object id="8" type="collision" x="1.28485" y="2.5697" width="60.388" height="191.443"/>
   <object id="9" type="collision" x="64.2426" y="2.5697" width="62.9577" height="82.2305"/>
   <object id="10" type="collision" x="64.2426" y="86.0851" width="30.8364" height="25.697"/>
@@ -410,8 +410,8 @@
   <object id="40" type="collision" x="544.76" y="437" width="29.5516" height="32"/>
   <object id="41" type="collision" x="543.457" y="513.348" width="32" height="32"/>
   <object id="42" type="collision" x="579.121" y="408" width="27.116" height="61"/>
-  <object id="64" type="collision" x="229.067" y="539.666" width="22.0008" height="20.7066"/>
-  <object id="65" type="collision" x="228.067" y="50.4724" width="23.2949" height="29.7658"/>
+  <object id="64" type="collision" x="227.645" y="479.956" width="23.4225" height="29.2366"/>
+  <object id="65" type="collision" x="222.38" y="63.2674" width="31.8249" height="32.6091"/>
   <object id="68" type="collision" x="33.6482" y="440.016" width="31.0599" height="27.1774"/>
  </objectgroup>
  <objectgroup name="waterfront" visible="0">
