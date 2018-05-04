@@ -135,7 +135,7 @@
   <object id="22" name="3.1" x="48" y="240.147" width="64.9539" height="61.1813"/>
   <object id="24" name="3.2" x="656" y="240" width="47.3763" height="62.693"/>
  </objectgroup>
- <objectgroup name="player" visible="0">
+ <objectgroup name="player">
   <object id="14" name="princess" type="player" x="109.431" y="329.599" width="13.5027" height="12.3754">
    <ellipse/>
   </object>
@@ -183,7 +183,7 @@
  <objectgroup name="waterleft" visible="0">
   <object id="19" type="waterleft" x="157.755" y="99.5842" width="3.65008" height="351.624"/>
  </objectgroup>
- <objectgroup name="block" visible="0">
+ <objectgroup name="block">
   <properties>
    <property name="block" value="1"/>
   </properties>

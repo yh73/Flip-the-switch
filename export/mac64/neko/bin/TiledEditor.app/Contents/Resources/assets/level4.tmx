@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="44">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="46">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="tiles.png" width="320" height="768"/>
  </tileset>
@@ -124,7 +124,7 @@
   <object id="26" type="collision" x="131.439" y="441.891" width="29.2006" height="33.1333"/>
   <object id="37" type="collision" x="446.987" y="573.816" width="34.4819" height="34.156"/>
  </objectgroup>
- <objectgroup name="button" visible="0">
+ <objectgroup name="button">
   <properties>
    <property name="button" value="1"/>
   </properties>
@@ -135,7 +135,7 @@
   <object id="22" name="3.1" x="48" y="240.147" width="64.9539" height="61.1813"/>
   <object id="24" name="3.2" x="656" y="240" width="47.3763" height="62.693"/>
  </objectgroup>
- <objectgroup name="player" visible="0">
+ <objectgroup name="player">
   <object id="14" name="princess" type="player" x="109.431" y="329.599" width="13.5027" height="12.3754">
    <ellipse/>
   </object>
@@ -155,21 +155,21 @@
   <object id="40" type="water" x="78.2047" y="566.701" width="256.149" height="35.1354"/>
   <object id="43" type="water" x="397.824" y="426.159" width="66.8707" height="72.5377"/>
  </objectgroup>
- <objectgroup name="item" visible="0">
+ <objectgroup name="item">
   <properties>
    <property name="item" value="0"/>
   </properties>
-  <object id="16" name="slingshot" type="slingshot" x="99.6535" y="185.387" width="18.0363" height="19.1636">
+  <object id="44" name="slingshot" type="slingshot" x="71.4305" y="167.121" width="18.0363" height="19.1636">
    <properties>
     <property name="from" value="slingshot"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="itemchoose" visible="0">
+ <objectgroup name="itemchoose">
   <properties>
    <property name="itemchoose" value="0"/>
   </properties>
-  <object id="17" name="slingshot" x="87.2412" y="167.339" width="43.9635" height="51.8544"/>
+  <object id="45" name="slingshot" x="65.0183" y="159.073" width="48.9635" height="45.8544"/>
  </objectgroup>
  <objectgroup name="waterfront" visible="0">
   <object id="42" type="waterfront" x="190.411" y="449.827" width="387.623" height="2.2668"/>
@@ -183,7 +183,7 @@
  <objectgroup name="waterleft" visible="0">
   <object id="19" type="waterleft" x="157.755" y="99.5842" width="3.65008" height="351.624"/>
  </objectgroup>
- <objectgroup name="block" visible="0">
+ <objectgroup name="block">
   <properties>
    <property name="block" value="1"/>
   </properties>

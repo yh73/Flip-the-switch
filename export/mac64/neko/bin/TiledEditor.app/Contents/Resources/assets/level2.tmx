@@ -339,10 +339,10 @@
   <object id="61" type="collision" x="642" y="97.5" width="28" height="121"/>
  </objectgroup>
  <objectgroup name="water">
-  <object id="67" type="water" x="131.098" y="199.428" width="151.756" height="83.426"/>
-  <object id="68" type="water" x="516.844" y="196.647" width="151.756" height="83.426"/>
-  <object id="69" type="water" x="129.112" y="366.677" width="151.756" height="83.426"/>
-  <object id="70" type="water" x="518.433" y="386.541" width="151.756" height="27.0141"/>
+  <object id="67" type="water" x="131.098" y="199.428" width="151.756" height="75.5302"/>
+  <object id="68" type="water" x="521.581" y="196.647" width="147.019" height="78.6885"/>
+  <object id="69" type="water" x="129.112" y="372.994" width="147.019" height="77.1094"/>
+  <object id="70" type="water" x="523.17" y="386.541" width="147.019" height="27.0141"/>
   <object id="71" type="water" x="545.05" y="362.307" width="30.1923" height="21.4524"/>
   <object id="72" type="water" x="608.613" y="362.705" width="30.1923" height="21.4524"/>
  </objectgroup>

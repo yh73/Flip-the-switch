@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="72">
- <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="0" columns="10">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="../../Tiles/tiles.png" width="320" height="768"/>
  </tileset>
  <layer name="bg" width="25" height="19">
@@ -317,12 +317,12 @@
   <properties>
    <property name="button" value="1"/>
   </properties>
-  <object id="63" name="1.2" type="button" x="205.518" y="447.876" width="67.0507" height="63.0124">
+  <object id="63" name="1.2" type="button" x="207.631" y="463.088" width="64.9379" height="47.8001">
    <properties>
     <property name="button" value="1"/>
    </properties>
   </object>
-  <object id="66" name="1.1" type="button" x="207.323" y="48.2856" width="57.8642" height="54.3358"/>
+  <object id="66" name="1.1" type="button" x="208" y="48" width="65.0478" height="62.7871"/>
  </objectgroup>
  <objectgroup name="block">
   <properties>
@@ -410,11 +410,11 @@
   <object id="40" type="collision" x="544.76" y="437" width="29.5516" height="32"/>
   <object id="41" type="collision" x="543.457" y="513.348" width="32" height="32"/>
   <object id="42" type="collision" x="579.121" y="408" width="27.116" height="61"/>
-  <object id="64" type="collision" x="227.645" y="479.956" width="23.4225" height="29.2366"/>
-  <object id="65" type="collision" x="222.38" y="63.2674" width="31.8249" height="32.6091"/>
+  <object id="64" type="collision" x="223.842" y="479.956" width="32.7189" height="30.9269"/>
+  <object id="65" type="collision" x="222.38" y="48.9002" width="34.7829" height="47.8214"/>
   <object id="68" type="collision" x="33.6482" y="440.016" width="31.0599" height="27.1774"/>
  </objectgroup>
- <objectgroup name="waterfront" visible="0">
+ <objectgroup name="waterfront">
   <object id="2" type="waterfront" x="191.4" y="416.59" width="192.162" height="5.74933"/>
  </objectgroup>
  <objectgroup name="waterback" visible="0">

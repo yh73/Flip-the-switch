@@ -22,7 +22,7 @@ class MenuState extends FlxState
 	override public function create():Void 
 	{   
         _btnPlay = new FlxButton(0, 0, "Play", clickPlay);
-		intro = new FlxText(200,260, "E to interact, B to open backpack, Space to shoot");
+		intro = new FlxText(80,260, "E to interact, B to open backpack, Space to shoot", 16);
         add(_btnPlay);
 		intro.alignment = FlxTextAlign.CENTER;
 		add(intro);
@@ -34,7 +34,7 @@ class MenuState extends FlxState
 
 	private function clickPlay():Void
     {
-        FlxG.switchState(new PlayState(4));
+        FlxG.switchState(new PlayState(3));
     }
 
 	override public function update(elapsed:Float):Void 

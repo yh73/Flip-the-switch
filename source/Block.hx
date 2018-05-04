@@ -24,21 +24,6 @@ class Block extends FlxSprite {
 
     override public function update(elapsed:Float):Void 
     {
-		updateBlock();
-        for (key in level.buttonBlock.keys()) {
-            var button = key;
-            if (FlxG.overlap(state.slingshot.playerBullets, button)
-			    || (FlxG.overlap(state.player, button) && FlxG.keys.anyJustPressed([E]))) {
-			    moveBlock(level.buttonBlock[button].block);
-		    }
-			if (FlxG.overlap(state.player, button)) {
-				level.popUp.revive();
-			}
-        }
-    }
-
-    public function updateBlock():Void
-	{
 		if (FlxG.overlap(state.player, block)) {
 			if (block.velocity.y > 0) {
 				state.player.y++;
@@ -66,7 +51,7 @@ class Block extends FlxSprite {
 		else if (block.velocity.x < 0) {
 			FlxG.overlap(block, level.waterLeft, stopBlockX);
 		}
-	}
+    }
 
 	private function stopBlockY(Object1:FlxSprite, Object2:FlxObject):Void
 	{
@@ -77,22 +62,4 @@ class Block extends FlxSprite {
 	{
 		Object1.velocity.x = 0;
 	}
-
-	public function moveBlock(currBlock:FlxSprite):Void
-	{
-		if (FlxG.overlap(currBlock, level.waterBack)) {
-			currBlock.velocity.y = 60;
-		}
-		else if (FlxG.overlap(currBlock, level.waterFront)) {
-			currBlock.velocity.y = -60;
-		}
-		else if (FlxG.overlap(currBlock, level.waterLeft)) {
-			currBlock.velocity.x = 60;
-		}
-		else if (FlxG.overlap(currBlock, level.waterRight)) {
-			currBlock.velocity.x = -60;
-		}
-	}
-
-
 }

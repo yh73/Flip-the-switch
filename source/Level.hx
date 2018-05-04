@@ -303,6 +303,7 @@ class Level extends TiledMap
 	{
 		updateSlingshot();
 		updateTouchingWater();
+		updateButtonBlock();
 		updateCollisions();
 		updateEventsOrder();
 	}
@@ -334,6 +335,33 @@ class Level extends TiledMap
 			}
 			if (touch)
 				FlxG.switchState(new PlayState(_state._levelNumber));
+		}
+	}
+
+	private function updateButtonBlock():Void
+	{
+		for (key in buttonBlock.keys()) {
+            var button = key;
+            if (FlxG.overlap(_state.slingshot.playerBullets, button)
+			    || (FlxG.overlap(_state.player, button) && FlxG.keys.anyJustPressed([E]))) {
+			    moveBlock(buttonBlock[button].block);
+		    }
+        }
+	}
+
+	public function moveBlock(block:FlxSprite):Void
+	{
+		if (FlxG.overlap(block, waterBack)) {
+			block.velocity.y = 60;
+		}
+		else if (FlxG.overlap(block, waterFront)) {
+			block.velocity.y = -60;
+		}
+		else if (FlxG.overlap(block, waterLeft)) {
+			block.velocity.x = 60;
+		}
+		else if (FlxG.overlap(block, waterRight)) {
+			block.velocity.x = -60;
 		}
 	}
 
@@ -388,6 +416,11 @@ class Level extends TiledMap
 			overlapped = true;
 			if (FlxG.keys.anyJustPressed([E])) {
 				_state.nextLevel(_state.player, _state.sw);
+			}
+		}
+		for (key in buttonBlock.keys()) {
+			if (FlxG.overlap(_state.player, key)) {
+				overlapped = true;
 			}
 		}
 
