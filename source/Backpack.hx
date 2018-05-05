@@ -17,6 +17,7 @@ class Backpack extends FlxTypedGroup<Item>
     var player:Character;
     public var currentItem:Item;
     var tileSize:Int; 
+    public var keyNum = 0;
     var currentItemIdx:Int;
     static var counter = 0;
 
@@ -82,10 +83,25 @@ class Backpack extends FlxTypedGroup<Item>
             i++;
         }
     }
+
+    public function openDoor() {
+        if (keyNum > 0) {
+            for (item in this) {
+                if (item.type == "key") {
+                    this.remove(item);
+                    keyNum--;
+                    break;
+                }
+            }
+        }
+    }
     
     public function addItem(item:Item) 
     {
         this.add(item);
+        if (item.type == "key") {
+            keyNum++;
+        }
     }
 
 }
