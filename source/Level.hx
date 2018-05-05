@@ -58,6 +58,7 @@ class Level extends TiledMap
 	public var bounds:FlxRect;
 
 	public var _state:PlayState;
+	public var before:Bool = false;
 
 	public function new(level:Dynamic, state:PlayState) 
 	{
@@ -303,7 +304,7 @@ class Level extends TiledMap
 	public function update(elapsed:Float):Void
 	{
 		updateSlingshot();
-		// updateTouchingWater();
+		updateTouchingWater();
 		updateButtonBlock();
 		updateCollisions();
 		updateEventsOrder();
@@ -323,20 +324,28 @@ class Level extends TiledMap
 	private function updateTouchingWater():Void
 	{
 		var touch:Bool = false;
-		if (FlxG.overlap(_state.player, waterGroup)) {
-			touch = true;
-		}
-		if (touch) {
-			for (i in 0...blockGroup.length) {
-				var block = blockGroup.members[i].block;
-				if (FlxG.overlap(_state.player, block)) {
-					touch = false;
-					break;
-				}
+		//if (FlxG.overlap(_state.player, waterGroup)) {
+		//	touch = true;
+		//}
+		for (i in 0...blockGroup.length) {
+			var block = blockGroup.members[i].block;
+			if (FlxG.overlap(_state.player, block)) {
+				touch = true;
+				break;
 			}
-			if (touch)
-				FlxG.collide(characterGroup, waterGroup);
 		}
+		if (!touch) {
+			FlxG.collide(characterGroup, waterGroup);
+		}
+		if (!touch) {
+			if (before && FlxG.overlap(_state.player, waterGroup)) {
+				FlxG.switchState(new PlayState(_state._levelNumber));
+			}
+			before = false;
+		} else {
+			before = true;
+		}
+
 	}
 
 	private function updateButtonBlock():Void
@@ -382,7 +391,7 @@ class Level extends TiledMap
 			if (FlxG.overlap(characterGroup, open)) {
 				var door:Door = openMap[open];
 				overlapped = true;
-				if (FlxG.keys.anyJustPressed([E]) && (door.need == "" || _state.backpack.currentItem.name == door.need)) {
+				if (FlxG.keys.anyJustPressed([E]) && (door.need == "" || (door.need == "key1" && _state.backpack.keyNum > 0))) {
 					var curr:String = openMap[open].name;
 					var doorOpenGroup = doorNameToOpenGroup[curr];
 					var doorClosedGroup = doorNameToClosedGroup[curr];
@@ -390,6 +399,7 @@ class Level extends TiledMap
 					_state.remove(doorClosedGroup);
 					_state.add(doorOpenGroup);
 					_state.add(doorOpenFgGroup);
+					_state.backpack.openDoor();
 					openMap[open].kill();
 					open.kill();
 					break; 
