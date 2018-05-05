@@ -54,7 +54,11 @@ class Backpack extends FlxTypedGroup<Item>
                     border.members[currentItemIdx].loadGraphic("assets/inventory.png");
                 }
                 currentItemIdx = i;
-                currentItem = this.members[currentItemIdx];
+                if (i < this.length) {
+                    currentItem = this.members[currentItemIdx];
+                } else {
+                    currentItem = new Item(0, 0, "", "", "");
+                }
             }
             i++;
         }
