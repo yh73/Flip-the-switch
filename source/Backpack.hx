@@ -10,19 +10,14 @@ import flixel.addons.ui.FlxButtonPlus;
 
 class Backpack extends FlxTypedGroup<Item>
 {   
-    public var border:FlxSprite;
-    public var buttons:FlxTypedGroup<FlxButtonPlus>;
-    public var equipSlotBorder:FlxSprite;
-    public var equipSlot:Item;
-    public var firstTimeEquip = true;
-    public var unEquipButton:FlxButtonPlus;
+    public var border:FlxTypedGroup<Item>;
     public var powerBar:PowerBar;
     public var hasLasso:Bool;
     public var hasSlingshot:Bool;
     var player:Character;
+    public var currentItem:Item;
     var tileSize:Int; 
-    var lastItemIdx:Int;
-    var equipButton:FlxButtonPlus;
+    var currentItemIdx:Int;
     static var counter = 0;
 
 	override public function new(size:Int, number:Int, color:FlxColor, character:Character) 
@@ -30,21 +25,14 @@ class Backpack extends FlxTypedGroup<Item>
 		super();
         player = character;
         tileSize = size;
-        buttons = new FlxTypedGroup<FlxButtonPlus>();
-        equipSlotBorder = new FlxSprite(0,0).makeGraphic(size, size, color);
-        equipSlot = new Item(0.0, 0.0, "", "", "");
-        border = new FlxSprite(0,0).makeGraphic(5 * size, size, color);
-        border = FlxGridOverlay.overlay(border, size, size,  number * size, 
-            size, true, color);
-        equipButton = new FlxButtonPlus(0,0, equip,"Equip", 48, 16);
-        unEquipButton = new FlxButtonPlus(0,0, unequip,"Unequip", 48, 16);
-        buttons.add(equipButton);
-        //buttons.add(new FlxButtonPlus(0,0, null,"Craft", 48, 16));
-        visible = hasLasso = hasSlingshot = equipSlotBorder.visible =  border.visible = false;
-        buttons.kill();
-        unEquipButton.kill();
-        equipSlot.kill();
+        currentItem = new Item(0.0, 0.0, "", "", "");
+        border = new FlxTypedGroup<Item>();
+        for (i in 0...6) {
+            border.add(new Item(0, 0, "slot", "inventory", "slot"));
+        }
+        hasLasso = hasSlingshot = false;
         hasLasso = false;
+        currentItemIdx = -1;
         hasSlingshot = false;
 	}
 	
@@ -53,96 +41,44 @@ class Backpack extends FlxTypedGroup<Item>
     override public function update(elapsed:Float):Void 
     {   
         var i = 0;
-        border.x = player.x - 4.5 * tileSize / 2;
-        border.y = player.y + tileSize;
-        if (equipSlot != null) {
-            equipSlot.x = player.x - tileSize;
-            equipSlot.y = player.y - tileSize / 2;
-        }
-        equipSlotBorder.x = player.x - tileSize;
-        equipSlotBorder.y = player.y - tileSize / 2;
-        for (item in this) {
-            item.x = player.x - 4.5 * tileSize / 2 + 32 * i;
-            item.y = player.y + tileSize;
-            if (FlxG.mouse.overlaps(item, null) && border.visible) {
-                var j = 0;
-                buttons.revive();
-                for (button in buttons) 
-                {  
-                    button.x = item.x;
-                    button.y = item.y + 16 * j;
-                    j++;
+        for (slot in border) {
+            slot.x = FlxG.camera.scroll.x + 165 + 45 * i;
+            slot.y = FlxG.camera.scroll.y + 435;
+            if (FlxG.mouse.overlaps(slot, null) && FlxG.mouse.justPressed && currentItemIdx == i) {
+                slot.loadGraphic("assets/inventory.png");
+                currentItemIdx = -1;
+                currentItem = new Item(0, 0, "", "", "");
+            } else if (FlxG.mouse.overlaps(slot, null) && FlxG.mouse.justPressed) {
+                slot.loadGraphic("assets/highlight.png");
+                if (currentItemIdx != -1) {
+                    border.members[currentItemIdx].loadGraphic("assets/inventory.png");
                 }
-            } else if (!FlxG.mouse.overlaps(border, null)) {
-                buttons.kill();
+                currentItemIdx = i;
+                currentItem = this.members[currentItemIdx];
             }
             i++;
         }
-
-        if (FlxG.mouse.overlaps(equipSlot, null) && equipSlotBorder.visible && !firstTimeEquip) {
-            unEquipButton.revive();
-            unEquipButton.x = equipSlot.x;
-            unEquipButton.y = equipSlot.y;
-        } else if (!FlxG.mouse.overlaps(equipSlot, null)) {
-            unEquipButton.kill();
-        }
-
-        if (FlxG.keys.justPressed.B) {
-            buttons.kill();
-            unEquipButton.kill();
-            visible = !visible;
-            if (!firstTimeEquip) {
-                equipSlot.visible = !equipSlot.visible;
-            }
-            equipSlotBorder.visible = !equipSlotBorder.visible;
-            border.visible = !border.visible;
-        }
-    }
-
-    private function equip() 
-    {   
-        var itemToEquip = new Item(0.0, 0.0, "", "", "");
-        for (item in this) {
-            if (item.x == equipButton.x) {
-                itemToEquip = item;
-                break;
-            }
-        }
-        lastItemIdx = this.members.indexOf(itemToEquip);
-        equipSlot.revive();
-
-        if (itemToEquip.name == "lasso"){
+        
+        if (currentItem.name == "lasso"){
             hasLasso = true;
             hasSlingshot = false;
-        } else if (itemToEquip.name == "slingshot") {
+        } else if (currentItem.name == "slingshot") {
             hasSlingshot = true;
             hasLasso = false;
         } else {
-            hasLasso = hasSlingshot = false;
+           hasLasso = hasSlingshot = false;
         }
-
-        if (!firstTimeEquip) {
-            this.insert(lastItemIdx, new Item(equipSlot.x, equipSlot.y, equipSlot.name, equipSlot.mypath, equipSlot.type));
-            equipSlot.loadGraphicFromItem(this.remove(itemToEquip));
-        } else {
-            equipSlot.loadGraphicFromItem(this.remove(itemToEquip));
-            firstTimeEquip = false;
+        i = 0;
+        for (item in this) {
+            item.x = FlxG.camera.scroll.x + 165 + 45 * i + 6.5;
+            item.y = FlxG.camera.scroll.y + 435 + 6.5;
+            if (i == currentItemIdx) {
+                currentItem = item;
+            }
+            i++;
         }
-        buttons.kill();
     }
-
-    private function unequip() 
-    {
-        if (equipSlot.name == "lasso"){
-            hasLasso = false;
-        } else if (equipSlot.name == "slingshot") {
-            hasSlingshot = false;
-        }
-        this.add(new Item(equipSlot.x, equipSlot.y, equipSlot.name, equipSlot.mypath, equipSlot.type));
-        equipSlot.kill();
-        firstTimeEquip = true;
-    }
-
+    
     public function addItem(item:Item) 
     {
         this.add(item);

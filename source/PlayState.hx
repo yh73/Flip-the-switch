@@ -67,11 +67,7 @@ class PlayState extends FlxState
 		add(level.foregroundGroup);
 		// add backpack
 		add(backpack.border);
-		add(backpack.equipSlotBorder);
-		add(backpack.equipSlot);
 		add(backpack);
-		add(backpack.buttons);
-		add(backpack.unEquipButton);
 		add(level.popUp);
 		add(level.itemPopUp);
 		// add collision

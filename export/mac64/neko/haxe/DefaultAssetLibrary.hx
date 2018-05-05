@@ -76,6 +76,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -115,6 +117,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -774,6 +778,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -817,12 +823,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/maps/untitled.tmx", AssetType.TEXT);
 		path.set ("assets/maps/tiles.png", "assets/maps/tiles.png");
 		type.set ("assets/maps/tiles.png", AssetType.IMAGE);
+		path.set ("assets/inventory.png", "assets/inventory.png");
+		type.set ("assets/inventory.png", AssetType.IMAGE);
 		path.set ("assets/health.png", "assets/health.png");
 		type.set ("assets/health.png", AssetType.IMAGE);
 		path.set ("assets/key1.png", "assets/key1.png");
 		type.set ("assets/key1.png", AssetType.IMAGE);
 		path.set ("assets/untitled.tmx", "assets/untitled.tmx");
 		type.set ("assets/untitled.tmx", AssetType.TEXT);
+		path.set ("assets/highlight.png", "assets/highlight.png");
+		type.set ("assets/highlight.png", AssetType.IMAGE);
 		path.set ("assets/lasso.png", "assets/lasso.png");
 		type.set ("assets/lasso.png", AssetType.IMAGE);
 		path.set ("assets/level2.tmx", "assets/level2.tmx");
@@ -932,6 +942,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/maps/tiles.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "assets/inventory.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/health.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -941,6 +954,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/untitled.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
+		id = "assets/highlight.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/lasso.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -1141,6 +1157,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -2003,6 +2021,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -2042,6 +2062,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
 
 
 

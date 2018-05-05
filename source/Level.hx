@@ -283,6 +283,7 @@ class Level extends TiledMap
 
 			case "water":
 				var water = new FlxObject(x, y, o.width, o.height);
+				water.immovable = true;
 				waterGroup.add(water);
 
 			case "waterfront":
@@ -302,7 +303,7 @@ class Level extends TiledMap
 	public function update(elapsed:Float):Void
 	{
 		updateSlingshot();
-		updateTouchingWater();
+		// updateTouchingWater();
 		updateButtonBlock();
 		updateCollisions();
 		updateEventsOrder();
@@ -334,7 +335,7 @@ class Level extends TiledMap
 				}
 			}
 			if (touch)
-				FlxG.switchState(new PlayState(_state._levelNumber));
+				FlxG.collide(characterGroup, waterGroup);
 		}
 	}
 
@@ -381,7 +382,7 @@ class Level extends TiledMap
 			if (FlxG.overlap(characterGroup, open)) {
 				var door:Door = openMap[open];
 				overlapped = true;
-				if (FlxG.keys.anyJustPressed([E]) && (door.need == "" || _state.backpack.equipSlot.name == door.need)) {
+				if (FlxG.keys.anyJustPressed([E]) && (door.need == "" || _state.backpack.currentItem.name == door.need)) {
 					var curr:String = openMap[open].name;
 					var doorOpenGroup = doorNameToOpenGroup[curr];
 					var doorClosedGroup = doorNameToClosedGroup[curr];
@@ -437,6 +438,7 @@ class Level extends TiledMap
 		FlxG.collide(characterGroup, collisionGroup);
 		FlxG.collide(characterGroup, doorGroup);
 		FlxG.collide(characterGroup, characterGroup);
+		
 	}
 
 	private function onTimer(Timer:FlxTimer):Void {
