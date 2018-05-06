@@ -40,7 +40,11 @@ class PlayState extends FlxState
 		slingshot = new Slingshot(player, powerBar, backpack);
 		// add background
 		add(level.backgroundGroup);
-
+		if (_levelNumber == 0) {
+			var arrowKey = new FlxSprite(160,2*32).loadGraphic("assets/arrows.png");
+			arrowKey.setGraphicSize(3*32, 2*32);
+			add(arrowKey);
+		}
 		// add floating block
 		add(level.blockGroup);
 		for (i in 0...level.blockGroup.length) {

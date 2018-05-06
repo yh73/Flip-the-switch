@@ -131,14 +131,7 @@ class Level extends TiledMap
 			if (tiledLayer.type != TiledLayerType.TILE)
 				continue;
 			var layer:TiledTileLayer = cast tiledLayer;
-			
-			if (layer.properties.contains("tileset"))
-				tileset = this.getTileSet(layer.properties.get("tileset"));
-			else
-				throw "Each layer needs a tileset property with the tileset name";
-			
-			if (tileset == null)
-				throw "The tileset is null";
+			tileset = this.getTileSet("tiles.png");
 			
 			tilemap = new FlxTilemapExt();
 			tilemap.loadMapFromArray(
