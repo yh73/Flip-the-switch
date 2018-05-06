@@ -17,7 +17,8 @@ class Slingshot extends FlxSprite {
     var bulletLife:Map<FlxSprite, Float>;
     var backpack:Backpack;
     override public function new(charater:Character, pb:PowerBar, backpack:Backpack) {
-        super(-100, -100);
+        super(0, 0);
+        makeGraphic(0,0);
         player = charater;
         powerBar = pb;
         percent = 0;
