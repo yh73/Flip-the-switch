@@ -338,8 +338,10 @@ class Level extends TiledMap
 		}
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
+				_state.player.kill();
 				_state.player.x = xBebeforeBlock;
 				_state.player.y = yBebeforeBlock;
+				_state.player.revive();
 			}
 			before = false;
 			xBebeforeBlock = _state.player.x;
