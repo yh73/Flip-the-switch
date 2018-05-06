@@ -59,6 +59,8 @@ class Level extends TiledMap
 
 	public var _state:PlayState;
 	public var before:Bool = false;
+	public var xBebeforeBlock:Float;
+	public var yBebeforeBlock:Float;
 
 	public function new(level:Dynamic, state:PlayState) 
 	{
@@ -324,9 +326,6 @@ class Level extends TiledMap
 	private function updateTouchingWater():Void
 	{
 		var touch:Bool = false;
-		//if (FlxG.overlap(_state.player, waterGroup)) {
-		//	touch = true;
-		//}
 		for (i in 0...blockGroup.length) {
 			var block = blockGroup.members[i].block;
 			if (FlxG.overlap(_state.player, block)) {
@@ -339,9 +338,12 @@ class Level extends TiledMap
 		}
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
-				FlxG.switchState(new PlayState(_state._levelNumber));
+				_state.player.x = xBebeforeBlock;
+				_state.player.y = yBebeforeBlock;
 			}
 			before = false;
+			xBebeforeBlock = _state.player.x;
+			yBebeforeBlock = _state.player.y;
 		} else {
 			before = true;
 		}
