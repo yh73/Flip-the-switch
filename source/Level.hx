@@ -12,6 +12,7 @@ import flixel.util.FlxSort;
 import flixel.group.FlxGroup;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
+import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.util.FlxTimer;
 
@@ -388,6 +389,7 @@ class Level extends TiledMap
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
 				_state.player.kill();
+				//Main.LOGGER.logLevelAction(2, {coor: _state.player.x + ", " +_state.player.y});
 				_state.player.x = xBebeforeBlock;
 				_state.player.y = yBebeforeBlock;
 				_state.player.revive();
@@ -489,7 +491,7 @@ class Level extends TiledMap
 		if ((FlxG.overlap(_state.lasso.end, _state.sw) && _state.lasso.lifeSpan <= 0)) {
 			_state.nextLevel(_state.player, _state.sw);
 		}
-		
+
 		for (key in buttonBlock.keys()) {
 			if (FlxG.overlap(_state.player, key)) {
 				overlapped = true;
