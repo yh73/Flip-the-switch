@@ -426,6 +426,11 @@ class Level extends TiledMap
 				_state.nextLevel(_state.player, _state.sw);
 			}
 		}
+
+		if ((FlxG.overlap(_state.lasso.end, _state.sw) && _state.lasso.lifeSpan <= 0)) {
+			_state.nextLevel(_state.player, _state.sw);
+		}
+		
 		for (key in buttonBlock.keys()) {
 			if (FlxG.overlap(_state.player, key)) {
 				overlapped = true;
