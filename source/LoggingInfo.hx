@@ -1,11 +1,13 @@
 package;
 
-class LoggingActions 
+class LoggingInfo 
 {
 	public static var USE_LASSO:Int = 1;
 	public static var USE_SLINGSHOT:Int = 2;
 	public static var COLLISION:Int = 3;
 	public static var PRESS_E:Int = 4;
+	public static var FALL_INTO_WATER = 5;
+	public static var PRESS_SPACE:Int = 6;
 	
 	public function new() 
 	{

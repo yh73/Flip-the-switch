@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup;
 import flixel.FlxSprite;
+import flixel.addons.ui.FlxButtonPlus;
 import flixel.addons.editors.tiled.TiledMap;
 class PlayState extends FlxState
 {
@@ -20,7 +21,7 @@ class PlayState extends FlxState
 	public var powerBar:PowerBar;
 	public var lasso:Lasso;
 	public var slingshot:Slingshot;
-
+	public var restartButton:FlxSprite;
 	public function new(levelNumber:Int) {
 		super();
 		_levelNumber = levelNumber;
@@ -29,7 +30,8 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		FlxG.mouse.visible = true;
-		
+		restartButton = new FlxSprite(0,0).loadGraphic("assets/restart.png");
+		restartButton.setGraphicSize(32,32);
 		// Set a background color
 		FlxG.cameras.bgColor = 0xff131c1b;
 		level = new Level("assets/level" + _levelNumber + ".tmx", this);
@@ -96,7 +98,7 @@ class PlayState extends FlxState
 		add(level.itemPopUp);
 		add(level.tutorialPopUp);
 		add(level.backpackPopUp);
-		
+		add(restartButton);
 		super.create();
 	}
 
@@ -104,7 +106,11 @@ class PlayState extends FlxState
 	{
 		level.update(elapsed);
 		super.update(elapsed);
-		
+		restartButton.x = FlxG.camera.scroll.x - 80;
+		restartButton.y = FlxG.camera.scroll.y - 80;
+		if (FlxG.mouse.overlaps(restartButton, null) && FlxG.mouse.justPressed) {
+			restart();
+		}
 	}	
 
 	public function nextLevel(player:Character, sw:FlxObject):Void
@@ -112,11 +118,20 @@ class PlayState extends FlxState
 		player.kill();
 		remove(level.switchoffGroup);
 		add(level.switchonGroup);
+		Main.LOGGER.logLevelEnd({status: "clear"});
 		_levelNumber = _levelNumber + 1;
-		if (_levelNumber < 9) {
+		Main.LOGGER.logLevelStart(_levelNumber);
+		if (_levelNumber < 11) {
 			FlxG.switchState(new PlayState(_levelNumber));
+		} else {
+			FlxG.switchState(new EndState());
 		}
-		FlxG.switchState(new EndState());
 	}
-
+	private function restart():Void
+	{
+		player.kill();
+		Main.LOGGER.logLevelEnd({status: "restart"});
+		Main.LOGGER.logLevelStart(_levelNumber);
+		FlxG.switchState(new PlayState(_levelNumber));
+	}
 }

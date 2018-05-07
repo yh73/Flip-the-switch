@@ -30,6 +30,7 @@ class Lasso extends FlxSprite{
 		if (FlxG.keys.justPressed.SPACE && !powerBar.alive && length == 0 && backpack.hasLasso) {
 			powerBar.revive();
 		} else if (FlxG.keys.justPressed.SPACE && powerBar.alive && backpack.hasLasso) {
+            Main.LOGGER.logLevelAction(LoggingInfo.USE_LASSO, {coor: player.x + ", " +player.y});
 			lifeSpan = powerBar.generateResult();
 		}
         if (lifeSpan > 0) {
@@ -38,7 +39,7 @@ class Lasso extends FlxSprite{
             player.controllable = false;
             if (player.facing == FlxObject.LEFT) {
                 this.x -= 20;
-                end.x = end.x;
+                end.x = this.x;
                 end.y = this.y;
                 makeGraphic(length, 3, COLOR);
             } else if (player.facing == FlxObject.UP) {

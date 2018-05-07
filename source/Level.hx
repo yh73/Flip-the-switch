@@ -327,7 +327,7 @@ class Level extends TiledMap
 
 	private function updateTutorial():Void
 	{
-		if (_state._levelNumber == 5) {
+		if (_state._levelNumber == 3 || _state._levelNumber == 5) {
 			var hasLasso = _state.backpack.hasLasso;
 			var hasSlingshot = _state.backpack.hasSlingshot; 
 			if (equipped && (hasLasso || hasSlingshot)) {
@@ -389,7 +389,7 @@ class Level extends TiledMap
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
 				_state.player.kill();
-				//Main.LOGGER.logLevelAction(2, {coor: _state.player.x + ", " +_state.player.y});
+				Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
 				_state.player.x = xBebeforeBlock;
 				_state.player.y = yBebeforeBlock;
 				_state.player.revive();
@@ -463,7 +463,13 @@ class Level extends TiledMap
 				}
 			}
 		}
+		if (FlxG.keys.justPressed.E) {
+			Main.LOGGER.logLevelAction(LoggingInfo.PRESS_E, {coor: _state.player.x + ", " +_state.player.y});
+		}
 
+		if (FlxG.keys.justPressed.SPACE && !_state.backpack.hasLasso && !_state.backpack.hasSlingshot) {
+			Main.LOGGER.logLevelAction(LoggingInfo.PRESS_SPACE, {coor: _state.player.x + ", " +_state.player.y});
+		}
 		for (choose in itemMap.keys()) {
 			if ((FlxG.overlap(characterGroup, choose) && FlxG.keys.justPressed.E)
 			|| (FlxG.overlap(_state.lasso.end, choose) && _state.lasso.lifeSpan <= 0)) {
@@ -508,7 +514,9 @@ class Level extends TiledMap
 		{
 			_state.lasso.lifeSpan = 0;
 		}
-		FlxG.collide(characterGroup, collisionGroup);
+		if (FlxG.collide(characterGroup, collisionGroup)) {
+			Main.LOGGER.logLevelAction(LoggingInfo.COLLISION, {coor: _state.player.x + ", " +_state.player.y});
+		}
 		FlxG.collide(characterGroup, doorGroup);
 		FlxG.collide(characterGroup, characterGroup);
 		
