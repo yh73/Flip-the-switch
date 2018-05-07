@@ -20,7 +20,7 @@ class Lasso extends FlxSprite{
         this.length = 0;
         this.backpack = backpack;
         super(Std.int(player.x + 10), Std.int(player.y + size / 2));
-        this.end = new FlxObject(this.x, this.y, 10, 10);
+        this.end = new FlxObject(this.x, this.y, 4, 4);
         //,HORIZONTAL, 0, 2, FlxColor.WHITE);
         //createFilledBar(FlxColor.TRANSPARENT, FlxColor.WHITE);
         //diff = 0;
@@ -33,16 +33,16 @@ class Lasso extends FlxSprite{
 			lifeSpan = powerBar.generateResult();
 		}
         if (lifeSpan > 0) {
-            length += 5;
+            length += 20;
             player.moves = false;
             player.controllable = false;
             if (player.facing == FlxObject.LEFT) {
-                this.x -= 5;
+                this.x -= 20;
                 end.x = end.x;
                 end.y = this.y;
                 makeGraphic(length, 3, COLOR);
             } else if (player.facing == FlxObject.UP) {
-                this.y -= 5;
+                this.y -= 20;
                 end.y = this.y;
                 end.x = this.x;
                 makeGraphic(3, length, COLOR);
@@ -55,7 +55,7 @@ class Lasso extends FlxSprite{
                 end.y = this.y;
                 makeGraphic(length, 3, COLOR);
             }
-            lifeSpan -= elapsed;
+            lifeSpan -= 4*elapsed;
         } else {
             length = 0;
             player.moves = true;

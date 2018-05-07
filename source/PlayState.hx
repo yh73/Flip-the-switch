@@ -113,8 +113,10 @@ class PlayState extends FlxState
 		remove(level.switchoffGroup);
 		add(level.switchonGroup);
 		_levelNumber = _levelNumber + 1;
-		FlxG.switchState(new PlayState(_levelNumber));
-		
+		if (_levelNumber < 9) {
+			FlxG.switchState(new PlayState(_levelNumber));
+		}
+		FlxG.switchState(new EndState());
 	}
 
 }
