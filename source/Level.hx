@@ -10,6 +10,7 @@ import flixel.FlxObject;
 import flixel.math.FlxRect;
 import flixel.util.FlxSort;
 import flixel.group.FlxGroup;
+import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.text.FlxText;
 import flixel.util.FlxTimer;
@@ -55,12 +56,18 @@ class Level extends TiledMap
 	
 	public var popUp:FlxText;
 	public var itemPopUp:FlxText;
+	public var backpackPopUp:FlxText;
+	public var tutorialPopUp:FlxSprite;
 	public var bounds:FlxRect;
 
 	public var _state:PlayState;
 	public var before:Bool = false;
 	public var xBebeforeBlock:Float;
 	public var yBebeforeBlock:Float;
+	public var count:Int;
+	public var equipped = false;
+	public var tutorialPopped = false;
+	public var equippedPopped = false;
 
 	public function new(level:Dynamic, state:PlayState) 
 	{
@@ -121,7 +128,18 @@ class Level extends TiledMap
 		itemPopUp.alignment = FlxTextAlign.CENTER;
 		popUp.kill();
 		itemPopUp.kill();
-		//popUp.kill();
+
+		// tutorial popup initialization
+		tutorialPopUp = new FlxSprite(-100, -100);
+		tutorialPopUp.loadGraphic("assets/flash.png");
+		tutorialPopUp.exists = true;
+		tutorialPopUp.kill();
+		count = 0;
+
+		// backpack text initialization
+		backpackPopUp = new FlxText(0,0, 7*32, "Click your Item to use!", 12);
+		backpackPopUp.kill();
+
 		var tileset:TiledTileSet;
 		var tilemap:FlxTilemapExt;
 		
@@ -298,11 +316,49 @@ class Level extends TiledMap
 	
 	public function update(elapsed:Float):Void
 	{
+		updateTutorial();
 		updateSlingshot();
 		updateTouchingWater();
 		updateButtonBlock();
 		updateCollisions();
 		updateEventsOrder();
+	}
+
+	private function updateTutorial():Void
+	{
+		if (_state._levelNumber == 5) {
+			var hasLasso = _state.backpack.hasLasso;
+			var hasSlingshot = _state.backpack.hasSlingshot; 
+			if (equipped && (hasLasso || hasSlingshot)) {
+				equippedPopped = true;
+				tutorialPopUp.kill();
+				backpackPopUp.kill();
+				if ((!_state.powerBar.exists) && (!tutorialPopped)) {
+					displayMsg("Press SPACE to focus!");
+				}
+				else if (_state.powerBar.exists) {
+					tutorialPopped = true;
+					if (hasLasso)
+						displayMsg("Press SPACE to use lasso!");
+					else if (hasSlingshot)
+						displayMsg("Press SPACE to shoot!");
+				}
+			} 
+			else if (equipped && (!equippedPopped)) {
+				backpackPopUp.reset(FlxG.camera.scroll.x + 100, FlxG.camera.scroll.y + 415);
+				if (count <= 25) {
+					tutorialPopUp.reset(FlxG.camera.scroll.x + 165, FlxG.camera.scroll.y + 435);
+					count++;
+				}
+				else {
+					tutorialPopUp.kill();
+					count = (count + 1) % 50;
+				}
+			}
+			if ((!hasLasso) && (!hasSlingshot)) {
+				tutorialPopped = false;
+			}
+		}
 	}
 
 	private function updateSlingshot():Void
@@ -412,6 +468,9 @@ class Level extends TiledMap
 				var item:Item = itemMap[choose];
 				_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath, item.type));
 				item.kill();
+				if (item.type == "lasso" || item.type == "slingshot") {
+					equipped = true;
+				}
 				displayMsg("You got a " + item.type);
 				itemMap[choose].kill();
 				choose.kill();
