@@ -72,8 +72,6 @@ class PlayState extends FlxState
 		// add backpack
 		add(backpack.border);
 		add(backpack);
-		add(level.popUp);
-		add(level.itemPopUp);
 		// add collision
 		add(level.collisionGroup);
 		add(level.doorGroup);
@@ -92,6 +90,12 @@ class PlayState extends FlxState
 		// add slingshot
 		add(slingshot);
 		add(slingshot.playerBullets);
+
+		// add pop up
+		add(level.popUp);
+		add(level.itemPopUp);
+		add(level.tutorialPopUp);
+		add(level.backpackPopUp);
 		
 		super.create();
 	}
