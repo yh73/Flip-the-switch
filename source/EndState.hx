@@ -30,7 +30,7 @@ class EndState extends FlxState
 	}
 
 	private function onTimer(Timer:FlxTimer):Void {
-		FlxG.switchState(new PlayState(8));
+		FlxG.switchState(new PlayState(10));
 	}
 
 	override public function update(elapsed:Float):Void 

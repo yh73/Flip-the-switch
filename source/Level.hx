@@ -54,6 +54,8 @@ class Level extends TiledMap
 	public var doorNameToOpenFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	public var doorNameToClosedGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	public var doorNameToClosedFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
+
+	public var transpositionGroup:Map<FlxObject, FlxObject>;
 	
 	public var popUp:FlxText;
 	public var itemPopUp:FlxText;
@@ -76,6 +78,7 @@ class Level extends TiledMap
 
 		_state = state;
 		
+		transpositionGroup = new Map<FlxObject, FlxObject>();
 		// background and foreground groups
 		backgroundGroup = new FlxTypedGroup<FlxTilemapExt>();
 		foregroundGroup = new FlxTypedGroup<FlxTilemapExt>();
@@ -198,6 +201,8 @@ class Level extends TiledMap
 		var stringchoose:Map<String, FlxObject> = new Map<String, FlxObject>();
 		var stringButton:Map<String, FlxObject> = new Map<String, FlxObject>();
 		var stringBlock:Map<String, Block> = new Map<String, Block>();
+		var stringFrom:Map<String, FlxObject> = new Map<String, FlxObject>();
+		var stringTo:Map<String, FlxObject> = new Map<String, FlxObject>();
 		for (layer in layers)
 		{
 			if (layer.type != TiledLayerType.OBJECT)
@@ -250,6 +255,22 @@ class Level extends TiledMap
 					blockGroup.add(curr);
 					stringBlock.set(o.name, curr);
 				}
+			} else if (group.properties.contains("switchfrom")) {
+				for (o in group.objects) {
+					var x:Int = o.x;
+					var y:Int = o.y;
+					var area:FlxObject = new FlxObject(x, y, o.width, o.height);
+					area.immovable = true;
+					stringFrom.set(o.name, area);
+				}
+			} else if (group.properties.contains("switchto")) {
+				for (o in group.objects) {
+					var x:Int = o.x;
+					var y:Int = o.y;
+					var area:FlxObject = new FlxObject(x, y, o.width, o.height);
+					area.immovable = true;
+					stringTo.set(o.name, area);
+				}
 			} else {
 				for (obj in group.objects)
 				{
@@ -265,6 +286,9 @@ class Level extends TiledMap
 		}
 		for (key in stringButton.keys()) {
 			buttonBlock.set(stringButton[key], stringBlock[key.charAt(0)]);
+		}
+		for (key in stringFrom.keys()) {
+			transpositionGroup.set(stringFrom[key], stringTo[key]);
 		}
 	}
 	
@@ -446,7 +470,7 @@ class Level extends TiledMap
 			if (FlxG.overlap(characterGroup, open)) {
 				var door:Door = openMap[open];
 				overlapped = true;
-				if (FlxG.keys.anyJustPressed([E]) && (door.need == "" || (door.need == "key1" && _state.backpack.keyNum > 0))) {
+				if (FlxG.keys.anyJustPressed([E]) && (door.need == "" || _state.backpack.openDoor(door.need))) {
 					var curr:String = openMap[open].name;
 					var doorOpenGroup = doorNameToOpenGroup[curr];
 					var doorClosedGroup = doorNameToClosedGroup[curr];
@@ -454,12 +478,30 @@ class Level extends TiledMap
 					_state.remove(doorClosedGroup);
 					_state.add(doorOpenGroup);
 					_state.add(doorOpenFgGroup);
-					_state.backpack.openDoor();
+					_state.backpack.openDoor(door.need);
 					openMap[open].kill();
 					open.kill();
 					break; 
 				} else if (FlxG.keys.anyJustPressed([E])) {
-					displayMsg("The door is locked.");
+					displayMsg("You haven't got the key to this door");
+				}
+			}
+		}
+
+		for (key in transpositionGroup.keys()) {
+			if (FlxG.overlap(_state.player, key)) {
+				overlapped = true;
+				if (FlxG.keys.anyJustPressed([E])) {
+					_state.player.x = transpositionGroup[key].x;
+					_state.player.y = transpositionGroup[key].y;
+					return;
+				}
+			} else if (FlxG.overlap(_state.player, transpositionGroup[key])) {
+				overlapped = true;
+				if (FlxG.keys.anyJustPressed([E])) {
+					_state.player.x = key.x;
+					_state.player.y = key.y;
+					return;
 				}
 			}
 		}

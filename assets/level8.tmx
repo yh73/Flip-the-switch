@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="41">
+<map version="1.0" tiledversion="2018.04.18" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="41">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="tiles.png" width="320" height="768"/>
  </tileset>
@@ -136,8 +136,8 @@
   <object id="14" type="water" x="728.54" y="9.57053" width="69.7739" height="177.61"/>
   <object id="15" type="water" x="481.348" y="6.22575" width="246.07" height="596.538"/>
   <object id="31" type="water" x="735.361" y="413.478" width="61.3625" height="184.82"/>
-  <object id="33" type="collisio" x="68.4932" y="128.575" width="26.436" height="27.6376"/>
-  <object id="35" type="collisio" x="2.40324" y="127.974" width="26.436" height="27.6376"/>
+  <object id="33" type="collision" x="68.4932" y="128.575" width="26.436" height="27.6376"/>
+  <object id="35" type="collision" x="2.40324" y="127.974" width="26.436" height="27.6376"/>
  </objectgroup>
  <layer name="switchOn" width="25" height="19">
   <properties>

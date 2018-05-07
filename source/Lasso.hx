@@ -62,7 +62,7 @@ class Lasso extends FlxSprite{
             player.controllable = true;
             this.x = player.x + size / 2;
             this.y = player.y + size / 2;
-            makeGraphic(length, 3, COLOR);
+            makeGraphic(1, 3, COLOR);
         }
         super.update(elapsed);
         //indicator.x = this.x;
