@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="10" tilewidth="32" tileheight="32" infinite="0" nextobjectid="12">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="10" tilewidth="32" tileheight="32" infinite="0" nextobjectid="15">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="tiles.png" width="320" height="768"/>
  </tileset>
@@ -14,18 +14,29 @@
 239,204,135,135,135,135,163,135,135,135,135,135,135,206,239,
 239,204,135,135,135,135,175,135,135,135,135,135,135,206,239,
 239,204,135,135,135,135,240,135,135,135,135,135,135,206,239,
-239,204,135,135,135,135,177,135,135,135,135,135,135,206,239,
+239,204,135,135,135,135,0,135,135,135,135,135,135,206,239,
 239,204,135,135,135,135,163,135,135,135,135,135,135,206,239,
 239,234,0,0,0,0,207,0,0,0,0,0,0,233,239,
 239,239,239,239,239,239,239,239,239,239,239,239,239,239,239
 </data>
  </layer>
- <objectgroup name="door">
+ <layer name="doorClosed" width="15" height="10">
   <properties>
-   <property name="door" value="1"/>
+   <property name="doorClosed" value="1"/>
   </properties>
-  <object id="1" name="1" type="door" x="193.35" y="177.518" width="29.9696" height="46.8075"/>
- </objectgroup>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,22,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
  <layer name="switchOff" width="15" height="10">
   <properties>
    <property name="switchoff" value="1"/>
@@ -60,28 +71,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="switchOpen">
-  <object id="4" type="opensw" x="65.1935" y="97.4472" width="53.5273" height="57.6448"/>
- </objectgroup>
- <objectgroup name="character">
-  <object id="5" name="princess" type="player" x="389.789" y="137.936" width="13.0387" height="10.98">
-   <ellipse/>
-  </object>
- </objectgroup>
- <objectgroup name="collision">
-  <object id="6" type="collision" x="33" y="34" width="29" height="255"/>
-  <object id="7" type="collision" x="64" y="258" width="380" height="29"/>
-  <object id="8" type="collision" x="419" y="35" width="28" height="223"/>
-  <object id="9" type="collision" x="66" y="32" width="350" height="61"/>
-  <object id="10" type="collision" x="195" y="96" width="26" height="75"/>
-  <object id="11" type="collision" x="195" y="229" width="27" height="57"/>
- </objectgroup>
- <objectgroup name="openDoor">
-  <properties>
-   <property name="opendoor" value="1"/>
-  </properties>
-  <object id="2" name="1" x="225.534" y="167.666" width="32" height="58"/>
- </objectgroup>
  <layer name="fg" width="15" height="10">
   <properties>
    <property name="fg" value="1"/>
@@ -99,21 +88,33 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="doorClosed" width="15" height="10">
+ <objectgroup name="switchOpen">
+  <object id="4" type="opensw" x="63.1175" y="97.4472" width="53.5273" height="57.6448"/>
+ </objectgroup>
+ <objectgroup name="character">
+  <object id="5" name="princess" type="player" x="389.789" y="137.936" width="13.0387" height="10.98">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="openDoor">
   <properties>
-   <property name="doorClosed" value="1"/>
+   <property name="opendoor" value="1"/>
   </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,22,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
+  <object id="2" name="1" x="225.534" y="167.666" width="32" height="58"/>
+ </objectgroup>
+ <objectgroup name="door">
+  <properties>
+   <property name="door" value="1"/>
+  </properties>
+  <object id="1" name="1" type="door" x="192.312" y="171.29" width="32.0456" height="54.0734"/>
+ </objectgroup>
+ <objectgroup name="collision">
+  <object id="6" type="collision" x="33" y="34" width="29" height="255"/>
+  <object id="7" type="collision" x="62.962" y="273.57" width="380" height="29"/>
+  <object id="8" type="collision" x="416.924" y="35" width="30.076" height="246.874"/>
+  <object id="9" type="collision" x="63.924" y="7.08823" width="352.076" height="73.4559"/>
+  <object id="10" type="collision" x="191.886" y="71.0882" width="31.19" height="99.9118"/>
+  <object id="11" type="collision" x="191.886" y="216.544" width="32.19" height="69.4559"/>
+  <object id="14" type="collision" x="65.3934" y="82.0012" width="40.4816" height="38.4056"/>
+ </objectgroup>
 </map>

@@ -128,7 +128,7 @@
   <properties>
    <property name="button" value="1"/>
   </properties>
-  <object id="5" name="1.1" type="button" x="79.7649" y="143.787" width="56.6751" height="55.6255"/>
+  <object id="5" name="1.1" type="button" x="88" y="152" width="48" height="48"/>
  </objectgroup>
  <objectgroup name="collision">
   <object id="6" type="collision" x="96.5575" y="160.579" width="30.4366" height="29.3871"/>
@@ -143,7 +143,7 @@
   <object id="19" type="opensw" x="467.045" y="352.645" width="61.9228" height="35.6843"/>
  </objectgroup>
  <objectgroup name="water">
-  <object id="11" type="water" x="264.484" y="97.6071" width="175.273" height="313.812"/>
+  <object id="11" type="water" x="263.341" y="97.6071" width="176.416" height="313.812"/>
  </objectgroup>
  <objectgroup name="item">
   <properties>

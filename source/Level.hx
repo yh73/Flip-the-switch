@@ -18,7 +18,7 @@ import flixel.util.FlxTimer;
 
 /**
  * ...
- * @author MrCdK
+ * @author Yuqi Huang, Zixuan Pan, Haoyi Qu 
  */
 class Level extends TiledMap
 {

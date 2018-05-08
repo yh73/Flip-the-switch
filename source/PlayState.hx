@@ -43,7 +43,7 @@ class PlayState extends FlxState
 		// add background
 		add(level.backgroundGroup);
 		if (_levelNumber == 0) {
-			var arrowKey = new FlxSprite(160,2*32).loadGraphic("assets/arrows.png");
+			var arrowKey = new FlxSprite(192,2*32).loadGraphic("assets/arrows.png");
 			arrowKey.setGraphicSize(3*32, 2*32);
 			add(arrowKey);
 		}
@@ -122,7 +122,7 @@ class PlayState extends FlxState
 		Main.LOGGER.logLevelEnd({status: "clear"});
 		_levelNumber = _levelNumber + 1;
 		Main.LOGGER.logLevelStart(_levelNumber);
-		if (_levelNumber < 11) {
+		if (_levelNumber < 16) {
 			FlxG.switchState(new PlayState(_levelNumber));
 		} else {
 			FlxG.switchState(new EndState());
@@ -135,4 +135,5 @@ class PlayState extends FlxState
 		Main.LOGGER.logLevelStart(_levelNumber);
 		FlxG.switchState(new PlayState(_levelNumber));
 	}
+
 }
