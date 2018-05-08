@@ -68,6 +68,9 @@ class PlayState extends FlxState
 		// add character
 		add(level.itemGroup);
 		add(lasso);
+		// add slingshot
+		add(slingshot);
+		add(slingshot.playerBullets);
 		add(level.characterGroup);
 		// add foreground
 		add(level.foregroundGroup);
@@ -89,9 +92,7 @@ class PlayState extends FlxState
 		add(powerBar.indicator);
 		FlxG.camera.setScrollBoundsRect(level.bounds.x, level.bounds.y, level.bounds.width, level.bounds.height);
 		FlxG.worldBounds.copyFrom(level.bounds);
-		// add slingshot
-		add(slingshot);
-		add(slingshot.playerBullets);
+		
 
 		// add pop up
 		add(level.popUp);

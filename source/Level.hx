@@ -241,7 +241,7 @@ class Level extends TiledMap
 				for (o in group.objects) {
 					var x:Int = o.x;
 					var y:Int = o.y;
-					var button = new FlxSprite(x+16, y+16);
+					var button = new FlxSprite(x+8, y+8);
 					var area:FlxObject = new FlxObject(x, y, o.width, o.height);
 					area.immovable = true;
 					buttonGroup.add(button);

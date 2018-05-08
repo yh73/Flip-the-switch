@@ -70,6 +70,8 @@ class Slingshot extends FlxSprite {
                 lifeSpan = 1/10;
             }
             bulletLife[bullet] = lifeSpan;
+        } else if (!backpack.hasLasso && !backpack.hasSlingshot) {
+            powerBar.kill();
         }
 
         for (bullet in bulletLife.keys()) {

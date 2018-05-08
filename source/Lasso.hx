@@ -32,7 +32,9 @@ class Lasso extends FlxSprite{
 		} else if (FlxG.keys.justPressed.SPACE && powerBar.alive && backpack.hasLasso) {
             Main.LOGGER.logLevelAction(LoggingInfo.USE_LASSO, {coor: player.x + ", " +player.y});
 			lifeSpan = powerBar.generateResult();
-		}
+		} else if (!backpack.hasLasso && !backpack.hasSlingshot) {
+            powerBar.kill();
+        }
         if (lifeSpan > 0) {
             length += 20;
             player.moves = false;
