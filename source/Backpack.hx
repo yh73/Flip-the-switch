@@ -34,7 +34,7 @@ class Backpack extends FlxTypedGroup<Item>
         }
 
         for (i in 1...7) {
-            index.add(new FlxText(0,0,Std.string(i),6));
+            index.add(new FlxText(0,0,Std.string(i),8));
         }
         hasLasso = hasSlingshot = false;
         hasLasso = false;
@@ -101,6 +101,7 @@ class Backpack extends FlxTypedGroup<Item>
         for (text in index) {
             text.x = FlxG.camera.scroll.x + 170 + 45 * i;
             text.y = FlxG.camera.scroll.y + 435 + 6.5;
+            text.color = FlxColor.CYAN;
             i ++;
         }
     }
