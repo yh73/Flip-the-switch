@@ -7,9 +7,11 @@ import flixel.util.FlxGradient;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.addons.ui.FlxButtonPlus;
+import flixel.text.FlxText;
 class Backpack extends FlxTypedGroup<Item>
 {   
     public var border:FlxTypedGroup<Item>;
+    public var index:FlxTypedGroup<FlxText>;
     public var powerBar:PowerBar;
     public var hasLasso:Bool;
     public var hasSlingshot:Bool;
@@ -26,8 +28,13 @@ class Backpack extends FlxTypedGroup<Item>
         tileSize = size;
         currentItem = new Item(0.0, 0.0, "", "", "");
         border = new FlxTypedGroup<Item>();
+        index = new FlxTypedGroup<FlxText>();
         for (i in 0...6) {
             border.add(new Item(0, 0, "slot", "inventory", "slot"));
+        }
+
+        for (i in 1...7) {
+            index.add(new FlxText(0,0,Std.string(i),6));
         }
         hasLasso = hasSlingshot = false;
         hasLasso = false;
@@ -88,6 +95,13 @@ class Backpack extends FlxTypedGroup<Item>
                 currentItem = item;
             }
             i++;
+        }
+
+        i = 0;
+        for (text in index) {
+            text.x = FlxG.camera.scroll.x + 170 + 45 * i;
+            text.y = FlxG.camera.scroll.y + 435 + 6.5;
+            i ++;
         }
     }
 

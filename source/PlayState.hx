@@ -79,6 +79,7 @@ class PlayState extends FlxState
 		// add backpack
 		add(backpack.border);
 		add(backpack);
+		add(backpack.index);
 		// add collision
 		add(level.collisionGroup);
 		add(level.doorGroup);
