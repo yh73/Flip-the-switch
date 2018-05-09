@@ -7,6 +7,7 @@ import flixel.FlxState;
 import flixel.ui.FlxButton;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
+import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 
 class MenuState extends FlxState
@@ -30,10 +31,10 @@ class MenuState extends FlxState
         var i: Int;
         for (i in 0...25) {
             var level = new FlxButton(120 + i % 5 * 80, 120 + Std.int(i / 5) * 60, Std.string(i + 1), loadLevel);
+            level.loadGraphic("assets/unselected.png");
+            level.label.size = 14;
+            level.label.color = FlxColor.WHITE;
             levels.add(level);
-            if (Main.SAVE.data.levels.length <= i) {
-                level.visible = false;
-            }
         }
 		add(intro);
         add(levels);
@@ -43,11 +44,25 @@ class MenuState extends FlxState
 
 	private function loadLevel():Void {
         var levelNumber = Std.int((FlxG.mouse.x - 120) / 80) + 5 * Std.int((FlxG.mouse.y - 120) / 60);
-		FlxG.switchState(new PlayState(levelNumber));
+		if (levelNumber < Main.SAVE.data.levels.length) {
+            FlxG.switchState(new PlayState(levelNumber));
+        }
 	}
 
 	override public function update(elapsed:Float):Void 
 	{	
+        var i = 0;
+        for (level in levels) {
+            if (Main.SAVE.data.levels.length <= i){
+                level.loadGraphic("assets/locked.png");
+                level.label.visible = false;
+            } else if (FlxG.mouse.overlaps(level, null) ) {
+                level.loadGraphic("assets/selected.png");
+            } else {
+                level.loadGraphic("assets/unselected.png");
+            }
+            i++;
+        }
 		super.update(elapsed);
 	}
 	

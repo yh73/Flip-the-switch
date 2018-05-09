@@ -13,7 +13,7 @@ class Main extends Sprite
 		var gameId:Int = 1803;
 		var gameKey:String = "c892cc326c959b61794b7ff5860e2e44";
 		var gameName:String = "islandescape";
-		var categoryId:Int = 1;
+		var categoryId:Int = 2;
 		var useDev:Bool = true;
 		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, useDev);
 		Main.SAVE = new FlxSave();
