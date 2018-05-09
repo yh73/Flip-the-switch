@@ -20,11 +20,12 @@ class StartState extends FlxState
 	private var switchOn:FlxSprite;
 	private var switchOff:FlxSprite;
 	private static var youDied:Bool = false;
-	
+	private var menu:MenuState;
 	override public function create():Void 
 	{   
         intro = new FlxText(180,80, "Flip the Switch", 30);
         //add(_btnPlay);
+		menu = new MenuState();
 		switchOff = new FlxSprite(195, 130).loadGraphic("assets/switchOff.png");
 		switchOn = new FlxSprite(195, 81).loadGraphic("assets/switchOn.png");
 		intro.alignment = FlxTextAlign.CENTER;
@@ -37,7 +38,7 @@ class StartState extends FlxState
 	}
 
 	private function onTimer(Timer:FlxTimer):Void {
-		FlxG.switchState(new MenuState());
+		FlxG.switchState(menu);
 	}
 
 	override public function update(elapsed:Float):Void 

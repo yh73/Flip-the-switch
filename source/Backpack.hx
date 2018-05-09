@@ -7,7 +7,6 @@ import flixel.util.FlxGradient;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.addons.ui.FlxButtonPlus;
-
 class Backpack extends FlxTypedGroup<Item>
 {   
     public var border:FlxTypedGroup<Item>;
@@ -44,11 +43,20 @@ class Backpack extends FlxTypedGroup<Item>
         for (slot in border) {
             slot.x = FlxG.camera.scroll.x + 165 + 45 * i;
             slot.y = FlxG.camera.scroll.y + 435;
-            if (FlxG.mouse.overlaps(slot, null) && FlxG.mouse.justPressed && currentItemIdx == i) {
+            var keyPressed = false;
+            switch (i) {
+                case 0: keyPressed = FlxG.keys.justPressed.ONE;
+                case 1: keyPressed = FlxG.keys.justPressed.TWO;
+                case 2: keyPressed = FlxG.keys.justPressed.THREE;
+                case 3: keyPressed = FlxG.keys.justPressed.FOUR;
+                case 4: keyPressed = FlxG.keys.justPressed.FIVE;
+                default: keyPressed = FlxG.keys.justPressed.SIX;
+            }
+            if ((FlxG.mouse.overlaps(slot, null) && FlxG.mouse.justPressed || keyPressed )&& currentItemIdx == i) {
                 slot.loadGraphic("assets/inventory.png");
                 currentItemIdx = -1;
                 currentItem = new Item(0, 0, "", "", "");
-            } else if (FlxG.mouse.overlaps(slot, null) && FlxG.mouse.justPressed) {
+            } else if ((FlxG.mouse.overlaps(slot, null) && FlxG.mouse.justPressed) || keyPressed) {
                 slot.loadGraphic("assets/highlight.png");
                 if (currentItemIdx != -1) {
                     border.members[currentItemIdx].loadGraphic("assets/inventory.png");

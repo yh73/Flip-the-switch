@@ -7,7 +7,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup;
 import flixel.FlxSprite;
-import flixel.addons.ui.FlxButtonPlus;
+import flixel.ui.FlxButton;
 import flixel.addons.editors.tiled.TiledMap;
 class PlayState extends FlxState
 {
@@ -22,6 +22,7 @@ class PlayState extends FlxState
 	public var lasso:Lasso;
 	public var slingshot:Slingshot;
 	public var restartButton:FlxSprite;
+	public var menuButton:FlxButton;
 	public function new(levelNumber:Int) {
 		super();
 		_levelNumber = levelNumber;
@@ -32,6 +33,7 @@ class PlayState extends FlxState
 		FlxG.mouse.visible = true;
 		restartButton = new FlxSprite(0,0).loadGraphic("assets/restart.png");
 		restartButton.setGraphicSize(32,32);
+		menuButton = new FlxButton(FlxG.camera.x + FlxG.camera.width - 80, 0, "Menu", menu);
 		// Set a background color
 		FlxG.cameras.bgColor = 0xff131c1b;
 		level = new Level("assets/level" + _levelNumber + ".tmx", this);
@@ -100,6 +102,7 @@ class PlayState extends FlxState
 		add(level.tutorialPopUp);
 		add(level.backpackPopUp);
 		add(restartButton);
+		add(menuButton);
 		super.create();
 	}
 
@@ -109,6 +112,7 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		restartButton.x = FlxG.camera.scroll.x - 80;
 		restartButton.y = FlxG.camera.scroll.y - 80;
+		menuButton.x = FlxG.camera.x + FlxG.camera.width - 80;
 		if (FlxG.mouse.overlaps(restartButton, null) && FlxG.mouse.justPressed) {
 			restart();
 		}
@@ -121,7 +125,11 @@ class PlayState extends FlxState
 		add(level.switchonGroup);
 		// Main.LOGGER.logLevelEnd({status: "clear"});
 		_levelNumber = _levelNumber + 1;
-		// Main.LOGGER.logLevelStart(_levelNumber);
+		if (_levelNumber == Main.SAVE.data.levels.length) {
+			Main.SAVE.data.levels.push(1);
+			Main.SAVE.flush();
+		}
+		Main.LOGGER.logLevelStart(_levelNumber);
 		if (_levelNumber < 16) {
 			FlxG.switchState(new PlayState(_levelNumber));
 		} else {
@@ -134,6 +142,12 @@ class PlayState extends FlxState
 		// Main.LOGGER.logLevelEnd({status: "restart"});
 		// Main.LOGGER.logLevelStart(_levelNumber);
 		FlxG.switchState(new PlayState(_levelNumber));
+	}
+
+	private function menu():Void
+	{
+		player.kill();
+		FlxG.switchState(new MenuState());
 	}
 
 }
