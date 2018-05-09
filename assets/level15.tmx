@@ -140,7 +140,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="water">
+ <objectgroup name="water" visible="0">
   <object id="1" type="water" x="167.655" y="141.973" width="401.078" height="230.354"/>
   <object id="28" type="water" x="583.233" y="9.05524" width="207.591" height="139.949"/>
   <object id="29" type="water" x="17.5731" y="9.16222" width="196.948" height="136.479"/>
@@ -154,7 +154,7 @@
   <object id="43" type="water" x="397.824" y="426.159" width="71.8707" height="72.5377"/>
   <object id="47" type="water" x="473" y="373" width="95.8672" height="34.3734"/>
  </objectgroup>
- <objectgroup name="item">
+ <objectgroup name="item" visible="0">
   <properties>
    <property name="item" value="0"/>
   </properties>
@@ -164,7 +164,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="itemchoose">
+ <objectgroup name="itemchoose" visible="0">
   <properties>
    <property name="itemchoose" value="0"/>
   </properties>
@@ -188,6 +188,6 @@
   </properties>
   <object id="4" name="1" type="block" x="255.89" y="420.054" width="31.5635" height="28.1817"/>
   <object id="5" name="2" type="block" x="447.347" y="126.496" width="31.5635" height="28.1817"/>
-  <object id="18" name="3" type="block" x="549.066" y="256.811" width="27.9839" height="26.7672"/>
+  <object id="18" name="3" type="block" x="549.066" y="267.811" width="27.9839" height="26.7672"/>
  </objectgroup>
 </map>

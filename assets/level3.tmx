@@ -128,10 +128,10 @@
   <properties>
    <property name="button" value="1"/>
   </properties>
-  <object id="5" name="1.1" type="button" x="88" y="152" width="48" height="48"/>
+  <object id="5" name="1.1" type="button" x="88" y="145" width="48" height="48"/>
  </objectgroup>
  <objectgroup name="collision">
-  <object id="6" type="collision" x="96.5575" y="160.579" width="30.4366" height="29.3871"/>
+  <object id="6" type="collision" x="96.5575" y="153" width="30.4366" height="29.3871"/>
   <object id="7" type="collision" x="6.29723" y="0" width="613.98" height="84"/>
   <object id="8" type="collision" x="25.1889" y="82.9135" width="71.3686" height="359.992"/>
   <object id="9" type="collision" x="543.661" y="83.9631" width="72.4181" height="354.744"/>
