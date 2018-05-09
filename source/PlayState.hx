@@ -119,9 +119,9 @@ class PlayState extends FlxState
 		player.kill();
 		remove(level.switchoffGroup);
 		add(level.switchonGroup);
-		Main.LOGGER.logLevelEnd({status: "clear"});
+		// Main.LOGGER.logLevelEnd({status: "clear"});
 		_levelNumber = _levelNumber + 1;
-		Main.LOGGER.logLevelStart(_levelNumber);
+		// Main.LOGGER.logLevelStart(_levelNumber);
 		if (_levelNumber < 16) {
 			FlxG.switchState(new PlayState(_levelNumber));
 		} else {
@@ -131,8 +131,8 @@ class PlayState extends FlxState
 	private function restart():Void
 	{
 		player.kill();
-		Main.LOGGER.logLevelEnd({status: "restart"});
-		Main.LOGGER.logLevelStart(_levelNumber);
+		// Main.LOGGER.logLevelEnd({status: "restart"});
+		// Main.LOGGER.logLevelStart(_levelNumber);
 		FlxG.switchState(new PlayState(_levelNumber));
 	}
 
