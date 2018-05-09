@@ -268,7 +268,7 @@
   <properties>
    <property name="itemchoose" value="1"/>
   </properties>
-  <object id="30" name="key1" type="key" x="385.732" y="386.64" width="62.6248" height="74.5968"/>
+  <object id="30" name="key1" type="key" x="385.732" y="386.64" width="62.6248" height="71.4131"/>
   <object id="42" name="lasso" type="lasso" x="97.3018" y="94.7921" width="49.6637" height="65.6502"/>
  </objectgroup>
  <objectgroup name="door">

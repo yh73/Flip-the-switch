@@ -166,7 +166,7 @@
   <properties>
    <property name="item" value="1"/>
   </properties>
-  <object id="20" name="key1" type="key" x="325.397" y="34.5918" width="21.5367" height="18.346">
+  <object id="20" name="key1" type="key" x="325.397" y="65.3481" width="21.5367" height="18.346">
    <properties>
     <property name="from" value="key1"/>
    </properties>
@@ -198,7 +198,7 @@
    <property name="itemchoose" value="1"/>
   </properties>
   <object id="30" name="slingshot" type="slingshot" x="629.44" y="362.348" width="47.2056" height="52.2633"/>
-  <object id="21" name="key1" type="key" x="315.848" y="12.1774" width="40.9483" height="52.2189"/>
+  <object id="21" name="key1" type="key" x="315.848" y="41.5357" width="40.9483" height="52.2189"/>
   <object id="37" name="lasso" type="lasso" x="61.053" y="501.083" width="47.2056" height="52.2633"/>
  </objectgroup>
  <objectgroup name="openSwitch">

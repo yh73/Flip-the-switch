@@ -405,7 +405,7 @@
   <object id="40" type="collision" x="544.76" y="413.219" width="29.5516" height="55.7812"/>
   <object id="41" type="collision" x="543.457" y="513.348" width="32" height="32"/>
   <object id="42" type="collision" x="576.093" y="408" width="30.1442" height="61"/>
-  <object id="64" type="collision" x="223.842" y="463" width="32.7189" height="33.9206"/>
+  <object id="64" type="collision" x="223.842" y="463" width="32.7189" height="32.6922"/>
   <object id="65" type="collision" x="222.38" y="48.9002" width="34.7829" height="47.8214"/>
   <object id="68" type="collision" x="33.6482" y="440.016" width="31.0599" height="27.1774"/>
  </objectgroup>

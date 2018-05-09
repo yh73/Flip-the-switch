@@ -117,21 +117,21 @@
  <objectgroup name="collision">
   <object id="6" type="collision" x="448.585" y="29.6457" width="31.173" height="31.8145"/>
   <object id="7" type="collision" x="255.429" y="30.1755" width="33.6117" height="33.1136"/>
-  <object id="8" type="collision" x="255.522" y="480.127" width="32.2143" height="41.0607"/>
+  <object id="8" type="collision" x="255.522" y="480.127" width="32.2143" height="35.434"/>
   <object id="9" type="collision" x="480.853" y="444.578" width="29.2908" height="44.1106"/>
   <object id="23" type="collision" x="65.411" y="253.421" width="31.2336" height="33.84"/>
   <object id="25" type="collision" x="671.991" y="254.875" width="31.0457" height="30.7942"/>
   <object id="26" type="collision" x="131.439" y="441.891" width="29.2006" height="33.1333"/>
-  <object id="37" type="collision" x="446.987" y="510.816" width="34.4819" height="34.156"/>
+  <object id="37" type="collision" x="446.987" y="510.816" width="32.2707" height="34.156"/>
  </objectgroup>
  <objectgroup name="button">
   <properties>
    <property name="button" value="1"/>
   </properties>
-  <object id="10" name="2.1" type="button" x="440" y="24" width="40" height="48"/>
+  <object id="10" name="2.1" type="button" x="440" y="24" width="40.5292" height="48"/>
   <object id="11" name="1.1" x="248" y="24" width="48" height="48"/>
-  <object id="12" name="1.2" x="248" y="472" width="48" height="48"/>
-  <object id="13" name="2.2" x="440" y="504" width="40" height="48"/>
+  <object id="12" name="1.2" x="248" y="472" width="48" height="47.2967"/>
+  <object id="13" name="2.2" x="440" y="504" width="40.8292" height="48"/>
   <object id="22" name="3.1" x="56" y="248" width="48" height="48"/>
   <object id="24" name="3.2" x="664" y="248" width="48" height="48"/>
  </objectgroup>

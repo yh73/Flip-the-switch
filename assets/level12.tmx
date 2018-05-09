@@ -116,7 +116,7 @@
   <properties>
    <property name="itemchoose" value="1"/>
   </properties>
-  <object id="21" name="key1" type="key" x="318.731" y="340.512" width="33.1097" height="47.9578"/>
+  <object id="21" name="key1" type="key" x="318.731" y="340.512" width="33.1097" height="51.2189"/>
   <object id="37" name="lasso" type="lasso" x="101.813" y="11.8976" width="47.2056" height="52.2633"/>
   <object id="52" name="slingshot" type="slingshot" x="697.105" y="277.95" width="47.2056" height="52.2633"/>
  </objectgroup>
