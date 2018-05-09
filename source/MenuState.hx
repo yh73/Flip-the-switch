@@ -32,7 +32,7 @@ class MenuState extends FlxState
             var level = new FlxButton(120 + i % 5 * 80, 120 + Std.int(i / 5) * 60, Std.string(i + 1), loadLevel);
             levels.add(level);
             if (Main.SAVE.data.levels.length <= i) {
-                level.visible = false;
+                // level.visible = false;
             }
         }
 		add(intro);
