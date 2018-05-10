@@ -38,10 +38,10 @@ class Level extends TiledMap
 	public var blockGroup:FlxTypedGroup<Block>;
 
 	public var waterGroup:FlxTypedGroup<FlxObject>;
-	public var waterFront:FlxObject;
-	public var waterBack:FlxObject;
-	public var waterLeft:FlxObject;
-	public var waterRight:FlxObject;
+	public var waterFrontGroup:FlxTypedGroup<FlxObject>;
+	public var waterBackGroup:FlxTypedGroup<FlxObject>;
+	public var waterLeftGroup:FlxTypedGroup<FlxObject>;
+	public var waterRightGroup:FlxTypedGroup<FlxObject>;
 
 	// open area to door collision
 	public var openMap:Map<FlxObject, Door>;
@@ -101,10 +101,10 @@ class Level extends TiledMap
 
 		// water group
 		waterGroup = new FlxTypedGroup<FlxObject>();
-		waterFront = new FlxObject();
-		waterBack = new FlxObject();
-		waterLeft = new FlxObject();
-		waterRight = new FlxObject();
+		waterFrontGroup = new FlxTypedGroup<FlxObject>();
+		waterBackGroup = new FlxTypedGroup<FlxObject>();
+		waterLeftGroup = new FlxTypedGroup<FlxObject>();
+		waterRightGroup = new FlxTypedGroup<FlxObject>();
 		
 		// events and collision groups
 		characterGroup = new FlxTypedGroup<Character>();
@@ -326,16 +326,24 @@ class Level extends TiledMap
 				waterGroup.add(water);
 
 			case "waterfront":
-				waterFront = new FlxObject(x, y, o.width, o.height);
+				var waterFront = new FlxObject(x, y, o.width, o.height);
+				waterFront.immovable = true;
+				waterFrontGroup.add(waterFront);
 
 			case "waterback":
-				waterBack = new FlxObject(x, y, o.width, o.height);
+				var waterBack = new FlxObject(x, y, o.width, o.height);
+				waterBack.immovable = true;
+				waterBackGroup.add(waterBack);
 
 			case "waterleft":
-				waterLeft = new FlxObject(x, y, o.width, o.height);
+				var waterLeft = new FlxObject(x, y, o.width, o.height);
+				waterLeft.immovable = true;
+				waterLeftGroup.add(waterLeft);
 
 			case "waterright":
-				waterRight = new FlxObject(x, y, o.width, o.height);
+				var waterRight = new FlxObject(x, y, o.width, o.height);
+				waterRight.immovable = true;
+				waterRightGroup.add(waterRight);
 		}
 	}
 	
@@ -413,7 +421,7 @@ class Level extends TiledMap
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
 				_state.player.kill();
-				Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
+				// Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
 				_state.player.x = xBebeforeBlock;
 				_state.player.y = yBebeforeBlock;
 				_state.player.revive();
@@ -429,28 +437,52 @@ class Level extends TiledMap
 
 	private function updateButtonBlock():Void
 	{
+		var bulletToKill = _state.slingshot.playerBullets.members[99];
 		for (key in buttonBlock.keys()) {
             var button = key;
             if (FlxG.overlap(_state.slingshot.playerBullets, button)
 			    || (FlxG.overlap(_state.player, button) && FlxG.keys.anyJustPressed([E]))) {
-			    moveBlock(buttonBlock[button].block);
+			    moveBlock(buttonBlock[button]);
+				// FlxG.overlap(_state.slingshot.playerBullets, button, stuffHitStuff);
+				for (i in 0..._state.slingshot.playerBullets.length) {
+					var bullet = _state.slingshot.playerBullets.members[i];
+					if (FlxG.overlap(bullet, button)) {
+						bulletToKill = bullet;
+					}
+				}
 		    }
         }
+		bulletToKill.kill();
 	}
 
-	public function moveBlock(block:FlxSprite):Void
+	public function moveBlock(curr: Block):Void
 	{
-		if (FlxG.overlap(block, waterBack)) {
-			block.velocity.y = 60;
+		curr.needMove = false;
+		if (FlxG.overlap(curr.block, waterBackGroup)) {
+			curr.currSpeedY = curr.block.velocity.y = 60;
 		}
-		else if (FlxG.overlap(block, waterFront)) {
-			block.velocity.y = -60;
+		else if (FlxG.overlap(curr.block, waterFrontGroup)) {
+			curr.currSpeedY = curr.block.velocity.y = -60;
 		}
-		else if (FlxG.overlap(block, waterLeft)) {
-			block.velocity.x = 60;
+		else if (FlxG.overlap(curr.block, waterLeftGroup)) {
+			curr.currSpeedX= curr.block.velocity.x = 60;
 		}
-		else if (FlxG.overlap(block, waterRight)) {
-			block.velocity.x = -60;
+		else if (FlxG.overlap(curr.block, waterRightGroup)) {
+			curr.currSpeedX = curr.block.velocity.x = -60;
+		}
+		else if (FlxG.overlap(curr.block, doorGroup) || FlxG.overlap(curr.block, collisionGroup)) {
+			curr.currSpeedX = curr.block.velocity.x = -1 * curr.currSpeedX;
+			curr.currSpeedY = curr.block.velocity.y = -1 * curr.currSpeedY;
+			curr.needMove = true;
+		}
+		else if (curr.block.velocity.x != 0 || curr.block.velocity.y != 0) {
+			curr.currSpeedX = curr.block.velocity.x = -1 * curr.block.velocity.x;
+			curr.currSpeedY = curr.block.velocity.y = -1 * curr.block.velocity.y;
+		}
+		else {
+			curr.currSpeedX = curr.block.velocity.x = -1 * curr.currSpeedX;
+			curr.currSpeedY = curr.block.velocity.y = -1 * curr.currSpeedY;
+			curr.needMove = true;
 		}
 	}
 
@@ -506,11 +538,11 @@ class Level extends TiledMap
 			}
 		}
 		if (FlxG.keys.justPressed.E) {
-			Main.LOGGER.logLevelAction(LoggingInfo.PRESS_E, {coor: _state.player.x + ", " +_state.player.y});
+			// Main.LOGGER.logLevelAction(LoggingInfo.PRESS_E, {coor: _state.player.x + ", " +_state.player.y});
 		}
 
 		if (FlxG.keys.justPressed.SPACE && !_state.backpack.hasLasso && !_state.backpack.hasSlingshot) {
-			Main.LOGGER.logLevelAction(LoggingInfo.PRESS_SPACE, {coor: _state.player.x + ", " +_state.player.y});
+			// Main.LOGGER.logLevelAction(LoggingInfo.PRESS_SPACE, {coor: _state.player.x + ", " +_state.player.y});
 		}
 		for (choose in itemMap.keys()) {
 			if ((FlxG.overlap(characterGroup, choose) && FlxG.keys.justPressed.E)
@@ -557,7 +589,7 @@ class Level extends TiledMap
 			_state.lasso.lifeSpan = 0;
 		}
 		if (FlxG.collide(characterGroup, collisionGroup)) {
-			Main.LOGGER.logLevelAction(LoggingInfo.COLLISION, {coor: _state.player.x + ", " +_state.player.y});
+			// Main.LOGGER.logLevelAction(LoggingInfo.COLLISION, {coor: _state.player.x + ", " +_state.player.y});
 		}
 		FlxG.collide(characterGroup, doorGroup);
 		FlxG.collide(characterGroup, characterGroup);

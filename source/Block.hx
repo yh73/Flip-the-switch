@@ -10,6 +10,9 @@ import flixel.addons.editors.tiled.TiledMap;
 
 class Block extends FlxSprite {
     public var block:FlxSprite;
+	public var currSpeedX:Float;
+	public var currSpeedY:Float;
+	public var needMove:Bool;
     var level:Level;
     var state:PlayState;
 
@@ -17,14 +20,18 @@ class Block extends FlxSprite {
         super(-100, -100);
         block = new FlxSprite(X, Y);
 		block.loadGraphic("assets/block.png");
+		currSpeedX = 0;
+		currSpeedY = 0;
+		needMove = false;
         level = l;
         state = playstate; 
-	
     }
 
     override public function update(elapsed:Float):Void 
     {
-		if (FlxG.overlap(state.player, block)) {
+		if (FlxG.overlap(state.player, block) 
+			&& !FlxG.overlap(state.player, level.doorGroup)
+			&& !FlxG.overlap(state.player, level.collisionGroup)) {
 			if (block.velocity.y > 0) {
 				state.player.y++;
 			}
@@ -39,27 +46,30 @@ class Block extends FlxSprite {
 			}
 
 		}
+
 		if (block.velocity.y > 0) {
-			FlxG.overlap(block, level.waterFront, stopBlockY);
+			FlxG.overlap(block, level.waterFrontGroup, stopBlock);
 		}
 		else if (block.velocity.y < 0) {
-			FlxG.overlap(block, level.waterBack, stopBlockY);
+			FlxG.overlap(block, level.waterBackGroup, stopBlock);
 		}
 		else if (block.velocity.x > 0) {
-			FlxG.overlap(block, level.waterRight, stopBlockX);
+			FlxG.overlap(block, level.waterRightGroup, stopBlock);
 		}
 		else if (block.velocity.x < 0) {
-			FlxG.overlap(block, level.waterLeft, stopBlockX);
+			FlxG.overlap(block, level.waterLeftGroup, stopBlock);
 		}
+		
+		if (!needMove) {
+			FlxG.overlap(block, level.collisionGroup, stopBlock);
+			FlxG.overlap(block, level.doorGroup, stopBlock);
+		}
+		
+
     }
 
-	private function stopBlockY(Object1:FlxSprite, Object2:FlxObject):Void
+	private function stopBlock(Object1:FlxSprite, Object2:FlxObject):Void
 	{
-		Object1.velocity.y = 0;
-	}
-
-	private function stopBlockX(Object1:FlxSprite, Object2:FlxObject):Void
-	{
-		Object1.velocity.x = 0;
+		Object1.velocity.x = Object1.velocity.y = 0;
 	}
 }
