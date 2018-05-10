@@ -54,6 +54,9 @@ class Level extends TiledMap
 	public var doorNameToOpenFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	public var doorNameToClosedGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	public var doorNameToClosedFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
+	public var blockItem:Map<Block, Item>;
+	public var itemArea:Map<Item, FlxObject>;
+
 
 	public var transpositionGroup:Map<FlxObject, FlxObject>;
 	
@@ -89,6 +92,7 @@ class Level extends TiledMap
 
 		// item group
 		itemGroup = new FlxTypedGroup<Item>();
+		itemArea = new Map<Item, FlxObject>();
 
 		// door group
 		doorGroup = new FlxTypedGroup<Door>();
@@ -117,6 +121,8 @@ class Level extends TiledMap
 		// Mapping from button to block
 		buttonBlock = new Map<FlxObject, Block>();
 
+		// Map block to item
+		blockItem = new Map<Block, Item>();
 		// Mapping from door's name to door's Group
 		doorNameToOpenGroup = new Map<String, FlxTypedGroup<FlxTilemapExt>>();
 		doorNameToOpenFgGroup = new Map<String, FlxTypedGroup<FlxTilemapExt>>();
@@ -203,6 +209,7 @@ class Level extends TiledMap
 		var stringBlock:Map<String, Block> = new Map<String, Block>();
 		var stringFrom:Map<String, FlxObject> = new Map<String, FlxObject>();
 		var stringTo:Map<String, FlxObject> = new Map<String, FlxObject>();
+		var itemString:Map<Item, String> = new Map<Item, String>();
 		for (layer in layers)
 		{
 			if (layer.type != TiledLayerType.OBJECT)
@@ -228,6 +235,9 @@ class Level extends TiledMap
 					var item:Item = new Item(o.x, o.y, o.name, o.properties.get("from"), o.type);
 					stringitem.set(o.name, item);
 					itemGroup.add(item);
+					if (o.properties.contains("block")) {
+						itemString.set(item, o.properties.get("block"));
+					}
 				}
 			} else if (group.properties.contains("itemchoose")) {
 				for (o in group.objects) {
@@ -283,12 +293,16 @@ class Level extends TiledMap
 		}
 		for (key in stringitem.keys()) {
 			itemMap.set(stringchoose[key], stringitem[key]);
+			itemArea.set(stringitem[key], stringchoose[key]);
 		}
 		for (key in stringButton.keys()) {
 			buttonBlock.set(stringButton[key], stringBlock[key.charAt(0)]);
 		}
 		for (key in stringFrom.keys()) {
 			transpositionGroup.set(stringFrom[key], stringTo[key]);
+		}
+		for (key in itemString.keys()) {
+			blockItem.set(stringBlock[itemString[key]], key);
 		}
 	}
 	
@@ -346,7 +360,7 @@ class Level extends TiledMap
 		updateTouchingWater();
 		updateButtonBlock();
 		updateCollisions();
-		updateEventsOrder();
+		updateEventsOrder();	
 	}
 
 	private function updateTutorial():Void
@@ -413,7 +427,7 @@ class Level extends TiledMap
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
 				_state.player.kill();
-				Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
+				//Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
 				_state.player.x = xBebeforeBlock;
 				_state.player.y = yBebeforeBlock;
 				_state.player.revive();
@@ -506,11 +520,11 @@ class Level extends TiledMap
 			}
 		}
 		if (FlxG.keys.justPressed.E) {
-			Main.LOGGER.logLevelAction(LoggingInfo.PRESS_E, {coor: _state.player.x + ", " +_state.player.y});
+			//Main.LOGGER.logLevelAction(LoggingInfo.PRESS_E, {coor: _state.player.x + ", " +_state.player.y});
 		}
 
 		if (FlxG.keys.justPressed.SPACE && !_state.backpack.hasLasso && !_state.backpack.hasSlingshot) {
-			Main.LOGGER.logLevelAction(LoggingInfo.PRESS_SPACE, {coor: _state.player.x + ", " +_state.player.y});
+			//Main.LOGGER.logLevelAction(LoggingInfo.PRESS_SPACE, {coor: _state.player.x + ", " +_state.player.y});
 		}
 		for (choose in itemMap.keys()) {
 			if ((FlxG.overlap(characterGroup, choose) && FlxG.keys.justPressed.E)
@@ -557,7 +571,7 @@ class Level extends TiledMap
 			_state.lasso.lifeSpan = 0;
 		}
 		if (FlxG.collide(characterGroup, collisionGroup)) {
-			Main.LOGGER.logLevelAction(LoggingInfo.COLLISION, {coor: _state.player.x + ", " +_state.player.y});
+			//Main.LOGGER.logLevelAction(LoggingInfo.COLLISION, {coor: _state.player.x + ", " +_state.player.y});
 		}
 		FlxG.collide(characterGroup, doorGroup);
 		FlxG.collide(characterGroup, characterGroup);

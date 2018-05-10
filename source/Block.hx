@@ -51,6 +51,25 @@ class Block extends FlxSprite {
 		else if (block.velocity.x < 0) {
 			FlxG.overlap(block, level.waterLeft, stopBlockX);
 		}
+		var item = level.blockItem[this];
+		if (item != null) {
+			if (block.velocity.y > 0) {
+				item.y++;
+				level.itemArea[item].y++;
+			}
+			else if (block.velocity.y < 0) {
+				item.y--;
+				level.itemArea[item].y--;		
+			}
+			else if (block.velocity.x > 0) {
+				item.x++;
+				level.itemArea[item].x++;
+			}
+			else if (block.velocity.x < 0) {
+				item.x--;
+				level.itemArea[item].x--;
+			}
+		}
     }
 
 	private function stopBlockY(Object1:FlxSprite, Object2:FlxObject):Void
