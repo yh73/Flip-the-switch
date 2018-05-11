@@ -84,10 +84,10 @@ class PlayState extends FlxState
 		add(level.collisionGroup);
 		add(level.doorGroup);
 		// add water
-		add(level.waterFront);
-		add(level.waterBack);
-		add(level.waterLeft);
-		add(level.waterRight);
+		add(level.waterFrontGroup);
+		add(level.waterBackGroup);
+		add(level.waterLeftGroup);
+		add(level.waterRightGroup);
 		add(level.waterGroup);
 
 		// add powerBar UI
@@ -111,8 +111,8 @@ class PlayState extends FlxState
 	{
 		level.update(elapsed);
 		super.update(elapsed);
-		restartButton.x = FlxG.camera.scroll.x - 80;
-		restartButton.y = FlxG.camera.scroll.y - 80;
+		restartButton.x = FlxG.camera.scroll.x;
+		restartButton.y = FlxG.camera.scroll.y;
 		menuButton.x = FlxG.camera.x + FlxG.camera.width - 80;
 		if (FlxG.mouse.overlaps(restartButton, null) && FlxG.mouse.justPressed) {
 			restart();

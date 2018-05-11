@@ -65,8 +65,27 @@ class Block extends FlxSprite {
 			FlxG.overlap(block, level.doorGroup, stopBlock);
 		}
 		
-
+		var item = level.blockItem[this];
+		if (item != null) {
+			if (block.velocity.y > 0) {
+				item.y++;
+				level.itemArea[item].y++;
+			}
+			else if (block.velocity.y < 0) {
+				item.y--;
+				level.itemArea[item].y--;		
+			}
+			else if (block.velocity.x > 0) {
+				item.x++;
+				level.itemArea[item].x++;
+			}
+			else if (block.velocity.x < 0) {
+				item.x--;
+				level.itemArea[item].x--;
+			}
+		}
     }
+
 
 	private function stopBlock(Object1:FlxSprite, Object2:FlxObject):Void
 	{
