@@ -84,10 +84,10 @@ class PlayState extends FlxState
 		add(level.collisionGroup);
 		add(level.doorGroup);
 		// add water
-		add(level.waterFront);
-		add(level.waterBack);
-		add(level.waterLeft);
-		add(level.waterRight);
+		add(level.waterFrontGroup);
+		add(level.waterBackGroup);
+		add(level.waterLeftGroup);
+		add(level.waterRightGroup);
 		add(level.waterGroup);
 
 		// add powerBar UI
