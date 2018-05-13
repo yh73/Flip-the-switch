@@ -9,6 +9,7 @@ import flixel.group.FlxGroup;
 import flixel.FlxSprite;
 import flixel.ui.FlxButton;
 import flixel.addons.editors.tiled.TiledMap;
+import flixel.system.FlxSound;
 class PlayState extends FlxState
 {
 	public var player:Character;
@@ -23,6 +24,7 @@ class PlayState extends FlxState
 	public var slingshot:Slingshot;
 	public var restartButton:FlxSprite;
 	public var menuButton:FlxButton;
+	public var bgm:FlxSound;
 	public function new(levelNumber:Int) {
 		super();
 		_levelNumber = levelNumber;
@@ -31,6 +33,8 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		FlxG.mouse.visible = true;
+		bgm = FlxG.sound.load("assets/bgm.ogg");
+		bgm.play(true);
 		restartButton = new FlxSprite(0,0).loadGraphic("assets/restart.png");
 		restartButton.setGraphicSize(32,32);
 		menuButton = new FlxButton(FlxG.camera.x + FlxG.camera.width - 80, 0, "Menu", menu);
@@ -109,6 +113,10 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
+		if (FlxG.sound.music == null) 
+		{
+			FlxG.sound.playMusic("assets/bgm.ogg", 1, true);
+		}
 		level.update(elapsed);
 		super.update(elapsed);
 		restartButton.x = FlxG.camera.scroll.x;
