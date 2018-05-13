@@ -44,7 +44,7 @@ class MenuState extends FlxState
 
 	private function loadLevel():Void {
         var levelNumber = Std.int((FlxG.mouse.x - 120) / 80) + 5 * Std.int((FlxG.mouse.y - 120) / 60);
-		if (levelNumber < Main.SAVE.data.levels.length) {
+		if (levelNumber < Main.SAVE.data.levels.length || true) {
             FlxG.switchState(new PlayState(levelNumber));
         }
 	}
