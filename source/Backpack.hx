@@ -110,6 +110,7 @@ class Backpack extends FlxTypedGroup<Item>
         for (item in this) {
             if (item.name == name) {
                 this.remove(item, true);
+                FlxG.sound.playMusic("assets/doorUnlock.wav", 1, false);
                 return true;
             }
         }
