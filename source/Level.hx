@@ -380,7 +380,7 @@ class Level extends TiledMap
 				equippedPopped = true;
 				tutorialPopUp.kill();
 				backpackPopUp.kill();
-				if ((!_state.powerBar.exists) && (!tutorialPopped)) {
+				if ((!_state.powerBar.exists) && (!tutorialPopped) && (_state.player.exists == true)) {
 					displayMsg("Press and hold SPACE to charge!");
 				}
 				else if (_state.powerBar.exists) {
@@ -439,6 +439,8 @@ class Level extends TiledMap
 				_state.player.kill();
 				_state.slingshot.kill();
 				_state.lasso.kill();
+				popUp.kill();
+				itemPopUp.kill();
 				_state.player.x = xBebeforeBlock;
 				_state.player.y = yBebeforeBlock;
 				timer.start(1, playerReviveOnTimer, 1);
