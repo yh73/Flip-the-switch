@@ -48,7 +48,7 @@ class Slingshot extends FlxSprite {
         if (FlxG.keys.justPressed.SPACE && !powerBar.alive && percent == 0 && backpack.hasSlingshot) {
             powerBar.revive();
         }
-        else if (FlxG.keys.justPressed.SPACE && powerBar.alive && backpack.hasSlingshot) {
+        else if (FlxG.keys.justReleased.SPACE && powerBar.alive && backpack.hasSlingshot) {
             Main.LOGGER.logLevelAction(LoggingInfo.USE_SLINGSHOT, {coor: player.x + ", " + player.y});
             lifeSpan = powerBar.generateResult();
             // Space bar was pressed! FIRE A BULLET

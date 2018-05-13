@@ -29,8 +29,8 @@ class Lasso extends FlxSprite{
     override public function update(elapsed:Float):Void {
 		if (FlxG.keys.justPressed.SPACE && !powerBar.alive && length == 0 && backpack.hasLasso) {
 			powerBar.revive();
-		} else if (FlxG.keys.justPressed.SPACE && powerBar.alive && backpack.hasLasso) {
-            Main.LOGGER.logLevelAction(LoggingInfo.USE_LASSO, {coor: player.x + ", " +player.y});
+		} else if (FlxG.keys.justReleased.SPACE && powerBar.alive && backpack.hasLasso) {
+            //Main.LOGGER.logLevelAction(LoggingInfo.USE_LASSO, {coor: player.x + ", " +player.y});
 			lifeSpan = powerBar.generateResult();
 		} else if (!backpack.hasLasso && !backpack.hasSlingshot) {
             powerBar.kill();
@@ -58,7 +58,7 @@ class Lasso extends FlxSprite{
                 end.y = this.y;
                 makeGraphic(length, 3, COLOR);
             }
-            lifeSpan -= 4*elapsed;
+            lifeSpan -= 3*elapsed;
         } else {
             length = 0;
             player.moves = true;

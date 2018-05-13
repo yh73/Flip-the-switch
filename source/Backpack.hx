@@ -109,7 +109,7 @@ class Backpack extends FlxTypedGroup<Item>
     public function openDoor(name:String) {
         for (item in this) {
             if (item.name == name) {
-                this.remove(item);
+                this.remove(item, true);
                 return true;
             }
         }

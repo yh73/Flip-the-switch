@@ -63,6 +63,6 @@ class PowerBar extends FlxSprite{
         indicator.revive();
         //indicator.velocity.y = 200;
         var random = new FlxRandom();
-        diff = random.int(1, 4 * size - 1);
+        diff = 4 * size - 1;
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="99">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="101">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="tiles.png" width="320" height="768"/>
  </tileset>
@@ -305,15 +305,15 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="open switch">
+ <objectgroup name="open switch" visible="0">
   <object id="37" type="opensw" x="192" y="52" width="96" height="76"/>
  </objectgroup>
- <objectgroup name="character">
+ <objectgroup name="character" visible="0">
   <object id="1" name="princess" type="player" x="169.813" y="555.839" width="10.5375" height="12.5353">
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="collision">
+ <objectgroup name="collision" visible="0">
   <object id="2" type="collision" x="94.8956" y="0" width="610.329" height="51.9429"/>
   <object id="3" type="collision" x="0" y="52.9418" width="128" height="552.392"/>
   <object id="4" type="collision" x="672" y="52.0132" width="128" height="554.39"/>
@@ -339,7 +339,7 @@
   <object id="73" type="collision" x="511.681" y="351.827" width="32.8175" height="33.4296"/>
   <object id="74" type="collision" x="639.776" y="350.849" width="32.8175" height="33.4296"/>
  </objectgroup>
- <objectgroup name="water">
+ <objectgroup name="water" visible="0">
   <object id="67" type="water" x="131.098" y="199.428" width="148.143" height="79.1434"/>
   <object id="68" type="water" x="519.172" y="184.603" width="149.428" height="94.3455"/>
   <object id="69" type="water" x="129.112" y="363.359" width="150.632" height="86.7445"/>
