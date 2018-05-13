@@ -364,9 +364,9 @@ class Level extends TiledMap
 	public function update(elapsed:Float):Void
 	{
 		updateTutorial();
-		updateSlingshot();
 		updateTouchingWater();
 		updateButtonBlock();
+		updateSlingshot();
 		updateCollisions();
 		updateEventsOrder();	
 	}
