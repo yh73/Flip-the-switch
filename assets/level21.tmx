@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="37">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
+  <image source="maps/tiles.png" width="320" height="768"/>
+ </tileset>
+ <layer name="bg" width="20" height="15">
+  <properties>
+   <property name="bg" value="0"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="csv">
+133,133,133,133,133,155,155,155,155,155,155,155,155,155,155,133,133,133,133,133,
+134,134,134,134,133,155,155,155,155,155,155,155,155,155,155,134,134,134,134,133,
+134,134,134,134,133,157,157,157,157,197,197,155,157,155,155,134,134,134,134,133,
+134,134,134,134,133,155,155,155,155,183,183,157,157,155,155,134,134,134,134,133,
+133,133,133,133,133,155,155,155,155,183,183,155,155,155,155,133,133,133,133,133,
+145,145,145,145,145,155,155,155,155,183,183,155,155,155,135,145,145,145,145,145,
+155,155,155,155,155,196,184,184,184,189,189,184,184,184,198,155,155,155,155,155,
+155,155,155,155,155,240,240,240,240,183,183,240,240,240,240,155,155,155,155,155,
+155,155,155,155,155,135,144,144,144,183,183,144,144,144,135,155,155,155,155,155,
+134,134,134,134,134,144,155,155,155,183,183,155,155,153,144,133,133,133,133,133,
+196,184,184,184,198,155,155,155,155,195,195,155,155,155,155,133,133,133,133,133,
+240,240,240,240,240,155,155,155,155,240,240,155,155,153,155,134,134,134,134,133,
+134,134,134,134,133,155,155,155,155,144,144,155,155,155,155,134,134,134,134,133,
+134,134,134,134,133,155,155,155,155,155,155,155,155,155,155,134,134,134,134,133,
+144,144,144,144,144,155,155,155,155,155,155,155,155,155,155,144,144,144,144,144
+</data>
+ </layer>
+ <layer name="switchoff" width="20" height="15">
+  <properties>
+   <property name="switchoff" value="1"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+96,97,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+106,107,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="switchon" width="20" height="15">
+  <properties>
+   <property name="switchon" value="1"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+94,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+104,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="fg" width="20" height="15">
+  <properties>
+   <property name="fg" value="1"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="block">
+  <properties>
+   <property name="block" value="1"/>
+  </properties>
+  <object id="2" name="1" type="block" x="160.469" y="415.885" width="32" height="32"/>
+  <object id="24" name="4" type="block" x="65.3857" y="161.772" width="28.4317" height="29.569"/>
+  <object id="25" name="2" type="block" x="544.673" y="255.807" width="32" height="32"/>
+  <object id="26" name="3" type="block" x="448.005" y="32.9025" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="button">
+  <properties>
+   <property name="button" value="1"/>
+  </properties>
+  <object id="5" name="1.1" type="button" x="154.04" y="248.5" width="37.8867" height="38.777"/>
+  <object id="21" name="2.1" type="button" x="443.46" y="247.66" width="41.21" height="43.78"/>
+  <object id="22" name="3.1" type="button" x="442.078" y="158.855" width="48" height="48"/>
+  <object id="23" name="4.2" type="button" x="154.04" y="248.496" width="37.8867" height="38.78"/>
+  <object id="27" name="4.3" type="button" x="442.08" y="158.85" width="48" height="48"/>
+  <object id="28" name="4.4" type="button" x="443.456" y="247.658" width="41.2084" height="43.7756"/>
+  <object id="36" name="4.1" type="button" x="-3.1497" y="412.204" width="41.9814" height="43.0088"/>
+ </objectgroup>
+ <objectgroup name="collision">
+  <object id="7" type="collision" x="161.266" y="194.672" width="317.446" height="61.5622"/>
+  <object id="8" type="collision" x="3.48874" y="352.578" width="154.812" height="30.822"/>
+  <object id="10" type="collision" x="286.889" y="192.586" width="66.2098" height="192.26"/>
+ </objectgroup>
+ <objectgroup name="open switch" visible="0">
+  <object id="19" type="opensw" x="-0.134719" y="281.119" width="61.9228" height="35.6843"/>
+ </objectgroup>
+ <objectgroup name="water" visible="0">
+  <object id="11" type="water" x="162.011" y="2.61027" width="314.478" height="473.407"/>
+  <object id="34" type="water" x="1.08906" y="173.683" width="637.467" height="111.152"/>
+  <object id="35" type="water" x="0.918126" y="457.72" width="637.467" height="22.2055"/>
+ </objectgroup>
+ <objectgroup name="item">
+  <properties>
+   <property name="item" value="1"/>
+  </properties>
+  <object id="12" name="slingshot" type="slingshot" x="129.608" y="386.11" width="23.0898" height="22.0403">
+   <properties>
+    <property name="from" value="slingshot"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="itemchoose">
+  <properties>
+   <property name="itemchoose" value=""/>
+  </properties>
+  <object id="13" name="slingshot" type="slingshot" x="104.119" y="380.895" width="54.576" height="46.1797"/>
+ </objectgroup>
+ <objectgroup name="waterright">
+  <object id="4" type="waterright" x="479.563" y="24.3739" width="2.09908" height="427.436"/>
+  <object id="29" type="waterback" x="31.9406" y="152.797" width="578.384" height="10.8074"/>
+  <object id="31" type="waterfront" x="11.2043" y="286.89" width="578.384" height="9.96223"/>
+ </objectgroup>
+ <objectgroup name="waterleft">
+  <object id="3" type="waterleft" x="158.578" y="0.217363" width="3.30634" height="454.819"/>
+ </objectgroup>
+ <objectgroup name="player" visible="0">
+  <object id="1" name="princess" type="player" x="86.3337" y="406.461" width="7.28129" height="10.0609">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>
