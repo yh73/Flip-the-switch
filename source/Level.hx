@@ -435,11 +435,15 @@ class Level extends TiledMap
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
         		FlxG.sound.playMusic("assets/intoWater.ogg", 1, false);
+				var timer = new FlxTimer();
 				_state.player.kill();
-				// Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
+				_state.slingshot.kill();
+				_state.lasso.kill();
 				_state.player.x = xBebeforeBlock;
 				_state.player.y = yBebeforeBlock;
-				_state.player.revive();
+				timer.start(1, playerReviveOnTimer, 1);
+				// Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
+				
 			}
 			before = false;
 			xBebeforeBlock = _state.player.x;
@@ -447,7 +451,12 @@ class Level extends TiledMap
 		} else {
 			before = true;
 		}
+	}
 
+	private function playerReviveOnTimer(Timer:FlxTimer):Void {
+		_state.player.revive();
+		_state.slingshot.revive();
+		_state.lasso.revive();
 	}
 
 	private function updateButtonBlock():Void
