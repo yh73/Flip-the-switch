@@ -30,12 +30,14 @@ class Level extends TiledMap
 	public var switchonGroup:FlxTypedGroup<FlxTilemapExt>;
 	public var switchoffGroup:FlxTypedGroup<FlxTilemapExt>;
 
+
 	public var collisionGroup:FlxTypedGroup<FlxObject>;
 	public var characterGroup:FlxTypedGroup<Character>;
 	public var itemGroup:FlxTypedGroup<Item>;
 	public var doorGroup:FlxTypedGroup<Door>;
 	public var buttonGroup:FlxTypedGroup<FlxSprite>;
 	public var blockGroup:FlxTypedGroup<Block>;
+	
 
 	public var waterGroup:FlxTypedGroup<FlxObject>;
 	public var waterFrontGroup:FlxTypedGroup<FlxObject>;
@@ -380,7 +382,7 @@ class Level extends TiledMap
 				equippedPopped = true;
 				tutorialPopUp.kill();
 				backpackPopUp.kill();
-				if ((!_state.powerBar.exists) && (!tutorialPopped)) {
+				if ((!_state.powerBar.exists) && (!tutorialPopped) && (_state.player.exists == true)) {
 					displayMsg("Press and hold SPACE to charge!");
 				}
 				else if (_state.powerBar.exists) {
@@ -435,15 +437,16 @@ class Level extends TiledMap
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
         		FlxG.sound.playMusic("assets/intoWater.ogg", 1, false);
-				var timer = new FlxTimer();
 				_state.player.kill();
 				_state.slingshot.kill();
 				_state.lasso.kill();
+				popUp.kill();
+				itemPopUp.kill();
 				_state.player.x = xBebeforeBlock;
 				_state.player.y = yBebeforeBlock;
-				timer.start(1, playerReviveOnTimer, 1);
+				//var timer = new FlxTimer();
+				//timer.start(1, playerReviveOnTimer, 1);
 				// Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
-				
 			}
 			before = false;
 			xBebeforeBlock = _state.player.x;

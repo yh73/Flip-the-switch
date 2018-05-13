@@ -129,7 +129,6 @@ class PlayState extends FlxState
 
 	public function nextLevel(player:Character, sw:FlxObject):Void
 	{
-		player.kill();
 		remove(level.switchoffGroup);
 		add(level.switchonGroup);
 		// Main.LOGGER.logLevelEnd({status: "clear"});
@@ -139,9 +138,10 @@ class PlayState extends FlxState
 			Main.SAVE.flush();
 		}
 		Main.LOGGER.logLevelStart(_levelNumber);
-		if (_levelNumber < 16) {
+		if (_levelNumber < 22) {		
 			player.kill();
 			slingshot.kill();
+			lasso.end.kill();
 			lasso.kill();
 			var timer = new FlxTimer();
 			timer.start(1, nextLevelOnTimer, 1);
