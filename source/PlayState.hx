@@ -34,6 +34,7 @@ class PlayState extends FlxState
 	{
 		FlxG.mouse.visible = true;
 		bgm = FlxG.sound.load("assets/bgm.ogg");
+		bgm.looped = true;
 		bgm.play(true);
 		restartButton = new FlxSprite(0,0).loadGraphic("assets/restart.png");
 		restartButton.setGraphicSize(32,32);
@@ -113,10 +114,6 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
-		if (FlxG.sound.music == null) 
-		{
-			FlxG.sound.playMusic("assets/bgm.ogg", 1, true);
-		}
 		level.update(elapsed);
 		super.update(elapsed);
 		restartButton.x = FlxG.camera.scroll.x;
