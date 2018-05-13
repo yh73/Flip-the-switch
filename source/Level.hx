@@ -147,7 +147,7 @@ class Level extends TiledMap
 		count = 0;
 
 		// backpack text initialization
-		backpackPopUp = new FlxText(0,0, 7*32, "Click your Item to use!", 12);
+		backpackPopUp = new FlxText(0,0, 7*32, "Click your item to use!", 12);
 		backpackPopUp.kill();
 
 		var tileset:TiledTileSet;
@@ -381,14 +381,14 @@ class Level extends TiledMap
 				tutorialPopUp.kill();
 				backpackPopUp.kill();
 				if ((!_state.powerBar.exists) && (!tutorialPopped)) {
-					displayMsg("Press SPACE to focus!");
+					displayMsg("Press and hold SPACE to charge!");
 				}
 				else if (_state.powerBar.exists) {
 					tutorialPopped = true;
 					if (hasLasso)
-						displayMsg("Press SPACE to use lasso!");
+						displayMsg("Release SPACE to use lasso!");
 					else if (hasSlingshot)
-						displayMsg("Press SPACE to shoot!");
+						displayMsg("Release SPACE to shoot!");
 				}
 			} 
 			else if (equipped && (!equippedPopped)) {
