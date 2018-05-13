@@ -529,6 +529,7 @@ class Level extends TiledMap
 					_state.remove(doorClosedGroup);
 					_state.add(doorOpenGroup);
 					_state.add(doorOpenFgGroup);
+					FlxG.sound.playMusic("assets/doorUnlock.ogg", 1, false);
 					_state.backpack.openDoor(door.need);
 					openMap[open].kill();
 					open.kill();
@@ -567,6 +568,7 @@ class Level extends TiledMap
 			if ((FlxG.overlap(characterGroup, choose) && FlxG.keys.justPressed.E)
 			|| (FlxG.overlap(_state.lasso.end, choose) && _state.lasso.lifeSpan <= 0)) {
 				var item:Item = itemMap[choose];
+        		FlxG.sound.playMusic("assets/pickUp.ogg", 1, false);
 				_state.backpack.addItem(new Item(item.x, item.y, item.name, item.mypath, item.type));
 				item.kill();
 				if (item.type == "lasso" || item.type == "slingshot") {
@@ -583,11 +585,13 @@ class Level extends TiledMap
 		if (FlxG.overlap(_state.player, _state.sw)) {
 			overlapped = true;
 			if (FlxG.keys.anyJustPressed([E])) {
+				FlxG.sound.playMusic("assets/switchFlip.ogg", 1, false);
 				_state.nextLevel(_state.player, _state.sw);
 			}
 		}
 
 		if ((FlxG.overlap(_state.lasso.end, _state.sw) && _state.lasso.lifeSpan <= 0)) {
+			FlxG.sound.playMusic("assets/switchFlip.ogg", 1, false);
 			_state.nextLevel(_state.player, _state.sw);
 		}
 

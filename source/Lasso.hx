@@ -31,7 +31,7 @@ class Lasso extends FlxSprite{
 			powerBar.revive();
 		} else if (FlxG.keys.justReleased.SPACE && powerBar.alive && backpack.hasLasso) {
             //Main.LOGGER.logLevelAction(LoggingInfo.USE_LASSO, {coor: player.x + ", " +player.y});
-            FlxG.sound.playMusic("assets/lassoShoot.wav", 1, false);
+            FlxG.sound.playMusic("assets/lassoShoot.ogg", 1, false);
 			lifeSpan = powerBar.generateResult();
 		} else if (!backpack.hasLasso && !backpack.hasSlingshot) {
             powerBar.kill();
