@@ -451,22 +451,27 @@ class Level extends TiledMap
 
 	private function updateButtonBlock():Void
 	{
-		var bulletToKill = _state.slingshot.playerBullets.members[99];
+		// var bulletToKill = _state.slingshot.playerBullets.members[99];
 		for (key in buttonBlock.keys()) {
             var button = key;
             if (FlxG.overlap(_state.slingshot.playerBullets, button)
 			    || (FlxG.overlap(_state.player, button) && FlxG.keys.anyJustPressed([E]))) {
 			    moveBlock(buttonBlock[button]);
-				// FlxG.overlap(_state.slingshot.playerBullets, button, stuffHitStuff);
+				/*
+				FlxG.overlap(_state.slingshot.playerBullets, button, stuffHitStuff);
 				for (i in 0..._state.slingshot.playerBullets.length) {
 					var bullet = _state.slingshot.playerBullets.members[i];
 					if (FlxG.overlap(bullet, button)) {
 						bulletToKill = bullet;
 					}
 				}
+				*/
 		    }
         }
-		bulletToKill.kill();
+		for (key in buttonBlock.keys()) {
+            var button = key;
+			FlxG.overlap(_state.slingshot.playerBullets, button, stuffHitStuff);
+        }
 	}
 
 	public function moveBlock(curr: Block):Void
