@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup;
 import flixel.FlxSprite;
+import flixel.util.FlxTimer;
 import flixel.ui.FlxButton;
 import flixel.addons.editors.tiled.TiledMap;
 class PlayState extends FlxState
@@ -132,7 +133,11 @@ class PlayState extends FlxState
 		}
 		Main.LOGGER.logLevelStart(_levelNumber);
 		if (_levelNumber < 16) {
-			FlxG.switchState(new PlayState(_levelNumber));
+			player.kill();
+			slingshot.kill();
+			lasso.kill();
+			var timer = new FlxTimer();
+			timer.start(1, nextLevelOnTimer, 1);
 		} else {
 			FlxG.switchState(new EndState());
 		}
@@ -142,6 +147,10 @@ class PlayState extends FlxState
 		player.kill();
 		// Main.LOGGER.logLevelEnd({status: "restart"});
 		// Main.LOGGER.logLevelStart(_levelNumber);
+		FlxG.switchState(new PlayState(_levelNumber));
+	}
+
+	private function nextLevelOnTimer(Timer:FlxTimer):Void {
 		FlxG.switchState(new PlayState(_levelNumber));
 	}
 
