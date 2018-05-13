@@ -434,6 +434,7 @@ class Level extends TiledMap
 		}
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
+        		FlxG.sound.playMusic("assets/intoWater.ogg", 1, false);
 				_state.player.kill();
 				// Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
 				_state.player.x = xBebeforeBlock;
