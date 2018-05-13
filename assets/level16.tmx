@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextobjectid="209">
+<map version="1.0" tiledversion="2018.04.18" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextobjectid="209">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="maps/tiles.png" width="320" height="768"/>
  </tileset>
@@ -398,11 +398,11 @@
   <object id="156" type="waterright" x="638" y="327.333" width="4" height="156.667"/>
   <object id="171" type="waterright" x="796" y="576.667" width="4" height="128.667"/>
  </objectgroup>
- <objectgroup name="button" visible="0">
+ <objectgroup name="button">
   <properties>
    <property name="button" value="1"/>
   </properties>
-  <object id="149" name="1.1" x="120" y="344" width="48" height="48"/>
+  <object id="149" name="1.1" x="120" y="376" width="48" height="48"/>
   <object id="154" name="2.1" x="728" y="376" width="48" height="48"/>
   <object id="179" name="2.2" x="312" y="280" width="48" height="48"/>
   <object id="181" name="3.1" x="504" y="472" width="48" height="48"/>
@@ -506,7 +506,7 @@
   <object id="177" name="key3" x="766" y="664" width="36" height="43.3333"/>
   <object id="189" name="key4" x="238.667" y="285.333" width="49.3333" height="34.6667"/>
  </objectgroup>
- <objectgroup name="collision" visible="0">
+ <objectgroup name="collision">
   <object id="3" type="collision" x="4" y="1" width="90" height="765"/>
   <object id="4" type="collision" x="96" y="721.022" width="863" height="46.9776"/>
   <object id="5" type="collision" x="862" y="-1" width="97" height="731"/>
@@ -531,7 +531,7 @@
   <object id="133" type="collision" x="286.626" y="440.846" width="33.5613" height="275.487"/>
   <object id="134" type="collision" x="113.62" y="531.732" width="527.463" height="38.5205"/>
   <object id="135" type="collision" x="129" y="666.415" width="30" height="66.9288"/>
-  <object id="150" type="collision" x="128" y="352" width="31.3333" height="31.3333"/>
+  <object id="150" type="collision" x="128" y="387" width="31.3333" height="31.3333"/>
   <object id="153" type="collision" x="735.333" y="384.667" width="32" height="31.3333"/>
   <object id="178" type="collision" x="128.667" y="244.585" width="448.667" height="35.4796"/>
   <object id="180" type="collision" x="321.334" y="286.667" width="32" height="32"/>
@@ -539,12 +539,12 @@
   <object id="201" type="collision" x="638" y="245.106" width="190.667" height="33.5442"/>
   <object id="205" type="collision" x="286.667" y="217.669" width="32" height="151.844"/>
  </objectgroup>
- <objectgroup name="block" visible="0">
+ <objectgroup name="block">
   <properties>
    <property name="block" value="1"/>
   </properties>
   <object id="69" name="2" type="block" x="607.551" y="391.834" width="34" height="34.3333"/>
-  <object id="79" name="1" type="block" x="190.667" y="352.333" width="37.3333" height="34.1011"/>
+  <object id="79" name="1" type="block" x="187.667" y="385.333" width="37.3333" height="34.1011"/>
   <object id="173" name="3" type="block" x="768.667" y="671.333" width="32" height="32"/>
  </objectgroup>
 </map>
