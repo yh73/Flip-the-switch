@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="39">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="41">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="maps/tiles.png" width="320" height="768"/>
  </tileset>
@@ -17,10 +17,10 @@
 239,239,204,135,137,136,138,138,156,156,156,156,156,153,137,133,136,206,239,239,
 239,239,204,138,136,135,147,147,156,156,0,156,156,153,146,146,146,206,239,239,
 239,239,204,133,137,138,156,156,156,157,240,156,156,153,157,157,157,206,239,239,
-239,239,204,136,135,133,156,156,156,157,146,156,156,153,138,136,138,206,239,239,
-239,239,204,136,135,138,154,154,156,156,156,156,156,153,136,0,0,210,239,239,
-239,239,204,135,133,136,134,136,156,156,240,156,156,153,138,240,240,206,239,239,
-239,239,204,136,137,135,137,133,156,156,145,156,156,153,136,138,137,206,239,239,
+239,239,204,136,135,133,156,156,156,157,146,156,156,136,138,136,138,206,239,239,
+239,239,204,136,135,138,154,154,156,156,156,156,156,134,136,0,0,210,239,239,
+239,239,204,135,133,136,134,136,156,156,240,156,156,137,138,240,240,206,239,239,
+239,239,204,136,137,135,137,133,156,156,145,156,156,138,136,138,137,206,239,239,
 239,239,234,0,0,0,0,0,0,0,0,0,0,0,0,0,0,233,239,239,
 239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,
 239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239
@@ -186,9 +186,10 @@
   <object id="19" type="opensw" x="467.045" y="352.645" width="61.9228" height="35.6843"/>
  </objectgroup>
  <objectgroup name="water">
-  <object id="11" type="water" x="264.02" y="92.8539" width="176.416" height="313.812"/>
+  <object id="11" type="water" x="264.02" y="92.8539" width="142.26" height="313.812"/>
   <object id="34" type="water" x="198.94" y="206.938" width="65.9802" height="108.967"/>
-  <object id="35" type="water" x="439.868" y="205.938" width="102.969" height="42.947"/>
+  <object id="35" type="water" x="398.107" y="205.938" width="144.73" height="42.947"/>
+  <object id="39" type="water" x="403.826" y="92.789" width="40.9076" height="126.469"/>
  </objectgroup>
  <objectgroup name="item">
   <properties>
@@ -215,7 +216,8 @@
  <objectgroup name="water side">
   <object id="3" type="waterleft" x="253.988" y="97.1035" width="2.09908" height="102.309"/>
   <object id="24" type="waterleft" x="186.893" y="220.067" width="2.09908" height="84.7165"/>
-  <object id="25" type="waterright" x="450.865" y="98.906" width="2.9991" height="226.956"/>
+  <object id="25" type="waterright" x="450.865" y="98.906" width="2.9991" height="112.113"/>
+  <object id="40" type="waterright" x="418.01" y="255.15" width="2.9991" height="112.113"/>
  </objectgroup>
  <objectgroup name="player">
   <object id="1" name="princess" type="player" x="112.301" y="344.249" width="14.6935" height="14.6935">
