@@ -39,7 +39,7 @@ class Character extends FlxExtendedSprite
 	}
 	
 	override public function update(elapsed:Float):Void 
-	{
+	{	
 		if (controllable)
 		{
 			acceleration.set(0, 0);
