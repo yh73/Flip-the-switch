@@ -10,6 +10,7 @@ class Lasso extends FlxSprite{
     public var lifeSpan:Float;
 	var powerBar:PowerBar;
     var length:Int;
+    var maxLength:Float;
     public var end:FlxObject;
     public var backpack:Backpack;
     static var COLOR = FlxColor.YELLOW;
@@ -33,20 +34,33 @@ class Lasso extends FlxSprite{
             //Main.LOGGER.logLevelAction(LoggingInfo.USE_LASSO, {coor: player.x + ", " +player.y});
             FlxG.sound.playMusic("assets/lassoShoot.ogg", 1, false);
 			lifeSpan = powerBar.generateResult();
+            maxLength = lifeSpan * 400;
 		} else if (!backpack.hasLasso && !backpack.hasSlingshot) {
             powerBar.kill();
         }
         if (lifeSpan > 0) {
-            length += 20;
+            if (length <= maxLength - 20) {
+                length += 20;
+            } else {
+                length = Std.int(maxLength);
+            }
             player.moves = false;
             player.controllable = false;
             if (player.facing == FlxObject.LEFT) {
-                this.x -= 20;
+                if (this.x - player.x - size/2 - 20 <= maxLength) {
+                    this.x -= 20;
+                } else {
+                    this.x = player.x + size/2 + maxLength;
+                }
                 end.x = this.x;
                 end.y = this.y;
                 makeGraphic(length, 3, COLOR);
             } else if (player.facing == FlxObject.UP) {
-                this.y -= 20;
+                if (this.y - player.y - size/2 - 20 <= maxLength) {
+                    this.y -= 20;
+                } else {
+                    this.y = player.y + size/2 + maxLength;
+                }
                 end.y = this.y;
                 end.x = this.x;
                 makeGraphic(3, length, COLOR);
