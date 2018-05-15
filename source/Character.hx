@@ -30,8 +30,8 @@ class Character extends FlxExtendedSprite
 		name = Name;
 		
 		parseJson(JsonPath);
-		velocity.set(75, 75);
-		maxVelocity.set(96,96);
+		velocity.set(50, 50);
+		maxVelocity.set(120,120);
 		facing = FlxObject.DOWN;
 
 		drag.x = maxVelocity.x * 4;
