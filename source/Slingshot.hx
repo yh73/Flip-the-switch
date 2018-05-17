@@ -33,6 +33,7 @@ class Slingshot extends FlxSprite {
         cdColor = new FlxColor();
         cdColor.setRGBFloat(0.5, 0.5, 0.5, 0.75);
 		cooldown.exists = false;
+        cooldown.scrollFactor.set();
         needCD = false;
         cdLength = 45;
 
@@ -94,8 +95,8 @@ class Slingshot extends FlxSprite {
             cdLength = 45;
             cdIndex = backpack.currentItemIdx;
             cooldown.makeGraphic(45, 45, cdColor);
-            var cdX = FlxG.camera.scroll.x + 165 + 45 * cdIndex;
-            var cdY = FlxG.camera.scroll.y + 435;
+            var cdX = FlxG.camera.x + 165 + 45 * cdIndex;
+            var cdY = FlxG.camera.y + 435;
             cooldown.reset(cdX, cdY);
         } 
         /* else if (!backpack.hasLasso && !backpack.hasSlingshot) {
@@ -105,8 +106,8 @@ class Slingshot extends FlxSprite {
         else if (needCD) {
             cdLength--;
             cooldown.makeGraphic(45, cdLength, cdColor);
-            var cdX = FlxG.camera.scroll.x + 165 + 45 * cdIndex;
-            var cdY = FlxG.camera.scroll.y + 435;
+            var cdX = FlxG.camera.x + 165 + 45 * cdIndex;
+            var cdY = FlxG.camera.y + 435;
             cooldown.reset(cdX, cdY);
             if (cdLength == 0) {
                 needCD = false;

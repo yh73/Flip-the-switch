@@ -35,6 +35,7 @@ class Lasso extends FlxSprite{
         //createFilledBar(FlxColor.TRANSPARENT, FlxColor.WHITE);
         //diff = 0;
         cooldown = new FlxSprite(-100, -100);
+        cooldown.scrollFactor.set();
         cdColor = new FlxColor();
         cdColor.setRGBFloat(0.5, 0.5, 0.5, 0.75);
 		cooldown.exists = false;
@@ -63,14 +64,14 @@ class Lasso extends FlxSprite{
             cdLength = 45;
             cdIndex = backpack.currentItemIdx;
             cooldown.makeGraphic(45, 45, cdColor);
-            var cdX = FlxG.camera.scroll.x + 165 + 45 * cdIndex;
-            var cdY = FlxG.camera.scroll.y + 435;
+            var cdX = FlxG.camera.x + 165 + 45 * cdIndex;
+            var cdY = FlxG.camera.y + 435;
             cooldown.reset(cdX, cdY);
         } else if (needCD) {
             cdLength--;
             cooldown.makeGraphic(45, cdLength, cdColor);
-            var cdX = FlxG.camera.scroll.x + 165 + 45 * cdIndex;
-            var cdY = FlxG.camera.scroll.y + 435;
+            var cdX = FlxG.camera.x + 165 + 45 * cdIndex;
+            var cdY = FlxG.camera.y + 435;
             cooldown.reset(cdX, cdY);
             if (cdLength == 0) {
                 needCD = false;
