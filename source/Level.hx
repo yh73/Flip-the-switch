@@ -365,6 +365,11 @@ class Level extends TiledMap
 	
 	public function update(elapsed:Float):Void
 	{
+		if (FlxG.overlap(_state.lasso, collisionGroup) || FlxG.overlap(_state.lasso, doorGroup))
+		{
+			_state.lasso.lifeSpan = 0;
+			_state.lasso.update(elapsed);
+		}
 		updateTutorial();
 		updateTouchingWater();
 		updateButtonBlock();
@@ -375,7 +380,7 @@ class Level extends TiledMap
 
 	private function updateTutorial():Void
 	{
-		if (_state._levelNumber == 3 || _state._levelNumber == 5) {
+		if (_state._levelNumber == 2 || _state._levelNumber == 4) {
 			var hasLasso = _state.backpack.hasLasso;
 			var hasSlingshot = _state.backpack.hasSlingshot; 
 			if (equipped && (hasLasso || hasSlingshot)) {
@@ -437,16 +442,12 @@ class Level extends TiledMap
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
         		FlxG.sound.playMusic("assets/intoWater.ogg", 1, false);
-				_state.player.kill();
-				_state.slingshot.kill();
-				_state.lasso.kill();
-				popUp.kill();
-				itemPopUp.kill();
+				Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
 				_state.player.x = xBebeforeBlock;
 				_state.player.y = yBebeforeBlock;
 				//var timer = new FlxTimer();
 				//timer.start(1, playerReviveOnTimer, 1);
-				// Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
+				//Main.LOGGER.logLevelAction(LoggingInfo.REVIVE, {coor: _state.player.x + ", " +_state.player.y});
 			}
 			before = false;
 			xBebeforeBlock = _state.player.x;

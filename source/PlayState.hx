@@ -150,11 +150,7 @@ class PlayState extends FlxState
 	{
 		remove(level.switchoffGroup);
 		add(level.switchonGroup);
-<<<<<<< HEAD
-	    Main.LOGGER.logLevelEnd({status: "clear"});
-=======
 		Main.LOGGER.logLevelEnd({status: "clear"});
->>>>>>> d6ce668b53ba8a7e6bdf0a108cae0995c1d39a40
 		_levelNumber = _levelNumber + 1;
 		if (_levelNumber == Main.SAVE.data.levels.length) {
 			Main.SAVE.data.levels.push(1);

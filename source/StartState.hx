@@ -44,6 +44,7 @@ class StartState extends FlxState
 	override public function update(elapsed:Float):Void 
 	{	
 		if (FlxG.mouse.overlaps(switchOff, null) && FlxG.mouse.justPressed) {
+			
 			switchOff.kill();
 			switchOn.revive();
 			var timer = new FlxTimer();

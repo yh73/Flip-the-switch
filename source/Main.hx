@@ -3,6 +3,8 @@ package;
 import flixel.FlxGame;
 import openfl.display.Sprite;
 import flixel.util.FlxSave;
+import flixel.system.FlxSound;
+import flixel.FlxG;
 class Main extends Sprite
 {	
 	public static var LOGGER:CapstoneLogger;
@@ -35,7 +37,10 @@ class Main extends Sprite
 
 	private function onSessionReady(sessionRecieved:Bool):Void
 	{
-		addChild(new FlxGame(640, 480, StartState));
+		addChild(new FlxGame(640, 480, StartState, true));
 	}
+
+
+		
 
 }
