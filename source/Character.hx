@@ -33,7 +33,7 @@ class Character extends FlxExtendedSprite
 		
 		parseJson(JsonPath);
 		velocity.set(50, 50);
-		maxVelocity.set(130,130);
+		maxVelocity.set(120,120);
 		facing = FlxObject.DOWN;
 
 		drag.x = maxVelocity.x * 4;
@@ -43,7 +43,7 @@ class Character extends FlxExtendedSprite
 	}
 	
 	override public function update(elapsed:Float):Void 
-	{
+	{	
 		if (controllable)
 		{
 			acceleration.set(0, 0);

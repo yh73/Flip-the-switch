@@ -47,7 +47,7 @@ class StartState extends FlxState
 			switchOff.kill();
 			switchOn.revive();
 			var timer = new FlxTimer();
-			Main.LOGGER.logLevelStart(0);
+			// Main.LOGGER.logLevelStart(0);
 			timer.start(0.1, onTimer, 1);
 		}
 		

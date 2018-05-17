@@ -12,17 +12,30 @@ class Slingshot extends FlxSprite {
     var player:Character;
     var powerBar:PowerBar;
     public var lifeSpan:Float;
-    var percent:Float;
     public var playerBullets:FlxTypedGroup<FlxSprite>;
     var bulletLife:Map<FlxSprite, Float>;
     var backpack:Backpack;
+    var needCD:Bool;
+    public var cooldown:FlxSprite;
+    var cdColor:FlxColor;
+    var cdLength:Int;
+    var cdIndex:Int;
+
     override public function new(charater:Character, pb:PowerBar, backpack:Backpack) {
         super(0, 0);
         makeGraphic(1,1);
         player = charater;
         powerBar = pb;
-        percent = 0;
         powerBar.kill();
+
+        // cooldown initialization
+		cooldown = new FlxSprite(-100, -100);
+        cdColor = new FlxColor();
+        cdColor.setRGBFloat(0.5, 0.5, 0.5, 0.75);
+		cooldown.exists = false;
+        needCD = false;
+        cdLength = 45;
+
         bulletLife = new Map<FlxSprite, Float>();
         // 100 bullets
 		var numPlayerBullets:Int = 100;
@@ -45,13 +58,17 @@ class Slingshot extends FlxSprite {
 
     override public function update(elapsed:Float):Void 
     {
-        if (FlxG.keys.justPressed.SPACE && !powerBar.alive && percent == 0 && backpack.hasSlingshot) {
+        /*
+        if (FlxG.keys.justPressed.SPACE && !powerBar.alive && backpack.hasSlingshot) {
             powerBar.revive();
         }
         else if (FlxG.keys.justReleased.SPACE && powerBar.alive && backpack.hasSlingshot) {
+        */
+        if (FlxG.keys.justPressed.SPACE && backpack.hasSlingshot && (!needCD)) {
             //Main.LOGGER.logLevelAction(LoggingInfo.USE_SLINGSHOT, {coor: player.x + ", " + player.y});
             FlxG.sound.playMusic("assets/slingshotShoot.ogg", 1, false);
-            lifeSpan = powerBar.generateResult();
+            // lifeSpan = powerBar.generateResult();
+            lifeSpan = 0.85;
             // Space bar was pressed! FIRE A BULLET
 			var bullet:FlxSprite = playerBullets.recycle();
 			bullet.reset(player.x + 16 - bullet.width/2, player.y);
@@ -67,12 +84,33 @@ class Slingshot extends FlxSprite {
 			else if (player.facing == FlxObject.DOWN) {
 					bullet.velocity.y = 400;
 			}
+            /*
             if (lifeSpan <= 0) {
                 lifeSpan = 1/10;
             }
+            */
             bulletLife[bullet] = lifeSpan;
-        } else if (!backpack.hasLasso && !backpack.hasSlingshot) {
+            needCD = true;
+            cdLength = 45;
+            cdIndex = backpack.currentItemIdx;
+            cooldown.makeGraphic(45, 45, cdColor);
+            var cdX = FlxG.camera.scroll.x + 165 + 45 * cdIndex;
+            var cdY = FlxG.camera.scroll.y + 435;
+            cooldown.reset(cdX, cdY);
+        } 
+        /* else if (!backpack.hasLasso && !backpack.hasSlingshot) {
             powerBar.kill();
+        }
+        */
+        else if (needCD) {
+            cdLength--;
+            cooldown.makeGraphic(45, cdLength, cdColor);
+            var cdX = FlxG.camera.scroll.x + 165 + 45 * cdIndex;
+            var cdY = FlxG.camera.scroll.y + 435;
+            cooldown.reset(cdX, cdY);
+            if (cdLength == 0) {
+                needCD = false;
+            }
         }
 
         for (bullet in bulletLife.keys()) {

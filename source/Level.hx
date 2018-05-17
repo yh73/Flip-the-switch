@@ -59,6 +59,7 @@ class Level extends TiledMap
 	public var blockItem:Map<Block, Item>;
 	public var itemArea:Map<Item, FlxObject>;
 
+	public var stringBlock:Map<String, Block>;
 
 	public var transpositionGroup:Map<FlxObject, FlxObject>;
 	
@@ -130,6 +131,9 @@ class Level extends TiledMap
 		doorNameToOpenFgGroup = new Map<String, FlxTypedGroup<FlxTilemapExt>>();
 		doorNameToClosedGroup = new Map<String, FlxTypedGroup<FlxTilemapExt>>();
 
+		// Map from block name to block
+		stringBlock = new Map<String, Block>();
+
 		// The bound of the map for the camera
 		bounds = FlxRect.get(0, 0, fullWidth, fullHeight);
 		
@@ -154,7 +158,6 @@ class Level extends TiledMap
 
 		var tileset:TiledTileSet;
 		var tilemap:FlxTilemapExt;
-		
 		
 		for (tiledLayer in layers)
 		{
@@ -208,7 +211,7 @@ class Level extends TiledMap
 		var stringitem:Map<String, Item> = new Map<String, Item>();
 		var stringchoose:Map<String, FlxObject> = new Map<String, FlxObject>();
 		var stringButton:Map<String, FlxObject> = new Map<String, FlxObject>();
-		var stringBlock:Map<String, Block> = new Map<String, Block>();
+		// var stringBlock:Map<String, Block> = new Map<String, Block>();
 		var stringFrom:Map<String, FlxObject> = new Map<String, FlxObject>();
 		var stringTo:Map<String, FlxObject> = new Map<String, FlxObject>();
 		var itemString:Map<Item, String> = new Map<Item, String>();
@@ -263,7 +266,7 @@ class Level extends TiledMap
 				for (o in group.objects) {
 					var x:Int = o.x;
 					var y:Int = o.y;
-					var curr = new Block(x, y, this, _state);
+					var curr = new Block(x, y, o.name, this, _state);
 					blockGroup.add(curr);
 					stringBlock.set(o.name, curr);
 				}
@@ -375,13 +378,14 @@ class Level extends TiledMap
 
 	private function updateTutorial():Void
 	{
-		if (_state._levelNumber == 3 || _state._levelNumber == 5) {
+		if (_state._levelNumber == 2 || _state._levelNumber == 4) {
 			var hasLasso = _state.backpack.hasLasso;
 			var hasSlingshot = _state.backpack.hasSlingshot; 
-			if (equipped && (hasLasso || hasSlingshot)) {
+			if (equipped && (hasLasso || hasSlingshot) && (!tutorialPopped) && _state.player.exists) {
 				equippedPopped = true;
 				tutorialPopUp.kill();
 				backpackPopUp.kill();
+				/*
 				if ((!_state.powerBar.exists) && (!tutorialPopped) && (_state.player.exists == true)) {
 					displayMsg("Press and hold SPACE to charge!");
 				}
@@ -392,8 +396,16 @@ class Level extends TiledMap
 					else if (hasSlingshot)
 						displayMsg("Release SPACE to shoot!");
 				}
+				*/
+				if (hasLasso)
+					displayMsg("Press SPACE to use lasso!");
+				else if (hasSlingshot)
+					displayMsg("Press SPACE to shoot!");
+				if (FlxG.keys.justPressed.SPACE) {
+					tutorialPopped = true;
+				}
 			} 
-			else if (equipped && (!equippedPopped)) {
+			else if (equipped && (!equippedPopped) && _state.player.exists) {
 				backpackPopUp.reset(FlxG.camera.scroll.x + 100, FlxG.camera.scroll.y + 415);
 				if (count <= 25) {
 					tutorialPopUp.reset(FlxG.camera.scroll.x + 165, FlxG.camera.scroll.y + 435);
@@ -424,29 +436,33 @@ class Level extends TiledMap
 	private function updateTouchingWater():Void
 	{
 		var touch:Bool = false;
-		for (i in 0...blockGroup.length) {
-			var block = blockGroup.members[i].block;
-			if (FlxG.overlap(_state.player, block)) {
-				touch = true;
-				break;
-			}
+		if ((_state.player.playerBlock.length > 0) && (FlxG.overlap(_state.player, stringBlock[_state.player.playerBlock].block))) {
+			touch = true;
 		}
+		else {
+			_state.player.playerBlock = "";
+			for (i in 0...blockGroup.length) {
+				var curr = blockGroup.members[i];
+				if (FlxG.overlap(_state.player, curr.block)) {
+					touch = true;
+					_state.player.playerBlock = curr.name;
+					break;
+				}
+			}
+		}	
+
 		if (!touch) {
 			FlxG.collide(characterGroup, waterGroup);
 		}
 		if (!touch) {
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
         		FlxG.sound.playMusic("assets/intoWater.ogg", 1, false);
-				_state.player.kill();
-				_state.slingshot.kill();
-				_state.lasso.kill();
-				popUp.kill();
-				itemPopUp.kill();
+				// Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
 				_state.player.x = xBebeforeBlock;
 				_state.player.y = yBebeforeBlock;
 				//var timer = new FlxTimer();
 				//timer.start(1, playerReviveOnTimer, 1);
-				// Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
+				// Main.LOGGER.logLevelAction(LoggingInfo.REVIVE, {coor: _state.player.x + ", " +_state.player.y});
 			}
 			before = false;
 			xBebeforeBlock = _state.player.x;
@@ -491,16 +507,16 @@ class Level extends TiledMap
 	{
 		curr.needMove = false;
 		if (FlxG.overlap(curr.block, waterBackGroup)) {
-			curr.currSpeedY = curr.block.velocity.y = 60;
+			curr.currSpeedY = curr.block.velocity.y = 75;
 		}
 		else if (FlxG.overlap(curr.block, waterFrontGroup)) {
-			curr.currSpeedY = curr.block.velocity.y = -60;
+			curr.currSpeedY = curr.block.velocity.y = -75;
 		}
 		else if (FlxG.overlap(curr.block, waterLeftGroup)) {
-			curr.currSpeedX= curr.block.velocity.x = 60;
+			curr.currSpeedX= curr.block.velocity.x = 75;
 		}
 		else if (FlxG.overlap(curr.block, waterRightGroup)) {
-			curr.currSpeedX = curr.block.velocity.x = -60;
+			curr.currSpeedX = curr.block.velocity.x = -75;
 		}
 		else if (FlxG.overlap(curr.block, doorGroup) || FlxG.overlap(curr.block, collisionGroup)) {
 			curr.currSpeedX = curr.block.velocity.x = -1 * curr.currSpeedX;
@@ -620,7 +636,7 @@ class Level extends TiledMap
 			popUp.kill();
 		}
 
-		if (FlxG.overlap(_state.lasso, collisionGroup) || FlxG.overlap(_state.lasso, doorGroup))
+		if (FlxG.overlap(_state.lasso, collisionGroup) || FlxG.overlap(_state.lasso, doorGroup) || FlxG.overlap(_state.lasso, itemGroup))
 		{
 			_state.lasso.lifeSpan = 0;
 		}
