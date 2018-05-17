@@ -107,6 +107,8 @@ class PlayState extends FlxState
 		add(level.itemPopUp);
 		add(level.tutorialPopUp);
 		add(level.backpackPopUp);
+		add(slingshot.cooldown);
+		add(lasso.cooldown);
 		add(restartButton);
 		add(menuButton);
 		super.create();
@@ -114,8 +116,8 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
-		level.update(elapsed);
 		super.update(elapsed);
+		level.update(elapsed);
 		if (!bgm.playing) {
 			bgm.play(true);
 		}
@@ -137,8 +139,8 @@ class PlayState extends FlxState
 			Main.SAVE.data.levels.push(1);
 			Main.SAVE.flush();
 		}
-		Main.LOGGER.logLevelStart(_levelNumber);
-		if (_levelNumber < 22) {		
+		// Main.LOGGER.logLevelStart(_levelNumber);
+		if (_levelNumber < 21) {		
 			player.kill();
 			slingshot.kill();
 			lasso.end.kill();
