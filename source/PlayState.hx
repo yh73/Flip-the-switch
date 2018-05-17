@@ -131,14 +131,14 @@ class PlayState extends FlxState
 	{
 		remove(level.switchoffGroup);
 		add(level.switchonGroup);
-		// Main.LOGGER.logLevelEnd({status: "clear"});
+	    Main.LOGGER.logLevelEnd({status: "clear"});
 		_levelNumber = _levelNumber + 1;
 		if (_levelNumber == Main.SAVE.data.levels.length) {
 			Main.SAVE.data.levels.push(1);
 			Main.SAVE.flush();
 		}
 		Main.LOGGER.logLevelStart(_levelNumber);
-		if (_levelNumber < 22) {		
+		if (_levelNumber < 21) {		
 			player.kill();
 			slingshot.kill();
 			lasso.end.kill();
@@ -152,8 +152,8 @@ class PlayState extends FlxState
 	private function restart():Void
 	{
 		player.kill();
-		// Main.LOGGER.logLevelEnd({status: "restart"});
-		// Main.LOGGER.logLevelStart(_levelNumber);
+		Main.LOGGER.logLevelEnd({status: "restart"});
+		Main.LOGGER.logLevelStart(_levelNumber);
 		FlxG.switchState(new PlayState(_levelNumber));
 	}
 

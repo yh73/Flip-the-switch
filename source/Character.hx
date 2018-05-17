@@ -206,6 +206,7 @@ class Character extends FlxExtendedSprite
 			for (type in Reflect.fields(d))
 			{
 				var t = Reflect.field(d, type);
+				throw t;
 				switch (type)
 				{
 					case "def":
