@@ -39,7 +39,9 @@ class PlayState extends FlxState
 		bgm = FlxG.sound.load("assets/bgm.ogg");
 		bgm.looped = true;
 		soundButton = new FlxSprite(0,0).loadGraphic("assets/sound.png");
+		soundButton.scrollFactor.set();
 		restartButton = new FlxSprite(0,0).loadGraphic("assets/restart.png");
+		restartButton.scrollFactor.set();
 		restartButton.setGraphicSize(32,32);
 		menuButton = new FlxButton(FlxG.camera.x + FlxG.camera.width - 80, 0, "Menu", menu);
 		menuButton.loadGraphic("assets/selected.png", 80, 40);
@@ -129,10 +131,10 @@ class PlayState extends FlxState
 		if (!bgm.playing) {
 			bgm.play(true);
 		}
-		restartButton.x = FlxG.camera.scroll.x;
-		restartButton.y = FlxG.camera.scroll.y;
-		soundButton.x = FlxG.camera.scroll.x + FlxG.camera.width - 120;
-		soundButton.y = FlxG.camera.scroll.y;
+		restartButton.x = FlxG.camera.x;
+		restartButton.y = FlxG.camera.y;
+		soundButton.x = FlxG.camera.x + FlxG.camera.width - 120;
+		soundButton.y = FlxG.camera.y;
 		menuButton.x = FlxG.camera.x + FlxG.camera.width - 70;
 		if (FlxG.mouse.overlaps(restartButton, null) && FlxG.mouse.justPressed) {
 			restart();

@@ -31,10 +31,12 @@ class Backpack extends FlxTypedGroup<Item>
         index = new FlxTypedGroup<FlxText>();
         for (i in 0...6) {
             border.add(new Item(0, 0, "slot", "inventory", "slot"));
+            border.members[i].scrollFactor.set();
         }
 
         for (i in 1...7) {
             index.add(new FlxText(0,0,Std.string(i),8));
+            index.members[i - 1].scrollFactor.set();
         }
         hasLasso = hasSlingshot = false;
         hasLasso = false;
@@ -48,8 +50,8 @@ class Backpack extends FlxTypedGroup<Item>
     {   
         var i = 0;
         for (slot in border) {
-            slot.x = FlxG.camera.scroll.x + 165 + 45 * i;
-            slot.y = FlxG.camera.scroll.y + 435;
+            slot.x = FlxG.camera.x + 165 + 45 * i;
+            slot.y = FlxG.camera.y + 435;
             var keyPressed = false;
             switch (i) {
                 case 0: keyPressed = FlxG.keys.justPressed.ONE;
@@ -89,8 +91,8 @@ class Backpack extends FlxTypedGroup<Item>
         }
         i = 0;
         for (item in this) {
-            item.x = FlxG.camera.scroll.x + 165 + 45 * i + 6.5;
-            item.y = FlxG.camera.scroll.y + 435 + 6.5;
+            item.x = FlxG.camera.x + 165 + 45 * i + 6.5;
+            item.y = FlxG.camera.y + 435 + 6.5;
             if (i == currentItemIdx) {
                 currentItem = item;
             }
@@ -99,8 +101,8 @@ class Backpack extends FlxTypedGroup<Item>
 
         i = 0;
         for (text in index) {
-            text.x = FlxG.camera.scroll.x + 170 + 45 * i;
-            text.y = FlxG.camera.scroll.y + 435 + 6.5;
+            text.x = FlxG.camera.x + 170 + 45 * i;
+            text.y = FlxG.camera.y + 435 + 6.5;
             text.color = FlxColor.CYAN;
             i ++;
         }
@@ -118,6 +120,7 @@ class Backpack extends FlxTypedGroup<Item>
     
     public function addItem(item:Item) 
     {   
+        item.scrollFactor.set();
         this.add(item);
     }
 }
