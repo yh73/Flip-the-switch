@@ -18,7 +18,7 @@ class Backpack extends FlxTypedGroup<Item>
     var player:Character;
     public var currentItem:Item;
     var tileSize:Int; 
-    var currentItemIdx:Int;
+    public var currentItemIdx:Int;
     static var counter = 0;
 
 	override public function new(size:Int, number:Int, color:FlxColor, character:Character) 

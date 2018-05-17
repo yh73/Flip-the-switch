@@ -13,7 +13,14 @@ class Lasso extends FlxSprite{
     var maxLength:Float;
     public var end:FlxObject;
     public var backpack:Backpack;
-    static var COLOR = FlxColor.YELLOW;
+    var lassoColor:FlxColor;
+    var needCD:Bool;
+    public var cooldown:FlxSprite;
+    var cdColor:FlxColor;
+    var cdLength:Int;
+    var cdIndex:Int;
+    static var SPEED = 25;
+
     override public function new(size:Int, charater:Character, powerBar:PowerBar, backpack:Backpack) {
         player = charater;
         this.size = size;
@@ -22,12 +29,21 @@ class Lasso extends FlxSprite{
         this.backpack = backpack;
         super(Std.int(player.x + 10), Std.int(player.y + size / 2));
         this.end = new FlxObject(this.x, this.y, 4, 4);
+        lassoColor = new FlxColor();
+        lassoColor.setRGBFloat(135.0/256, 86.0/256, 56.0/256, 1);
         //,HORIZONTAL, 0, 2, FlxColor.WHITE);
         //createFilledBar(FlxColor.TRANSPARENT, FlxColor.WHITE);
         //diff = 0;
+        cooldown = new FlxSprite(-100, -100);
+        cdColor = new FlxColor();
+        cdColor.setRGBFloat(0.5, 0.5, 0.5, 0.75);
+		cooldown.exists = false;
+        needCD = false;
+        cdLength = 45;
     }
 
     override public function update(elapsed:Float):Void {
+        /*
 		if (FlxG.keys.justPressed.SPACE && !powerBar.alive && length == 0 && backpack.hasLasso) {
 			powerBar.revive();
 		} else if (FlxG.keys.justReleased.SPACE && powerBar.alive && backpack.hasLasso) {
@@ -38,49 +54,78 @@ class Lasso extends FlxSprite{
 		} else if (!backpack.hasLasso && !backpack.hasSlingshot) {
             powerBar.kill();
         }
+        */
+        if (FlxG.keys.justPressed.SPACE && backpack.hasLasso && (!needCD)) {
+            FlxG.sound.playMusic("assets/lassoShoot.ogg", 1, false);
+            lifeSpan = 1;
+            maxLength = lifeSpan * 400;
+            needCD = true;
+            cdLength = 45;
+            cdIndex = backpack.currentItemIdx;
+            cooldown.makeGraphic(45, 45, cdColor);
+            var cdX = FlxG.camera.scroll.x + 165 + 45 * cdIndex;
+            var cdY = FlxG.camera.scroll.y + 435;
+            cooldown.reset(cdX, cdY);
+        } else if (needCD) {
+            cdLength--;
+            cooldown.makeGraphic(45, cdLength, cdColor);
+            var cdX = FlxG.camera.scroll.x + 165 + 45 * cdIndex;
+            var cdY = FlxG.camera.scroll.y + 435;
+            cooldown.reset(cdX, cdY);
+            if (cdLength == 0) {
+                needCD = false;
+            }
+        }
+
         if (lifeSpan > 0) {
-            if (length <= maxLength - 20) {
-                length += 20;
+            if (length <= maxLength - SPEED) {
+                length += SPEED;
             } else {
                 length = Std.int(maxLength);
             }
             player.moves = false;
             player.controllable = false;
             if (player.facing == FlxObject.LEFT) {
-                if (this.x - player.x - size/2 - 20 <= maxLength) {
-                    this.x -= 20;
+                this.y = player.y;
+                if (this.x - player.x - size/2 - SPEED <= maxLength) {
+                    this.x -= SPEED;
                 } else {
                     this.x = player.x + size/2 + maxLength;
                 }
                 end.x = this.x;
                 end.y = this.y;
-                makeGraphic(length, 3, COLOR);
+                makeGraphic(length, 3, lassoColor);
             } else if (player.facing == FlxObject.UP) {
-                if (this.y - player.y - size/2 - 20 <= maxLength) {
-                    this.y -= 20;
+                this.x = player.x + 12;
+                if (this.y - player.y - size/2 - SPEED <= maxLength) {
+                    this.y -= SPEED;
                 } else {
                     this.y = player.y + size/2 + maxLength;
                 }
                 end.y = this.y;
                 end.x = this.x;
-                makeGraphic(3, length, COLOR);
+                makeGraphic(3, length, lassoColor);
             } else if (player.facing == FlxObject.DOWN) {
+                this.x = player.x + 12;
+                this.y = player.y;
                 end.y = this.y + length;
                 end.x = this.x;
-                makeGraphic(3, length, COLOR);
+                makeGraphic(3, length, lassoColor);
             } else {
+                this.x = player.x + 12;
+                this.y = player.y;
                 end.x = this.x + length;
                 end.y = this.y;
-                makeGraphic(length, 3, COLOR);
+                makeGraphic(length, 3, lassoColor);
             }
-            lifeSpan -= 3*elapsed;
+            lifeSpan -= 6*elapsed;
         } else {
             length = 0;
             player.moves = true;
             player.controllable = true;
-            this.x = player.x + size / 2;
+            this.x = player.x + 12;
             this.y = player.y + size / 2;
-            makeGraphic(1, 3, COLOR);
+            makeGraphic(1, 3, lassoColor);
         }
         super.update(elapsed);
         //indicator.x = this.x;

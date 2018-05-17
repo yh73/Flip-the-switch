@@ -15,13 +15,15 @@ class Block extends FlxSprite {
 	public var needMove:Bool;
     var level:Level;
     var state:PlayState;
+	public var name:String;
 
-    override public function new(X:Float = 0, Y:Float = 0, l:Level, playstate: PlayState) {
+    override public function new(X:Float = 0, Y:Float = 0, blockName:String, l:Level, playstate: PlayState) {
         super(-100, -100);
         block = new FlxSprite(X, Y);
 		block.loadGraphic("assets/block.png");
 		currSpeedX = 0;
 		currSpeedY = 0;
+		name = blockName;
 		needMove = false;
         level = l;
         state = playstate; 
@@ -29,20 +31,20 @@ class Block extends FlxSprite {
 
     override public function update(elapsed:Float):Void 
     {
-		if (FlxG.overlap(state.player, block) 
+		if ((state.player.playerBlock == name) 
 			&& !FlxG.overlap(state.player, level.doorGroup)
 			&& !FlxG.overlap(state.player, level.collisionGroup)) {
 			if (block.velocity.y > 0) {
-				state.player.y++;
+				state.player.y += 75.0/60;
 			}
 			else if (block.velocity.y < 0) {
-				state.player.y--;
+				state.player.y -= 75.0/60;
 			}
 			else if (block.velocity.x > 0) {
-				state.player.x++;
+				state.player.x += 75.0/60;
 			}
 			else if (block.velocity.x < 0) {
-				state.player.x--;
+				state.player.x -= 75.0/60;
 			}
 
 		}
@@ -68,20 +70,20 @@ class Block extends FlxSprite {
 		var item = level.blockItem[this];
 		if (item != null) {
 			if (block.velocity.y > 0) {
-				item.y++;
-				level.itemArea[item].y++;
+				item.y += 75.0/60;
+				level.itemArea[item].y += 75.0/60;
 			}
 			else if (block.velocity.y < 0) {
-				item.y--;
-				level.itemArea[item].y--;		
+				item.y -= 75.0/60;
+				level.itemArea[item].y -= 75.0/60;		
 			}
 			else if (block.velocity.x > 0) {
-				item.x++;
-				level.itemArea[item].x++;
+				item.x += 75.0/60;
+				level.itemArea[item].x += 75.0/60;
 			}
 			else if (block.velocity.x < 0) {
-				item.x--;
-				level.itemArea[item].x--;
+				item.x -= 75.0/60;
+				level.itemArea[item].x -= 75.0/60;
 			}
 		}
     }

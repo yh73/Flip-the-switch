@@ -30,7 +30,7 @@ class Main extends Sprite
 		if (userId == null)
 		{
 			userId = Main.LOGGER.generateUuid();
-			Main.LOGGER.setSavedUserId(userId);
+			// Main.LOGGER.setSavedUserId(userId);
 		}
 		Main.LOGGER.startNewSession(userId, this.onSessionReady);
 	}

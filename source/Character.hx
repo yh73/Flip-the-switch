@@ -23,6 +23,8 @@ class Character extends FlxExtendedSprite
 	public var anim:String;
 	
 	public var name:String = "";
+
+	public var playerBlock:String;
 	
 	public function new(Name:String, X:Float = 0, Y:Float = 0, ?JsonPath:String, ?SimpleGraphic:Dynamic)
 	{
@@ -36,6 +38,8 @@ class Character extends FlxExtendedSprite
 
 		drag.x = maxVelocity.x * 4;
 		drag.y = maxVelocity.y * 4;
+
+		playerBlock = "";
 	}
 	
 	override public function update(elapsed:Float):Void 
