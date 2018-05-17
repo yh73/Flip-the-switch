@@ -9,6 +9,7 @@ import flixel.group.FlxGroup;
 import flixel.FlxSprite;
 import flixel.util.FlxTimer;
 import flixel.ui.FlxButton;
+import flixel.math.FlxPoint;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.system.FlxSound;
 class PlayState extends FlxState
@@ -25,6 +26,7 @@ class PlayState extends FlxState
 	public var slingshot:Slingshot;
 	public var restartButton:FlxSprite;
 	public var menuButton:FlxButton;
+	public var soundButton:FlxSprite;
 	public var bgm:FlxSound;
 	public function new(levelNumber:Int) {
 		super();
@@ -36,9 +38,14 @@ class PlayState extends FlxState
 		FlxG.mouse.visible = true;
 		bgm = FlxG.sound.load("assets/bgm.ogg");
 		bgm.looped = true;
+		soundButton = new FlxSprite(0,0).loadGraphic("assets/sound.png");
 		restartButton = new FlxSprite(0,0).loadGraphic("assets/restart.png");
 		restartButton.setGraphicSize(32,32);
 		menuButton = new FlxButton(FlxG.camera.x + FlxG.camera.width - 80, 0, "Menu", menu);
+		menuButton.loadGraphic("assets/selected.png", 80, 40);
+		menuButton.label.size = 12;
+		menuButton.labelOffsets = [FlxPoint.get(0, 10), FlxPoint.get(0, 10), FlxPoint.get(0, 11)];
+		menuButton.setGraphicSize(80, 40);
 		// Set a background color
 		FlxG.cameras.bgColor = 0xff131c1b;
 		level = new Level("assets/level" + _levelNumber + ".tmx", this);
@@ -109,21 +116,33 @@ class PlayState extends FlxState
 		add(level.backpackPopUp);
 		add(restartButton);
 		add(menuButton);
+		add(soundButton);
 		super.create();
 	}
 
 	override public function update(elapsed:Float):Void
-	{
-		level.update(elapsed);
+	{	
 		super.update(elapsed);
+		level.update(elapsed);
 		if (!bgm.playing) {
 			bgm.play(true);
 		}
 		restartButton.x = FlxG.camera.scroll.x;
 		restartButton.y = FlxG.camera.scroll.y;
-		menuButton.x = FlxG.camera.x + FlxG.camera.width - 80;
+		soundButton.x = FlxG.camera.scroll.x + FlxG.camera.width - 120;
+		soundButton.y = FlxG.camera.scroll.y;
+		menuButton.x = FlxG.camera.x + FlxG.camera.width - 70;
 		if (FlxG.mouse.overlaps(restartButton, null) && FlxG.mouse.justPressed) {
 			restart();
+		}
+		if (FlxG.mouse.overlaps(soundButton, null) && FlxG.mouse.justPressed) {
+			if (bgm.volume == 0) {
+				bgm.volume = 0.6;
+				soundButton.loadGraphic("assets/sound.png");
+			} else {
+				bgm.volume = 0;
+				soundButton.loadGraphic("assets/silence.png");
+			}
 		}
 	}	
 
@@ -131,7 +150,11 @@ class PlayState extends FlxState
 	{
 		remove(level.switchoffGroup);
 		add(level.switchonGroup);
+<<<<<<< HEAD
 	    Main.LOGGER.logLevelEnd({status: "clear"});
+=======
+		Main.LOGGER.logLevelEnd({status: "clear"});
+>>>>>>> d6ce668b53ba8a7e6bdf0a108cae0995c1d39a40
 		_levelNumber = _levelNumber + 1;
 		if (_levelNumber == Main.SAVE.data.levels.length) {
 			Main.SAVE.data.levels.push(1);
