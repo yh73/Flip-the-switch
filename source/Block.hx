@@ -91,6 +91,20 @@ class Block extends FlxSprite {
 
 	private function stopBlock(Object1:FlxSprite, Object2:FlxObject):Void
 	{
+		if (FlxG.overlap(state.player, level.doorGroup) || FlxG.overlap(state.player, level.collisionGroup)) {
+			if (block.velocity.y > 0) {
+				state.player.y -= 75.0/60;
+			}
+			else if (block.velocity.y < 0) {
+				state.player.y += 75.0/60;
+			}
+			else if (block.velocity.x > 0) {
+				state.player.x -= 75.0/60;
+			}
+			else if (block.velocity.x < 0) {
+				state.player.x += 75.0/60;
+			}
+		}
 		Object1.velocity.x = Object1.velocity.y = 0;
 	}
 }
