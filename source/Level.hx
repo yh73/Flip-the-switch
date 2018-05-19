@@ -402,9 +402,9 @@ class Level extends TiledMap
 						displayMsg("Release SPACE to shoot!");
 				}
 				*/
-				if (hasLasso)
+				if (hasLasso && _state._levelNumber == 4)
 					displayMsg("Press SPACE to use lasso!");
-				else if (hasSlingshot)
+				else if (hasSlingshot && _state._levelNumber == 2)
 					displayMsg("Press SPACE to shoot!");
 				if (FlxG.keys.justPressed.SPACE) {
 					tutorialPopped = true;
