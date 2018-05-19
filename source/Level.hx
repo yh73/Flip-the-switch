@@ -596,7 +596,7 @@ class Level extends TiledMap
 		}
 
 		if (FlxG.keys.justPressed.SPACE && !_state.backpack.hasLasso && !_state.backpack.hasSlingshot) {
-			// Main.LOGGER.logLevelAction(LoggingInfo.PRESS_SPACE, {coor: _state.player.x + ", " +_state.player.y});
+			 Main.LOGGER.logLevelAction(LoggingInfo.PRESS_SPACE, {coor: _state.player.x + ", " +_state.player.y});
 		}
 		for (choose in itemMap.keys()) {
 			if ((FlxG.overlap(characterGroup, choose) && FlxG.keys.justPressed.E)

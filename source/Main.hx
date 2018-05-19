@@ -15,8 +15,8 @@ class Main extends Sprite
 		var gameId:Int = 1803;
 		var gameKey:String = "c892cc326c959b61794b7ff5860e2e44";
 		var gameName:String = "islandescape";
-		var categoryId:Int = 2;
-		var useDev:Bool = true;
+		var categoryId:Int = 101;
+		var useDev:Bool = false;
 		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, useDev);
 		Main.SAVE = new FlxSave();
 		Main.SAVE.bind("levels");
@@ -30,7 +30,7 @@ class Main extends Sprite
 		if (userId == null)
 		{
 			userId = Main.LOGGER.generateUuid();
-			// Main.LOGGER.setSavedUserId(userId);
+			Main.LOGGER.setSavedUserId(userId);
 		}
 		Main.LOGGER.startNewSession(userId, this.onSessionReady);
 	}

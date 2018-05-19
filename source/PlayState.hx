@@ -28,14 +28,21 @@ class PlayState extends FlxState
 	public var menuButton:FlxButton;
 	public var soundButton:FlxSprite;
 	public var bgm:FlxSound;
-	public function new(levelNumber:Int) {
+	public var bgmTime:Float;
+	public function new(levelNumber:Int, ?time:Float) {
 		super();
 		_levelNumber = levelNumber;
+		if (time == null) {
+			bgmTime = 0;
+		} else {
+			bgmTime = time;
+		}
 	}
 
 	override public function create():Void
 	{
 		FlxG.mouse.visible = true;
+		FlxG.camera.fade(FlxColor.BLACK, .33, true);
 		bgm = FlxG.sound.load("assets/bgm.ogg");
 		bgm.looped = true;
 		soundButton = new FlxSprite(0,0).loadGraphic("assets/sound.png");
@@ -129,7 +136,7 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		level.update(elapsed);
 		if (!bgm.playing) {
-			bgm.play(true);
+			bgm.play(true, bgmTime);
 		}
 		restartButton.x = FlxG.camera.x;
 		restartButton.y = FlxG.camera.y;
@@ -140,6 +147,7 @@ class PlayState extends FlxState
 			restart();
 		}
 		if (FlxG.mouse.overlaps(soundButton, null) && FlxG.mouse.justPressed) {
+			Main.LOGGER.logLevelAction(LoggingInfo.MUTE);
 			if (bgm.volume == 0) {
 				bgm.volume = 0.6;
 				soundButton.loadGraphic("assets/sound.png");
@@ -160,24 +168,28 @@ class PlayState extends FlxState
 			Main.SAVE.data.levels.push(1);
 			Main.SAVE.flush();
 		}
-		// Main.LOGGER.logLevelStart(_levelNumber);
-		if (_levelNumber < 21) {		
-			player.kill();
+		Main.LOGGER.logLevelStart(_levelNumber);
+		if (_levelNumber < 21) {
 			slingshot.kill();
 			lasso.end.kill();
 			lasso.kill();
 			var timer = new FlxTimer();
-			timer.start(1, nextLevelOnTimer, 1);
+			FlxG.camera.fade(FlxColor.BLACK,.33, false, function()
+			{
+				FlxG.switchState(new PlayState(_levelNumber, bgm.time));
+			});
 		} else {
 			FlxG.switchState(new EndState());
 		}
 	}
 	private function restart():Void
 	{
-		player.kill();
 		Main.LOGGER.logLevelEnd({status: "restart"});
-		Main.LOGGER.logLevelStart(_levelNumber);
-		FlxG.switchState(new PlayState(_levelNumber));
+		Main.LOGGER.logLevelStart(_levelNumber, {status: "restart"});
+		FlxG.camera.fade(FlxColor.BLACK,.33, false, function()
+		{
+			FlxG.switchState(new PlayState(_levelNumber, bgm.time));
+		});
 	}
 
 	private function nextLevelOnTimer(Timer:FlxTimer):Void {

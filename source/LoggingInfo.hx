@@ -9,6 +9,7 @@ class LoggingInfo
 	public static var FALL_INTO_WATER = 5;
 	public static var PRESS_SPACE:Int = 6;
 	public static var REVIVE:Int = 7;
+	public static var MUTE:Int = 8;
 	public function new() 
 	{
 		
