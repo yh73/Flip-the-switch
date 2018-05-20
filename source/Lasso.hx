@@ -73,8 +73,9 @@ class Lasso extends FlxSprite{
             var cdX = FlxG.camera.x + 165 + 45 * cdIndex;
             var cdY = FlxG.camera.y + 435;
             cooldown.reset(cdX, cdY);
-            if (cdLength == 0) {
+            if (cdLength == 1) {
                 needCD = false;
+                cooldown.kill();
             }
         }
 
