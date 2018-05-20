@@ -33,19 +33,24 @@ class PlayState extends FlxState
 		super();
 		_levelNumber = levelNumber;
 		if (time == null) {
+			soundButton = new FlxSprite(0,0).loadGraphic("assets/sound.png");
 			bgmTime = 0;
 		} else {
 			bgmTime = time;
+			soundButton = new FlxSprite(0,0).loadGraphic("assets/silence.png");
 		}
+
 	}
 
 	override public function create():Void
 	{
-		FlxG.mouse.visible = true;
-		FlxG.camera.fade(FlxColor.BLACK, .33, true);
 		bgm = FlxG.sound.load("assets/bgm.ogg");
 		bgm.looped = true;
-		soundButton = new FlxSprite(0,0).loadGraphic("assets/sound.png");
+		if (soundButton.graphic.key == "assets/silence.png") {
+			bgm.volume = 0;
+		}
+		FlxG.mouse.visible = true;
+		FlxG.camera.fade(FlxColor.BLACK, .33, true);
 		soundButton.scrollFactor.set();
 		restartButton = new FlxSprite(0,0).loadGraphic("assets/restart.png");
 		restartButton.scrollFactor.set();
