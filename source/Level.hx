@@ -463,8 +463,15 @@ class Level extends TiledMap
 			if (before && FlxG.overlap(_state.player, waterGroup)) {
         		FlxG.sound.playMusic("assets/intoWater.ogg", 1, false);
 				Main.LOGGER.logLevelAction(LoggingInfo.FALL_INTO_WATER, {coor: _state.player.x + ", " +_state.player.y});
-				_state.player.x = xBebeforeBlock;
-				_state.player.y = yBebeforeBlock;
+				if (_state.health.members.length > 1) {
+					_state.player.x = xBebeforeBlock;
+					_state.player.y = yBebeforeBlock;
+					_state.health.remove(_state.health.members[0], true);
+				} else {
+					_state.player.kill();
+					_state.health.remove(_state.health.members[0], true);
+					_state.restart();
+				}
 				//var timer = new FlxTimer();
 				//timer.start(1, playerReviveOnTimer, 1);
 				//Main.LOGGER.logLevelAction(LoggingInfo.REVIVE, {coor: _state.player.x + ", " +_state.player.y});
