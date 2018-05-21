@@ -12,6 +12,10 @@ import flixel.ui.FlxButton;
 import flixel.math.FlxPoint;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.system.FlxSound;
+import flixel.addons.ui.FlxUIPopup;
+import openfl.text.TextField;
+import openfl.text.TextFieldType;
+import openfl.text.TextFormat;
 class PlayState extends FlxState
 {
 	public var player:Character;
@@ -29,6 +33,7 @@ class PlayState extends FlxState
 	public var soundButton:FlxSprite;
 	public var bgm:FlxSound;
 	public var bgmTime:Float;
+	//private var _textField:TextField;
 	public var health:FlxTypedGroup<FlxSprite>;
 	public function new(levelNumber:Int, ?time:Float) {
 		super();
@@ -45,6 +50,27 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
+		/*
+		_textField = new TextField();
+
+		_textField.embedFonts = true;
+
+		// scale and position
+		_textField.x = 100;
+		_textField.y = 350;
+		_textField.width = 400;
+		_textField.height = 100;
+
+		_textField.text = "Test!";
+		_textField.multiline = true;
+		_textField.wordWrap = true;
+		_textField.border = true;
+		_textField.borderColor = FlxColor.BLACK;
+		_textField.backgroundColor = FlxColor.BLACK;
+
+		// add the _textField
+		FlxG.addChildBelowMouse(_textField);
+		*/
 		health = new FlxTypedGroup<FlxSprite>();
 		for (i in 0...3) {
 			health.add(new FlxSprite(0,0).loadGraphic("assets/heart.png"));
