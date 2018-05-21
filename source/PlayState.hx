@@ -29,6 +29,7 @@ class PlayState extends FlxState
 	public var soundButton:FlxSprite;
 	public var bgm:FlxSound;
 	public var bgmTime:Float;
+	public var health:FlxTypedGroup<FlxSprite>;
 	public function new(levelNumber:Int, ?time:Float) {
 		super();
 		_levelNumber = levelNumber;
@@ -44,6 +45,12 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
+		health = new FlxTypedGroup<FlxSprite>();
+		for (i in 0...3) {
+			health.add(new FlxSprite(0,0).loadGraphic("assets/heart.png"));
+			health.members[i].scrollFactor.set();
+			health.members[i].setGraphicSize(20,20);
+		}
 		bgm = FlxG.sound.load("assets/bgm.ogg");
 		bgm.looped = true;
 		if (soundButton.graphic.key == "assets/silence.png") {
@@ -134,6 +141,7 @@ class PlayState extends FlxState
 		add(restartButton);
 		add(menuButton);
 		add(soundButton);
+		add(health);
 		super.create();
 	}
 
@@ -144,6 +152,11 @@ class PlayState extends FlxState
 		if (!bgm.playing) {
 			bgm.play(true, bgmTime);
 		}
+		var i = 0;
+        for (heart in health) {
+            heart.x = FlxG.camera.x + 20*i + 32;
+            i++;
+        }
 		restartButton.x = FlxG.camera.x;
 		restartButton.y = FlxG.camera.y;
 		soundButton.x = FlxG.camera.x + FlxG.camera.width - 120;
@@ -188,7 +201,7 @@ class PlayState extends FlxState
 			FlxG.switchState(new EndState());
 		}
 	}
-	private function restart():Void
+	public function restart():Void
 	{
 		Main.LOGGER.logLevelEnd({status: "restart"});
 		Main.LOGGER.logLevelStart(_levelNumber, {status: "restart"});
