@@ -172,12 +172,12 @@
   <properties>
    <property name="item" value="1"/>
   </properties>
-  <object id="34" name="lasso" type="lasso" x="125.333" y="93.3333" width="36.6667" height="35.3333">
+  <object id="34" name="lasso" type="lasso" x="462.666" y="351.333" width="36.6667" height="35.3333">
    <properties>
     <property name="from" value="lasso"/>
    </properties>
   </object>
-  <object id="39" name="slingshot" type="slingshot" x="448.667" y="94" width="30.6667" height="31.3333">
+  <object id="39" name="slingshot" type="slingshot" x="270" y="98.6667" width="30.6667" height="31.3333">
    <properties>
     <property name="from" value="slingshot"/>
    </properties>
@@ -187,8 +187,8 @@
   <properties>
    <property name="itemchoose" value=""/>
   </properties>
-  <object id="13" name="lasso" x="115.485" y="90.605" width="54.576" height="40.1797"/>
-  <object id="40" name="slingshot" x="436" y="93.3333" width="57.3333" height="33.3333"/>
+  <object id="13" name="lasso" x="452.818" y="347.272" width="54.576" height="40.1797"/>
+  <object id="40" name="slingshot" x="258.667" y="97.3333" width="57.3333" height="33.3333"/>
  </objectgroup>
  <objectgroup name="water side">
   <object id="32" type="waterfront" x="351.666" y="351" width="190" height="2.66667"/>
@@ -197,7 +197,7 @@
   <object id="30" type="waterback" x="97.6665" y="135" width="220.667" height="4.66667"/>
  </objectgroup>
  <objectgroup name="player">
-  <object id="1" name="princess" type="player" x="242.301" y="106.916" width="14.6935" height="14.6935">
+  <object id="1" name="princess" type="player" x="108.301" y="106.249" width="14.6935" height="14.6935">
    <ellipse/>
   </object>
  </objectgroup>
