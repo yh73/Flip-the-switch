@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextobjectid="120">
+<map version="1.0" tiledversion="2018.04.18" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextobjectid="120">
+ <properties>
+  <property name="teleport" value="1"/>
+ </properties>
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="maps/tiles.png" width="320" height="768"/>
  </tileset>
@@ -43,7 +46,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,115,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -56,10 +58,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,115,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,115,0,0,0,0,0,0,
-0,0,0,0,0,0,0,115,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -318,13 +321,6 @@
  <objectgroup name="waterfront" visible="0">
   <object id="67" type="waterfront" x="446" y="446" width="356" height="5"/>
  </objectgroup>
- <objectgroup name="switchto">
-  <properties>
-   <property name="switchto" value="1"/>
-  </properties>
-  <object id="29" name="1" x="221.978" y="542.326" width="39.4867" height="38.7902"/>
-  <object id="76" name="2" x="736.203" y="603.543" width="33.4867" height="40.0224"/>
- </objectgroup>
  <objectgroup name="waterback" visible="0">
   <object id="66" type="waterback" x="446" y="292.884" width="355.116" height="5.11608"/>
  </objectgroup>
@@ -359,13 +355,6 @@
     <property name="need" value="key2"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="switchfrom">
-  <properties>
-   <property name="switchfrom" value="1"/>
-  </properties>
-  <object id="75" name="1" x="478.431" y="128.435" width="35.3706" height="34.4643"/>
-  <object id="77" name="2" x="221.645" y="638.326" width="36.4867" height="38.3482"/>
  </objectgroup>
  <objectgroup name="water" visible="0">
   <object id="1" type="water" x="98" y="300.442" width="766" height="139.058"/>
@@ -452,5 +441,30 @@
   <object id="117" type="collision" x="573.374" y="636.255" width="32.7769" height="82.9329"/>
   <object id="118" type="collision" x="802.645" y="663.653" width="32.7769" height="59.8615"/>
   <object id="119" type="collision" x="129.25" y="467.546" width="29.893" height="39.6741"/>
+ </objectgroup>
+ <objectgroup name="teleport">
+  <properties>
+   <property name="teleport" value="1"/>
+  </properties>
+  <object id="29" name="1" x="221.978" y="542.326" width="39.4867" height="38.7902">
+   <properties>
+    <property name="from" value="1"/>
+   </properties>
+  </object>
+  <object id="76" name="2" x="736.203" y="603.543" width="33.4867" height="40.0224">
+   <properties>
+    <property name="from" value="2"/>
+   </properties>
+  </object>
+  <object id="77" name="2" x="221.645" y="638.326" width="36.4867" height="38.3482">
+   <properties>
+    <property name="to" value="2"/>
+   </properties>
+  </object>
+  <object id="75" name="1" x="478.431" y="128.435" width="35.3706" height="34.4643">
+   <properties>
+    <property name="to" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -86,6 +86,22 @@ class Block extends FlxSprite {
 				level.itemArea[item].x -= 75.0/60;
 			}
 		}
+
+		var trans = level.blockTrans[this];
+		if (trans != null) {
+			if (block.velocity.y > 0) {
+				trans.y += 75.0/60;
+			}
+			else if (block.velocity.y < 0) {
+				trans.y -= 75.0/60;	
+			}
+			else if (block.velocity.x > 0) {
+				trans.x += 75.0/60;
+			}
+			else if (block.velocity.x < 0) {
+				trans.x -= 75.0/60;
+			}
+		}
     }
 
 

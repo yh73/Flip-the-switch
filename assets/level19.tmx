@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextobjectid="209">
+<map version="1.0" tiledversion="2018.04.18" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextobjectid="209">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="maps/tiles.png" width="320" height="768"/>
  </tileset>
@@ -43,25 +43,25 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,115,0,0,115,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,115,0,0,115,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,115,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,115,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,115,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,115,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,115,0,0,115,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
@@ -382,16 +382,6 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="switchto">
-  <properties>
-   <property name="switchto" value="1"/>
-  </properties>
-  <object id="165" name="2" x="449.333" y="674" width="30" height="31.3333"/>
-  <object id="163" name="1" x="130" y="480" width="30" height="30"/>
-  <object id="191" name="3" x="351.333" y="669.333" width="33.3333" height="32"/>
-  <object id="192" name="4" x="450" y="579.333" width="31.3333" height="28"/>
-  <object id="200" name="6" x="224" y="640" width="31.3333" height="30"/>
- </objectgroup>
  <objectgroup name="water side" visible="0">
   <object id="155" type="waterleft" x="188.667" y="332" width="6.66667" height="148"/>
   <object id="156" type="waterright" x="638" y="327.333" width="4" height="156.667"/>
@@ -403,13 +393,12 @@
   </properties>
   <object id="149" name="1.1" x="120" y="376" width="48" height="48"/>
   <object id="154" name="2.1" x="728" y="376" width="48" height="48"/>
-  <object id="179" name="2.2" x="312" y="280" width="48" height="48"/>
   <object id="181" name="3.1" x="504" y="472" width="48" height="48"/>
  </objectgroup>
  <objectgroup name="openSwitch" visible="0">
   <object id="90" type="opensw" x="762.092" y="85.0829" width="45.0995" height="53.2494"/>
  </objectgroup>
- <objectgroup name="opendoor" visible="0">
+ <objectgroup name="opendoor">
   <properties>
    <property name="opendoor" value="1"/>
   </properties>
@@ -443,21 +432,66 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="switchfrom">
+ <objectgroup name="teleport">
   <properties>
-   <property name="switchfrom" value="1"/>
+   <property name="teleport" value="1"/>
   </properties>
-  <object id="164" name="2" x="797.333" y="318" width="32" height="34"/>
-  <object id="167" name="1" x="447.333" y="98" width="32" height="30.6667"/>
-  <object id="190" name="3" x="351.333" y="190" width="34.6667" height="34.6667"/>
-  <object id="194" name="4" x="450" y="192" width="29.3333" height="30"/>
-  <object id="197" name="6" x="352" y="96" width="34" height="30"/>
+  <object id="194" x="442" y="191" width="29.3333" height="30">
+   <properties>
+    <property name="from" value="4"/>
+   </properties>
+  </object>
+  <object id="197" x="352" y="96" width="34" height="30">
+   <properties>
+    <property name="from" value="6"/>
+   </properties>
+  </object>
+  <object id="190" x="356.333" y="187" width="34.6667" height="34.6667">
+   <properties>
+    <property name="from" value="3"/>
+   </properties>
+  </object>
+  <object id="167" x="440.333" y="96" width="32" height="30.6667">
+   <properties>
+    <property name="from" value="1"/>
+   </properties>
+  </object>
+  <object id="164" x="792.333" y="316" width="32" height="34">
+   <properties>
+    <property name="from" value="2"/>
+   </properties>
+  </object>
+  <object id="200" name="6" x="224" y="640" width="31.3333" height="30">
+   <properties>
+    <property name="to" value="6"/>
+   </properties>
+  </object>
+  <object id="192" name="4" x="392" y="588.333" width="31.3333" height="28">
+   <properties>
+    <property name="to" value="4"/>
+   </properties>
+  </object>
+  <object id="191" name="3" x="340.333" y="662.333" width="33.3333" height="32">
+   <properties>
+    <property name="to" value="3"/>
+   </properties>
+  </object>
+  <object id="165" name="2" x="433.333" y="662" width="30" height="31.3333">
+   <properties>
+    <property name="to" value="2"/>
+   </properties>
+  </object>
+  <object id="163" name="1" x="131" y="471" width="30" height="30">
+   <properties>
+    <property name="to" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="water" visible="0">
+ <objectgroup name="water">
   <object id="206" type="water" x="200.081" y="334.894" width="431.836" height="136.796"/>
   <object id="207" type="water" x="519.643" y="590.684" width="269.755" height="128.374"/>
  </objectgroup>
- <objectgroup name="item" visible="0">
+ <objectgroup name="item">
   <properties>
    <property name="item" value="1"/>
   </properties>
@@ -532,7 +566,6 @@
   <object id="150" type="collision" x="128" y="387" width="31.3333" height="31.3333"/>
   <object id="153" type="collision" x="735.333" y="384.667" width="32" height="31.3333"/>
   <object id="178" type="collision" x="128.667" y="244.585" width="448.667" height="35.4796"/>
-  <object id="180" type="collision" x="321.334" y="286.667" width="32" height="32"/>
   <object id="183" type="collision" x="513" y="480.333" width="33.3333" height="33.3333"/>
   <object id="201" type="collision" x="638" y="245.106" width="190.667" height="33.5442"/>
   <object id="205" type="collision" x="286.667" y="217.669" width="32" height="151.844"/>
