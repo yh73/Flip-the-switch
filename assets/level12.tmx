@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="28">
+<map version="1.0" tiledversion="2018.04.18" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="28">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="maps/tiles.png" width="320" height="768"/>
  </tileset>
@@ -14,31 +14,42 @@
 239,239,204,240,240,240,240,240,240,163,240,240,240,240,240,240,240,206,239,239,
 239,239,204,136,136,135,138,135,136,163,137,133,138,135,138,136,134,206,239,239,
 239,239,204,133,134,137,133,134,136,163,133,135,136,135,133,138,136,206,239,239,
-239,239,204,135,137,136,138,138,115,163,138,138,134,115,137,133,138,206,239,239,
+239,239,204,135,137,136,138,138,133,163,138,138,134,133,137,133,138,206,239,239,
 239,239,208,138,136,135,138,135,137,168,138,133,134,135,137,133,138,206,239,239,
 239,239,204,240,240,240,240,240,240,163,138,136,138,138,135,138,138,206,239,239,
-239,239,204,136,135,133,136,134,115,163,135,138,136,138,138,136,138,206,239,239,
+239,239,204,136,135,133,136,134,133,163,135,138,136,138,138,136,138,206,239,239,
 239,239,204,136,135,138,137,133,135,163,135,138,136,135,138,133,133,206,239,239,
 239,239,204,135,138,136,134,136,135,163,136,135,138,136,138,133,133,206,239,239,
-239,239,204,136,137,135,137,133,133,163,115,135,135,135,136,138,137,206,239,239,
+239,239,204,136,137,135,137,133,133,163,133,135,135,135,136,138,137,206,239,239,
 239,239,234,0,0,0,0,0,0,207,0,0,0,0,0,0,0,233,239,239,
 239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,
 239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239
 </data>
  </layer>
- <objectgroup name="switchto" visible="0">
+ <objectgroup name="teleport">
   <properties>
-   <property name="switchto" value="1"/>
+   <property name="teleport" value="1"/>
   </properties>
-  <object id="23" name="2" x="255.893" y="158.479" width="31.309" height="32.1488"/>
-  <object id="22" name="1" x="319.953" y="350.107" width="31.867" height="35.3477"/>
- </objectgroup>
- <objectgroup name="switchfrom" visible="0">
-  <properties>
-   <property name="switchfrom" value="1"/>
-  </properties>
-  <object id="20" name="1" x="254.374" y="257.81" width="31.9886" height="32.0272"/>
-  <object id="21" name="2" x="414.571" y="158.479" width="34.8226" height="34.1045"/>
+  <object id="21" name="2" x="414.571" y="158.479" width="34.8226" height="34.1045">
+   <properties>
+    <property name="from" value="2"/>
+   </properties>
+  </object>
+  <object id="23" name="2" x="220.893" y="126.479" width="31.309" height="32.1488">
+   <properties>
+    <property name="to" value="2"/>
+   </properties>
+  </object>
+  <object id="22" name="1" x="416.953" y="343.107" width="31.867" height="35.3477">
+   <properties>
+    <property name="to" value="1"/>
+   </properties>
+  </object>
+  <object id="20" name="1" x="227.374" y="291.81" width="31.9886" height="32.0272">
+   <properties>
+    <property name="from" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="wall bg" width="20" height="15">
   <properties>
@@ -145,6 +156,9 @@
   <object id="19" type="opensw" x="96.5455" y="91.8351" width="40.0058" height="37.2809"/>
  </objectgroup>
  <objectgroup name="player" visible="0">
+  <properties>
+   <property name="from" value="1"/>
+  </properties>
   <object id="1" name="princess" type="player" x="112.301" y="344.249" width="14.6935" height="14.6935">
    <ellipse/>
   </object>

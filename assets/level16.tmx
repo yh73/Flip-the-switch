@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextobjectid="134">
+<map version="1.0" tiledversion="2018.04.18" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextobjectid="134">
+ <properties>
+  <property name="teleport" value="1"/>
+ </properties>
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="maps/tiles.png" width="320" height="768"/>
  </tileset>
@@ -12,10 +15,10 @@
 239,239,204,190,184,184,184,184,184,184,184,187,184,184,184,184,184,184,184,187,184,184,184,184,184,184,200,206,239,239,
 239,239,204,183,240,240,240,240,240,240,240,183,240,240,240,240,240,240,240,183,240,240,240,240,240,240,183,206,239,239,
 239,239,204,183,138,135,138,135,136,138,135,183,138,135,138,135,136,138,135,183,135,137,133,137,135,136,183,206,239,239,
-239,239,204,183,133,115,133,137,135,115,136,183,133,115,133,137,135,115,136,183,138,115,135,137,134,137,183,206,239,239,
-239,239,204,183,138,135,138,135,138,137,134,183,138,135,138,135,138,137,134,183,135,137,133,137,135,136,183,206,239,239,
-239,239,204,183,133,137,133,137,135,136,136,183,133,137,133,137,135,136,136,183,138,138,135,137,134,137,183,206,239,239,
-239,239,204,183,138,115,138,135,138,115,134,183,138,115,138,137,134,115,134,183,137,136,136,138,138,134,183,206,239,239,
+239,239,204,183,133,133,133,137,135,133,136,183,133,133,133,137,135,133,136,183,138,133,135,137,134,137,183,206,239,239,
+239,239,204,183,138,135,138,135,133,133,133,183,138,135,138,135,138,137,134,183,135,137,133,137,135,136,183,206,239,239,
+239,239,204,183,133,133,133,137,133,133,133,183,133,137,133,137,135,136,136,183,138,138,135,137,134,137,183,206,239,239,
+239,239,204,183,138,133,133,133,138,133,134,183,138,133,138,137,134,133,134,183,137,136,136,138,138,134,183,206,239,239,
 239,239,204,183,133,137,133,137,135,136,136,183,133,137,135,136,136,136,136,183,137,135,137,134,137,137,183,206,239,239,
 239,239,204,194,0,0,0,0,0,0,0,185,0,0,0,0,0,0,0,185,0,0,0,0,0,0,193,206,239,239,
 239,239,204,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,206,239,239,
@@ -25,15 +28,110 @@
 239,239,204,190,184,184,184,184,184,184,184,187,184,184,184,184,184,184,184,187,184,184,184,184,184,184,200,206,239,239,
 239,239,204,183,240,240,240,240,240,240,240,183,240,240,240,240,240,240,240,183,240,240,240,240,240,240,183,206,239,239,
 239,239,204,183,133,135,137,133,137,135,136,183,133,137,137,137,136,137,136,183,135,137,133,137,135,136,183,206,239,239,
-239,239,204,183,135,115,138,135,137,115,137,183,133,115,136,137,133,115,137,183,138,115,135,137,115,137,183,206,239,239,
+239,239,204,183,135,133,138,135,137,133,137,183,133,133,136,137,133,133,137,183,138,133,133,137,133,137,183,206,239,239,
 239,239,204,183,138,137,136,136,138,138,134,183,133,135,137,133,137,135,136,183,137,136,136,138,138,134,183,206,239,239,
 239,239,204,183,137,137,135,137,134,137,137,183,133,138,138,135,137,134,137,183,137,135,137,134,137,137,183,206,239,239,
-239,239,204,183,137,137,136,136,138,138,134,183,133,115,136,136,138,115,134,183,135,135,135,135,115,135,183,206,239,239,
+239,239,204,183,137,137,136,136,138,138,134,183,133,133,136,136,138,133,134,183,135,135,135,135,133,135,183,206,239,239,
 239,239,204,183,137,137,135,137,134,137,137,183,133,137,135,137,134,137,137,183,135,135,137,137,137,135,183,206,239,239,
 239,239,204,194,0,0,0,0,0,0,0,185,0,0,0,0,0,0,0,185,0,0,0,0,0,0,193,206,239,239,
 239,239,204,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,240,206,239,239
 </data>
  </layer>
+ <objectgroup name="teleport">
+  <properties>
+   <property name="teleport" value="1"/>
+  </properties>
+  <object id="113" name="4" x="159.848" y="126.608" width="33.5585" height="35.8384">
+   <properties>
+    <property name="from" value="4"/>
+   </properties>
+  </object>
+  <object id="115" name="7" x="158.964" y="223.107" width="34.5747" height="33.8061">
+   <properties>
+    <property name="from" value="7"/>
+   </properties>
+  </object>
+  <object id="116" name="5" x="285.597" y="220.633" width="36.607" height="37.8707">
+   <properties>
+    <property name="from" value="5"/>
+   </properties>
+  </object>
+  <object id="114" name="6" x="288.292" y="128.861" width="32.5424" height="33.8061">
+   <properties>
+    <property name="from" value="6"/>
+   </properties>
+  </object>
+  <object id="117" name="3" x="415.278" y="126.74" width="32.5424" height="34.8223">
+   <properties>
+    <property name="from" value="3"/>
+   </properties>
+  </object>
+  <object id="118" name="8" x="415.278" y="223.592" width="32.5424" height="32.79">
+   <properties>
+    <property name="from" value="8"/>
+   </properties>
+  </object>
+  <object id="126" name="1" x="671.018" y="127.182" width="33.5585" height="34.8223">
+   <properties>
+    <property name="from" value="1"/>
+   </properties>
+  </object>
+  <object id="123" name="9" x="671.593" y="543.975" width="33.5585" height="33.8061">
+   <properties>
+    <property name="from" value="9"/>
+   </properties>
+  </object>
+  <object id="122" name="2" x="544.165" y="639.015" width="33.5585" height="34.8223">
+   <properties>
+    <property name="from" value="2"/>
+   </properties>
+  </object>
+  <object id="120" name="4" x="542.485" y="126.962" width="34.5747" height="33.8061">
+   <properties>
+    <property name="to" value="4"/>
+   </properties>
+  </object>
+  <object id="119" name="5" x="541.999" y="222.753" width="36.607" height="34.8223">
+   <properties>
+    <property name="to" value="5"/>
+   </properties>
+  </object>
+  <object id="29" name="3" x="159.778" y="542.285" width="35.5908" height="38.8869">
+   <properties>
+    <property name="to" value="3"/>
+   </properties>
+  </object>
+  <object id="77" name="2" x="287.757" y="543.598" width="34.1812" height="33.79">
+   <properties>
+    <property name="to" value="2"/>
+   </properties>
+  </object>
+  <object id="75" name="1" x="414.166" y="541.402" width="35.6607" height="33.8061">
+   <properties>
+    <property name="to" value="1"/>
+   </properties>
+  </object>
+  <object id="121" name="8" x="543.501" y="544.548" width="32.5424" height="33.8061">
+   <properties>
+    <property name="to" value="8"/>
+   </properties>
+  </object>
+  <object id="125" name="9" x="414.836" y="638.219" width="34.5747" height="37.8707">
+   <properties>
+    <property name="to" value="9"/>
+   </properties>
+  </object>
+  <object id="124" name="7" x="767.87" y="542.074" width="34.5747" height="34.8223">
+   <properties>
+    <property name="to" value="7"/>
+   </properties>
+  </object>
+  <object id="76" name="6" x="769.601" y="638.087" width="32.5961" height="32.6769">
+   <properties>
+    <property name="to" value="6"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer name="decoration" width="30" height="24">
   <properties>
    <property name="bg" value="1"/>
@@ -158,36 +256,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="switchto" visible="0">
-  <properties>
-   <property name="switchto" value="1"/>
-  </properties>
-  <object id="113" name="4" x="159.848" y="126.608" width="33.5585" height="35.8384"/>
-  <object id="114" name="6" x="288.292" y="128.861" width="32.5424" height="33.8061"/>
-  <object id="115" name="7" x="158.964" y="223.107" width="34.5747" height="33.8061"/>
-  <object id="116" name="5" x="285.597" y="220.633" width="36.607" height="37.8707"/>
-  <object id="117" name="3" x="415.278" y="126.74" width="32.5424" height="34.8223"/>
-  <object id="118" name="8" x="415.278" y="223.592" width="32.5424" height="32.79"/>
-  <object id="123" name="9" x="671.593" y="543.975" width="33.5585" height="33.8061"/>
-  <object id="122" name="2" x="544.165" y="639.015" width="33.5585" height="34.8223"/>
-  <object id="126" name="1" x="671.018" y="127.182" width="33.5585" height="34.8223"/>
- </objectgroup>
  <objectgroup name="openSwitch">
   <object id="90" type="opensw" x="754.781" y="83.2118" width="56.5103" height="54.168"/>
- </objectgroup>
- <objectgroup name="switchfrom" visible="0">
-  <properties>
-   <property name="switchfrom" value="1"/>
-  </properties>
-  <object id="75" name="1" x="414.166" y="541.402" width="35.6607" height="33.8061"/>
-  <object id="77" name="2" x="287.757" y="543.598" width="34.1812" height="33.79"/>
-  <object id="121" name="8" x="543.501" y="544.548" width="32.5424" height="33.8061"/>
-  <object id="29" name="3" x="159.778" y="542.285" width="35.5908" height="38.8869"/>
-  <object id="125" name="9" x="414.836" y="638.219" width="34.5747" height="37.8707"/>
-  <object id="124" name="7" x="767.87" y="542.074" width="34.5747" height="34.8223"/>
-  <object id="76" name="6" x="769.601" y="638.087" width="32.5961" height="32.6769"/>
-  <object id="119" name="5" x="541.999" y="222.753" width="36.607" height="34.8223"/>
-  <object id="120" name="4" x="542.485" y="126.962" width="34.5747" height="33.8061"/>
  </objectgroup>
  <objectgroup name="water">
   <object id="1" type="water" x="98" y="361.63" width="766" height="103.274"/>

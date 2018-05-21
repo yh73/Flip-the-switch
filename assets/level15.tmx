@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="76">
+<map version="1.0" tiledversion="2018.04.18" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" infinite="0" nextobjectid="76">
+ <properties>
+  <property name="teleport" value="1"/>
+ </properties>
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="tiles.png" width="320" height="768"/>
  </tileset>
@@ -9,7 +12,7 @@
   </properties>
   <data encoding="csv">
 155,155,137,134,136,138,156,156,156,156,156,156,135,135,136,138,136,135,135,135,156,156,156,156,156,
-155,155,135,136,138,138,156,156,156,156,156,156,135,115,136,136,133,135,135,135,156,156,156,156,156,
+155,155,135,136,138,138,156,156,156,156,156,156,135,133,136,136,133,135,135,135,156,156,156,156,156,
 155,155,137,134,136,138,156,156,156,156,156,156,135,135,133,138,133,135,136,136,156,156,156,156,156,
 155,155,135,136,137,138,156,156,156,156,156,156,144,144,148,148,148,144,144,144,156,156,156,156,156,
 155,155,138,137,134,138,156,156,156,156,156,156,156,153,153,153,156,156,156,156,156,156,156,156,156,
@@ -20,7 +23,7 @@
 156,156,156,156,156,156,156,156,156,153,156,156,156,156,156,156,156,155,155,155,155,137,137,137,137,
 156,156,156,156,156,156,156,156,156,197,156,156,156,156,156,156,156,155,155,155,155,134,136,134,135,
 156,156,156,157,157,157,157,134,134,183,134,156,156,156,156,156,156,155,155,155,155,136,135,138,135,
-156,156,156,156,156,156,156,115,134,183,137,156,156,156,156,156,156,156,156,156,155,135,115,138,115,
+156,156,156,156,156,156,156,133,134,183,137,156,156,156,156,156,156,156,156,156,155,135,133,138,133,
 155,155,156,154,156,156,154,134,137,195,134,156,156,156,156,156,156,155,155,155,155,146,146,147,147,
 155,155,154,154,154,154,154,137,134,240,137,156,156,156,156,155,156,156,156,158,158,158,156,155,155,
 155,155,154,154,154,154,154,144,144,144,144,156,156,136,135,136,136,138,135,135,135,176,164,164,178,
@@ -29,6 +32,31 @@
 155,155,154,154,154,154,154,156,156,156,156,156,156,138,136,135,136,135,134,138,134,0,136,137,136
 </data>
  </layer>
+ <objectgroup name="teleport">
+  <properties>
+   <property name="teleport" value="1"/>
+  </properties>
+  <object id="45" name="2" x="757.552" y="376.613" width="33.7062" height="35.2941">
+   <properties>
+    <property name="to" value="2"/>
+   </properties>
+  </object>
+  <object id="38" name="1" x="695.32" y="378.699" width="32.9689" height="33.3263">
+   <properties>
+    <property name="from" value="1"/>
+   </properties>
+  </object>
+  <object id="43" name="1" x="237.611" y="383.072" width="33.191" height="37.6661">
+   <properties>
+    <property name="to" value="1"/>
+   </properties>
+  </object>
+  <object id="44" name="2" x="413.913" y="30.7568" width="34.7477" height="38.3267">
+   <properties>
+    <property name="from" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer name="switchOff" width="25" height="19">
   <properties>
    <property name="switchoff" value="1"/>
@@ -91,13 +119,6 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="switchto">
-  <properties>
-   <property name="switchto" value="1"/>
-  </properties>
-  <object id="38" name="1" x="703.32" y="382.699" width="32.9689" height="33.3263"/>
-  <object id="44" name="2" x="413.913" y="30.7568" width="34.7477" height="38.3267"/>
- </objectgroup>
  <objectgroup name="character" visible="0">
   <object id="4" name="princess" type="player" x="516.224" y="44.3998" width="10.9584" height="10.9584">
    <ellipse/>
@@ -119,13 +140,6 @@
   <object id="21" name="key1" type="key" x="318.731" y="340.512" width="33.1097" height="51.2189"/>
   <object id="37" name="lasso" type="lasso" x="101.813" y="11.8976" width="47.2056" height="52.2633"/>
   <object id="52" name="slingshot" type="slingshot" x="697.105" y="277.95" width="47.2056" height="52.2633"/>
- </objectgroup>
- <objectgroup name="switchfrom">
-  <properties>
-   <property name="switchfrom" value="1"/>
-  </properties>
-  <object id="45" name="2" x="766.552" y="381.613" width="33.7062" height="35.2941"/>
-  <object id="43" name="1" x="224.611" y="383.072" width="33.191" height="37.6661"/>
  </objectgroup>
  <objectgroup name="openSwitch" visible="0">
   <object id="10" type="opensw" x="720.996" y="535.702" width="59.6738" height="49.5048"/>

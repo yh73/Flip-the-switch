@@ -80,6 +80,7 @@ class PlayState extends FlxState
 		for (i in 0...level.blockGroup.length) {
 			add(level.blockGroup.members[i].block);
 		}
+		add(level.teleGroup);
 		// add button
 		add(level.buttonGroup);
 		for (i in 0...level.buttonGroup.length) {

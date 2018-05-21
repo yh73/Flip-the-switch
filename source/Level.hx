@@ -58,10 +58,11 @@ class Level extends TiledMap
 	public var doorNameToClosedFgGroup:Map<String, FlxTypedGroup<FlxTilemapExt>>;
 	public var blockItem:Map<Block, Item>;
 	public var itemArea:Map<Item, FlxObject>;
+	public var blockTrans:Map<Block, FlxSprite>;
+	public var teleportMap:Map<FlxSprite, FlxSprite>;
+	public var teleGroup:FlxTypedGroup<FlxSprite>;
 
 	public var stringBlock:Map<String, Block>;
-
-	public var transpositionGroup:Map<FlxObject, FlxObject>;
 	
 	public var popUp:FlxText;
 	public var itemPopUp:FlxText;
@@ -84,7 +85,6 @@ class Level extends TiledMap
 
 		_state = state;
 		
-		transpositionGroup = new Map<FlxObject, FlxObject>();
 		// background and foreground groups
 		backgroundGroup = new FlxTypedGroup<FlxTilemapExt>();
 		foregroundGroup = new FlxTypedGroup<FlxTilemapExt>();
@@ -96,6 +96,10 @@ class Level extends TiledMap
 		// item group
 		itemGroup = new FlxTypedGroup<Item>();
 		itemArea = new Map<Item, FlxObject>();
+
+		blockTrans = new Map<Block, FlxSprite>();
+		teleportMap = new Map<FlxSprite, FlxSprite>();
+		teleGroup = new FlxTypedGroup<FlxSprite>();
 
 		// door group
 		doorGroup = new FlxTypedGroup<Door>();
@@ -212,9 +216,10 @@ class Level extends TiledMap
 		var stringchoose:Map<String, FlxObject> = new Map<String, FlxObject>();
 		var stringButton:Map<String, FlxObject> = new Map<String, FlxObject>();
 		// var stringBlock:Map<String, Block> = new Map<String, Block>();
-		var stringFrom:Map<String, FlxObject> = new Map<String, FlxObject>();
-		var stringTo:Map<String, FlxObject> = new Map<String, FlxObject>();
+		var stringFrom:Map<String, FlxSprite> = new Map<String, FlxSprite>();
+		var stringTo:Map<String, FlxSprite> = new Map<String, FlxSprite>();
 		var itemString:Map<Item, String> = new Map<Item, String>();
+		var blockString:Map<String, FlxSprite> = new Map<String, FlxSprite>();
 		for (layer in layers)
 		{
 			if (layer.type != TiledLayerType.OBJECT)
@@ -270,21 +275,21 @@ class Level extends TiledMap
 					blockGroup.add(curr);
 					stringBlock.set(o.name, curr);
 				}
-			} else if (group.properties.contains("switchfrom")) {
+			} else if (group.properties.contains("teleport")) {
 				for (o in group.objects) {
 					var x:Int = o.x;
 					var y:Int = o.y;
-					var area:FlxObject = new FlxObject(x, y, o.width, o.height);
+					var area:FlxSprite = new FlxSprite(x, y).loadGraphic("assets/teleport.png");
+					teleGroup.add(area);
 					area.immovable = true;
-					stringFrom.set(o.name, area);
-				}
-			} else if (group.properties.contains("switchto")) {
-				for (o in group.objects) {
-					var x:Int = o.x;
-					var y:Int = o.y;
-					var area:FlxObject = new FlxObject(x, y, o.width, o.height);
-					area.immovable = true;
-					stringTo.set(o.name, area);
+					if (o.properties.contains("from")) {
+						stringFrom.set(o.properties.get("from"), area);
+					} else {
+						stringTo.set(o.properties.get("to"), area);
+					}
+					if (o.properties.contains("block")) {
+						blockString.set(o.properties.get("block"), area);
+					}
 				}
 			} else {
 				for (obj in group.objects)
@@ -304,10 +309,13 @@ class Level extends TiledMap
 			buttonBlock.set(stringButton[key], stringBlock[key.charAt(0)]);
 		}
 		for (key in stringFrom.keys()) {
-			transpositionGroup.set(stringFrom[key], stringTo[key]);
+			teleportMap.set(stringFrom[key], stringTo[key]);
 		}
 		for (key in itemString.keys()) {
 			blockItem.set(stringBlock[itemString[key]], key);
+		}
+		for (key in blockString.keys()) {
+			blockTrans.set(stringBlock[key], blockString[key]);
 		}
 	}
 	
@@ -574,15 +582,15 @@ class Level extends TiledMap
 			}
 		}
 
-		for (key in transpositionGroup.keys()) {
+		for (key in teleportMap.keys()) {
 			if (FlxG.overlap(_state.player, key)) {
 				overlapped = true;
 				if (FlxG.keys.anyJustPressed([E])) {
-					_state.player.x = transpositionGroup[key].x;
-					_state.player.y = transpositionGroup[key].y;
+					_state.player.x = teleportMap[key].x;
+					_state.player.y = teleportMap[key].y;
 					return;
 				}
-			} else if (FlxG.overlap(_state.player, transpositionGroup[key])) {
+			} else if (FlxG.overlap(_state.player, teleportMap[key])) {
 				overlapped = true;
 				if (FlxG.keys.anyJustPressed([E])) {
 					_state.player.x = key.x;
