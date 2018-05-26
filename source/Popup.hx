@@ -27,11 +27,15 @@ class Popup extends FlxSubState
 
     override public function new (text:String) {
         super();
-        bg = new FlxSprite(160, 150).loadGraphic("assets/popupborder.png");
-        bgcolor = new FlxSprite(160, 150).loadGraphic("assets/popupcolor.png");
-        content = new FlxText(200, 170, text, 12);
+        bg = new FlxSprite(FlxG.camera.x + 160, FlxG.camera.y + 150).loadGraphic("assets/popupborder.png");
+        bgcolor = new FlxSprite(FlxG.camera.x + 160, FlxG.camera.y + 150).loadGraphic("assets/popupcolor.png");
+        content = new FlxText(FlxG.camera.x + 200, FlxG.camera.y + 170, text, 12);
+        bg.scrollFactor.set();
+        bgcolor.scrollFactor.set();
+        content.scrollFactor.set();
         content.fieldWidth = 240;
-        button = new FlxText(337, 285, "Click to Continue ->", 10);
+        button = new FlxText(FlxG.camera.x + 337, FlxG.camera.y + 285, "Click to Continue ->", 10);
+        button.scrollFactor.set();
         add(bg);
         add(bgcolor);
         add(content);
