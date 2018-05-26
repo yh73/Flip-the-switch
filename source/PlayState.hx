@@ -110,7 +110,10 @@ class PlayState extends FlxState
 			add(arrowKey);
 		}
 		if (_levelNumber == 1) {
-			openSubState(new Popup("Ouchh! My head is killing me. What happened?? Where am I??"));
+			openSubState(new Popup("Hmm... It seems like the lever activates some kind of teleport magic."));
+		}
+		if (_levelNumber == 2) {
+			openSubState(new Popup("A slingshot, what I could do with it...."));
 		}
 		// add floating block
 		add(level.blockGroup);
@@ -187,6 +190,10 @@ class PlayState extends FlxState
             heart.x = FlxG.camera.x + 20*i + 32;
             i++;
         }
+		if (Main.FIRSTTIMEFALLINTOWATER && health.length != 3) {
+			openSubState(new Popup("I should be more careful on the platform next time ."));
+			Main.FIRSTTIMEFALLINTOWATER = false;
+		}
 		restartButton.x = FlxG.camera.x;
 		restartButton.y = FlxG.camera.y;
 		soundButton.x = FlxG.camera.x + FlxG.camera.width - 120;

@@ -40,7 +40,7 @@ class Popup extends FlxSubState
 	
     override public function update(elapsed:Float):Void
 	{
-        if (FlxG.mouse.justPressed) {
+        if (FlxG.mouse.justPressed || FlxG.keys.anyPressed([SPACE, E])) {
             close();
         }
     }
