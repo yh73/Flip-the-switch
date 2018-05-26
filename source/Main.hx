@@ -8,6 +8,7 @@ import flixel.FlxG;
 class Main extends Sprite
 {	
 	public static var LOGGER:CapstoneLogger;
+	public static var isMute:Bool;
 	public static var SAVE:FlxSave;
 	public function new()
 	{
@@ -17,6 +18,7 @@ class Main extends Sprite
 		var gameName:String = "islandescape";
 		var categoryId:Int = 101;
 		var useDev:Bool = false;
+		Main.isMute = false;
 		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, useDev);
 		Main.SAVE = new FlxSave();
 		Main.SAVE.bind("levels");

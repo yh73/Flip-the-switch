@@ -639,7 +639,7 @@ class Level extends TiledMap
 			}
 		}
 
-		if ((FlxG.overlap(_state.lasso.end, _state.sw) && _state.lasso.lifeSpan <= 0)) {
+		if (FlxG.overlap(_state.lasso.end, _state.sw)) {
 			FlxG.sound.playMusic("assets/switchFlip.ogg", 1, false);
 			_state.nextLevel(_state.player, _state.sw);
 		}
