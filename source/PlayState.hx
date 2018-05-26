@@ -118,6 +118,9 @@ class PlayState extends FlxState
 		if (_levelNumber == 2) {
 			openSubState(new Popup("A slingshot, what I could do with it...."));
 		}
+		if (_levelNumber == 4) {
+			openSubState(new Popup("Look what I found here, a lasso!"));
+		}
 		// add floating block
 		add(level.blockGroup);
 		for (i in 0...level.blockGroup.length) {
@@ -250,6 +253,10 @@ class PlayState extends FlxState
 		{
 			FlxG.switchState(new PlayState(_levelNumber, bgm.time));
 		});
+	}
+
+	private function nextLevelOnTimer(Timer:FlxTimer):Void {
+		FlxG.switchState(new PlayState(_levelNumber));
 	}
 
 	private function menu():Void
