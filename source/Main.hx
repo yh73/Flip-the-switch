@@ -5,10 +5,13 @@ import openfl.display.Sprite;
 import flixel.util.FlxSave;
 import flixel.system.FlxSound;
 import flixel.FlxG;
+import flixel.group.FlxGroup;
 class Main extends Sprite
 {	
 	public static var LOGGER:CapstoneLogger;
 	public static var SAVE:FlxSave;
+	public static var FIRSTTIMEFALLINTOWATER:Bool;
+	public static var LEVELS:FlxTypedGroup<PlayState>;
 	public function new()
 	{
 		super();
@@ -17,6 +20,11 @@ class Main extends Sprite
 		var gameName:String = "islandescape";
 		var categoryId:Int = 101;
 		var useDev:Bool = false;
+		FIRSTTIMEFALLINTOWATER = true;
+		LEVELS = new FlxTypedGroup<PlayState>();
+		for (i in 0...21) {
+			LEVELS.add(new PlayState(i));
+		}
 		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, useDev);
 		Main.SAVE = new FlxSave();
 		Main.SAVE.bind("levels");
@@ -39,8 +47,4 @@ class Main extends Sprite
 	{
 		addChild(new FlxGame(640, 480, StartState, true));
 	}
-
-
-		
-
 }
