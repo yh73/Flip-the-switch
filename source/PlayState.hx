@@ -104,9 +104,13 @@ class PlayState extends FlxState
 		// add background
 		add(level.backgroundGroup);
 		if (_levelNumber == 0) {
-			var arrowKey = new FlxSprite(192,2*32).loadGraphic("assets/arrows.png");
+			openSubState(new Popup("Ouchh! My head is killing me. What happened?? Where am I??"));
+			var arrowKey = new FlxSprite(192 + 96,3*32).loadGraphic("assets/arrows.png");
 			arrowKey.setGraphicSize(3*32, 2*32);
 			add(arrowKey);
+		}
+		if (_levelNumber == 1) {
+			openSubState(new Popup("Ouchh! My head is killing me. What happened?? Where am I??"));
 		}
 		// add floating block
 		add(level.blockGroup);
