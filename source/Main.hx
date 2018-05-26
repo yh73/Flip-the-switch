@@ -9,6 +9,7 @@ import flixel.group.FlxGroup;
 class Main extends Sprite
 {	
 	public static var LOGGER:CapstoneLogger;
+	public static var isMute:Bool;
 	public static var SAVE:FlxSave;
 	public static var FIRSTTIMEFALLINTOWATER:Bool;
 	public static var LEVELS:FlxTypedGroup<PlayState>;
@@ -25,6 +26,7 @@ class Main extends Sprite
 		for (i in 0...21) {
 			LEVELS.add(new PlayState(i));
 		}
+		Main.isMute = false;
 		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, useDev);
 		Main.SAVE = new FlxSave();
 		Main.SAVE.bind("levels");

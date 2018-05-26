@@ -38,12 +38,15 @@ class PlayState extends FlxState
 	public function new(levelNumber:Int, ?time:Float) {
 		super();
 		_levelNumber = levelNumber;
-		if (time == null) {
+		if (Main.isMute) {
+			soundButton = new FlxSprite(0,0).loadGraphic("assets/silence.png");
+		} else {
 			soundButton = new FlxSprite(0,0).loadGraphic("assets/sound.png");
+		}
+		if (time == null) {
 			bgmTime = 0;
 		} else {
 			bgmTime = time;
-			soundButton = new FlxSprite(0,0).loadGraphic("assets/silence.png");
 		}
 
 	}
@@ -204,6 +207,7 @@ class PlayState extends FlxState
 		}
 		if (FlxG.mouse.overlaps(soundButton, null) && FlxG.mouse.justPressed) {
 			Main.LOGGER.logLevelAction(LoggingInfo.MUTE);
+			Main.isMute = !Main.isMute;
 			if (bgm.volume == 0) {
 				bgm.volume = 0.6;
 				soundButton.loadGraphic("assets/sound.png");
@@ -246,10 +250,6 @@ class PlayState extends FlxState
 		{
 			FlxG.switchState(new PlayState(_levelNumber, bgm.time));
 		});
-	}
-
-	private function nextLevelOnTimer(Timer:FlxTimer):Void {
-		FlxG.switchState(new PlayState(_levelNumber));
 	}
 
 	private function menu():Void
