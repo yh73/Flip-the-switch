@@ -156,7 +156,7 @@
   <object id="19" type="opensw" x="49.0615" y="65.1539" width="61.9228" height="46.8985"/>
  </objectgroup>
  <objectgroup name="water">
-  <object id="11" type="water" x="166.034" y="110.396" width="308.63" height="363.402"/>
+  <object id="11" type="water" x="166.034" y="115.129" width="308.63" height="358.669"/>
   <object id="34" type="water" x="2.18192" y="2.02415" width="220.94" height="60.0323"/>
   <object id="35" type="water" x="609.138" y="190.646" width="29.5297" height="285.581"/>
   <object id="39" type="water" x="449.702" y="1.03653" width="185.673" height="189.676"/>
@@ -165,9 +165,9 @@
   <object id="46" type="water" x="32.6231" y="430.217" width="127.434" height="44.8568"/>
   <object id="48" type="water" x="480.681" y="430.217" width="127.434" height="44.8568"/>
  </objectgroup>
- <objectgroup name="item" visible="0">
+ <objectgroup name="item">
   <properties>
-   <property name="item" value="0"/>
+   <property name="item" value="1"/>
   </properties>
   <object id="12" name="slingshot" type="slingshot" x="578.716" y="357.333" width="23.0898" height="22.0403">
    <properties>

@@ -12,6 +12,10 @@ import flixel.ui.FlxButton;
 import flixel.math.FlxPoint;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.system.FlxSound;
+import flixel.addons.ui.FlxUIPopup;
+import openfl.text.TextField;
+import openfl.text.TextFieldType;
+import openfl.text.TextFormat;
 class PlayState extends FlxState
 {
 	public var player:Character;
@@ -29,6 +33,7 @@ class PlayState extends FlxState
 	public var soundButton:FlxSprite;
 	public var bgm:FlxSound;
 	public var bgmTime:Float;
+	//private var _textField:TextField;
 	public var health:FlxTypedGroup<FlxSprite>;
 	public function new(levelNumber:Int, ?time:Float) {
 		super();
@@ -48,6 +53,27 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
+		/*
+		_textField = new TextField();
+
+		_textField.embedFonts = true;
+
+		// scale and position
+		_textField.x = 100;
+		_textField.y = 350;
+		_textField.width = 400;
+		_textField.height = 100;
+
+		_textField.text = "Test!";
+		_textField.multiline = true;
+		_textField.wordWrap = true;
+		_textField.border = true;
+		_textField.borderColor = FlxColor.BLACK;
+		_textField.backgroundColor = FlxColor.BLACK;
+
+		// add the _textField
+		FlxG.addChildBelowMouse(_textField);
+		*/
 		health = new FlxTypedGroup<FlxSprite>();
 		for (i in 0...3) {
 			health.add(new FlxSprite(0,0).loadGraphic("assets/heart.png"));
@@ -81,9 +107,16 @@ class PlayState extends FlxState
 		// add background
 		add(level.backgroundGroup);
 		if (_levelNumber == 0) {
-			var arrowKey = new FlxSprite(192,2*32).loadGraphic("assets/arrows.png");
+			openSubState(new Popup("Ouchh! My head is killing me. What happened?? Where am I??"));
+			var arrowKey = new FlxSprite(192 + 96,3*32).loadGraphic("assets/arrows.png");
 			arrowKey.setGraphicSize(3*32, 2*32);
 			add(arrowKey);
+		}
+		if (_levelNumber == 1) {
+			openSubState(new Popup("Hmm... It seems like the lever activates some kind of teleport magic."));
+		}
+		if (_levelNumber == 2) {
+			openSubState(new Popup("A slingshot, what I could do with it...."));
 		}
 		// add floating block
 		add(level.blockGroup);
@@ -160,6 +193,10 @@ class PlayState extends FlxState
             heart.x = FlxG.camera.x + 20*i + 32;
             i++;
         }
+		if (Main.FIRSTTIMEFALLINTOWATER && health.length != 3) {
+			openSubState(new Popup("I should be more careful on the platform next time ."));
+			Main.FIRSTTIMEFALLINTOWATER = false;
+		}
 		restartButton.x = FlxG.camera.x;
 		restartButton.y = FlxG.camera.y;
 		soundButton.x = FlxG.camera.x + FlxG.camera.width - 120;
