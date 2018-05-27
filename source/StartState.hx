@@ -21,6 +21,7 @@ class StartState extends FlxState
 	private var switchOff:FlxSprite;
 	private static var youDied:Bool = false;
 	private var menu:MenuState;
+	private var popup:Popup;
 	override public function create():Void 
 	{   
         intro = new FlxText(180,80, "Flip the Switch", 30);
@@ -34,7 +35,6 @@ class StartState extends FlxState
 		add(intro);
 		switchOn.kill();
 		super.create();
-		
 	}
 
 	private function onTimer(Timer:FlxTimer):Void {

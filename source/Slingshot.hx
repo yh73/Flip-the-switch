@@ -66,7 +66,7 @@ class Slingshot extends FlxSprite {
         else if (FlxG.keys.justReleased.SPACE && powerBar.alive && backpack.hasSlingshot) {
         */
         if (FlxG.keys.justPressed.SPACE && backpack.hasSlingshot && (!needCD)) {
-            //Main.LOGGER.logLevelAction(LoggingInfo.USE_SLINGSHOT, {coor: player.x + ", " + player.y});
+            Main.LOGGER.logLevelAction(LoggingInfo.USE_SLINGSHOT, {coor: player.x + ", " + player.y});
             FlxG.sound.playMusic("assets/slingshotShoot.ogg", 1, false);
             // lifeSpan = powerBar.generateResult();
             lifeSpan = 0.85;

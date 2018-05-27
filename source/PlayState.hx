@@ -232,7 +232,7 @@ class PlayState extends FlxState
 			Main.SAVE.flush();
 		}
 		Main.LOGGER.logLevelStart(_levelNumber);
-		if (_levelNumber < 21) {
+		if (_levelNumber < 25) {
 			slingshot.kill();
 			lasso.end.kill();
 			lasso.kill();

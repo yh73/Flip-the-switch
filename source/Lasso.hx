@@ -57,6 +57,7 @@ class Lasso extends FlxSprite{
         }
         */
         if (FlxG.keys.justPressed.SPACE && backpack.hasLasso && (!needCD)) {
+            Main.LOGGER.logLevelAction(LoggingInfo.USE_LASSO, {coor: _state.player.x + ", " +_state.player.y});
             FlxG.sound.playMusic("assets/lassoShoot.ogg", 1, false);
             lifeSpan = 1;
             maxLength = lifeSpan * 400;
