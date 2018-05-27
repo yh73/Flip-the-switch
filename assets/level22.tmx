@@ -467,7 +467,7 @@
   <object id="99" type="collision" x="735.796" y="949" width="33.1335" height="398.217"/>
   <object id="100" type="collision" x="927.387" y="1332.56" width="33.1335" height="127.059"/>
   <object id="101" type="collision" x="639.279" y="1043.1" width="33.1335" height="131.75"/>
-  <object id="104" x="1601.58" y="396.956" width="28.4195" height="41.2541"/>
+  <object id="104" type="collision" x="1601.58" y="396.956" width="28.4195" height="41.2541"/>
   <object id="105" type="collision" x="1119.77" y="564.762" width="129.946" height="32.3326"/>
  </objectgroup>
  <objectgroup name="player">
