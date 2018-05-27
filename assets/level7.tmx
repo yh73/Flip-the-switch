@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="51">
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="52">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
+  <image source="maps/tiles.png" width="320" height="768"/>
+ </tileset>
+ <tileset firstgid="241" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="maps/tiles.png" width="320" height="768"/>
  </tileset>
  <layer name="bg" width="20" height="15">
@@ -15,7 +18,7 @@
 154,135,135,138,135,154,154,144,144,144,144,144,144,144,154,154,154,154,154,155,
 154,135,135,135,135,154,154,154,154,154,154,154,154,154,154,154,154,154,154,155,
 155,154,135,138,135,154,154,154,154,154,154,154,154,154,154,154,154,154,154,155,
-155,135,135,135,135,154,154,154,154,154,154,154,154,154,154,135,135,135,135,155,
+155,240,135,135,240,154,154,154,154,154,154,154,154,154,154,135,135,135,135,155,
 155,135,135,136,135,154,154,154,154,154,154,154,154,154,154,135,136,138,135,154,
 154,138,135,135,135,154,154,154,154,154,154,154,154,154,154,138,135,135,136,154,
 154,135,135,136,135,154,154,154,154,154,154,154,154,154,154,135,135,135,135,154,
@@ -151,6 +154,7 @@
   <object id="38" type="collision" x="31.4129" y="191.668" width="33.9898" height="31.4763"/>
   <object id="50" type="collision" x="67.5759" y="291.1" width="26.1252" height="24.1123"/>
   <object id="49" type="collision" x="546.183" y="291.229" width="29.4228" height="27.4098"/>
+  <object id="51" type="collision" x="64.6032" y="65.5674" width="29.891" height="28.9268"/>
  </objectgroup>
  <objectgroup name="open switch">
   <object id="19" type="opensw" x="49.0615" y="65.1539" width="61.9228" height="46.8985"/>
