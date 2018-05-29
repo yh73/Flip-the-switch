@@ -3,9 +3,6 @@
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
   <image source="maps/tiles.png" width="320" height="768"/>
  </tileset>
- <tileset firstgid="241" name="tiles" tilewidth="32" tileheight="32" tilecount="240" columns="10">
-  <image source="maps/tiles.png" width="320" height="768"/>
- </tileset>
  <layer name="bg" width="20" height="15">
   <properties>
    <property name="bg" value="0"/>
