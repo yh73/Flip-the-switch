@@ -394,22 +394,22 @@ class Level extends TiledMap
 		if (_state._levelNumber == 2 || _state._levelNumber == 4) {
 			var hasLasso = _state.backpack.hasLasso;
 			var hasSlingshot = _state.backpack.hasSlingshot; 
-			if (equipped && (hasLasso || hasSlingshot) && (!tutorialPopped) && _state.player.exists) {
+			if (equipped && ((hasLasso && _state._levelNumber == 4) || (hasSlingshot && _state._levelNumber == 2))) {
 				equippedPopped = true;
 				tutorialPopUp.kill();
 				backpackPopUp.kill();
-				/*
-				if ((!_state.powerBar.exists) && (!tutorialPopped) && (_state.player.exists == true)) {
+				
+				if ((!_state.powerBar.exists) && (!tutorialPopped)) {
 					displayMsg("Press and hold SPACE to charge!");
 				}
 				else if (_state.powerBar.exists) {
 					tutorialPopped = true;
-					if (hasLasso)
+					if (hasLasso) 
 						displayMsg("Release SPACE to use lasso!");
 					else if (hasSlingshot)
 						displayMsg("Release SPACE to shoot!");
 				}
-				*/
+				/*
 				if (hasLasso && _state._levelNumber == 4)
 					displayMsg("Press SPACE to use lasso!");
 				else if (hasSlingshot && _state._levelNumber == 2)
@@ -417,8 +417,9 @@ class Level extends TiledMap
 				if (FlxG.keys.justPressed.SPACE) {
 					tutorialPopped = true;
 				}
+				*/
 			} 
-			else if (equipped && (!equippedPopped) && _state.player.exists) {
+			else if (equipped && ((!hasSlingshot && _state._levelNumber == 4) || _state._levelNumber == 2) && (!equippedPopped) && _state.player.exists) {
 				backpackPopUp.reset(FlxG.camera.scroll.x + 100, FlxG.camera.scroll.y + 415);
 				if (count <= 25) {
 					tutorialPopUp.reset(FlxG.camera.scroll.x + 165, FlxG.camera.scroll.y + 435);
@@ -639,7 +640,7 @@ class Level extends TiledMap
 			}
 		}
 
-		if (FlxG.overlap(_state.lasso.end, _state.sw)) {
+		if (FlxG.overlap(_state.lasso.end, _state.sw) && _state.lasso.lifeSpan <= 0) {
 			FlxG.sound.playMusic("assets/switchFlip.ogg", 1, false);
 			_state.nextLevel(_state.player, _state.sw);
 		}
