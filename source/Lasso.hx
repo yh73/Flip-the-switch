@@ -44,18 +44,18 @@ class Lasso extends FlxSprite{
     }
 
     override public function update(elapsed:Float):Void {
-        /*
+        
 		if (FlxG.keys.justPressed.SPACE && !powerBar.alive && length == 0 && backpack.hasLasso) {
 			powerBar.revive();
 		} else if (FlxG.keys.justReleased.SPACE && powerBar.alive && backpack.hasLasso) {
-            //Main.LOGGER.logLevelAction(LoggingInfo.USE_LASSO, {coor: player.x + ", " +player.y});
+            Main.LOGGER.logLevelAction(LoggingInfo.USE_LASSO, {coor: player.x + ", " +player.y});
             FlxG.sound.playMusic("assets/lassoShoot.ogg", 1, false);
 			lifeSpan = powerBar.generateResult();
             maxLength = lifeSpan * 400;
 		} else if (!backpack.hasLasso && !backpack.hasSlingshot) {
             powerBar.kill();
         }
-        */
+        /*
         if (FlxG.keys.justPressed.SPACE && backpack.hasLasso && (!needCD)) {
             Main.LOGGER.logLevelAction(LoggingInfo.USE_LASSO, {coor: player.x + ", " + player.y});
             FlxG.sound.playMusic("assets/lassoShoot.ogg", 1, false);
@@ -79,7 +79,7 @@ class Lasso extends FlxSprite{
                 cooldown.kill();
             }
         }
-
+        */
         if (lifeSpan > 0) {
             if (length <= maxLength - SPEED) {
                 length += SPEED;
